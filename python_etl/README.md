@@ -1,15 +1,15 @@
-# Python-based ETL of SynPUF data to CDMv5-compatible CSV files
+# Python-based ETL of Synthea data to CDMv5 or CSMv6 compatible CSV files
 
 This is an implementation of the Synthea Extract-Transform-Load (ETL)
-specification designed to generate a set of CDMv5-compatible CSV files
+specification designed to generate a set of CDMv5 or CDMv6 compatible CSV files
 that can then be bulk-loaded into your RDBMS of choice.
 
 It is designed to be massively scalable but still run on a user's workstation or laptop
 
 We follow a similar mapping stratedgy as Synthea-ETL.
 
-We implemented the drug era and condition era sql scripts into python.  There are limits
-what can be done when running a sql query against a postgres database.
+We implemented the drug era and condition era sql scripts into multi threaded python.  There are limits
+what can be done when running a single sql query against a postgres database.
 
 ## Overview of Steps
 

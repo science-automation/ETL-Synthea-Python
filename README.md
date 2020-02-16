@@ -25,7 +25,7 @@ in the [python_etl/README.md](https://github.com/OHDSI/ETL-CMS/blob/master/pytho
 
 
 ### hand_conversion
-@claire-oi hand-converted a couple patients worth of SynPUF data into CDMv5.  Along the way she found several inconsistencies and ambiguities with the ETL specification which have hopefully been addressed.  Her internal notes, along with the sample patients and her hand-converted CDM outputs are available in the [hand_conversion](https://github.com/OHDSI/ETL-CMS/tree/master/hand_conversion) directory.
+hand-converted a couple patients worth of SynPUF data into CDMv5.  
 
 ### Additional Resources
 - [Partial ETL of SEER Medicare to OMOP CDMv4](https://github.com/outcomesinsights/seer_to_omop_cdmv4) - [Outcomes Insights](http://outins.com) has released their partial implementation of a SEER Medicare ETL, along with their specification document to serve as a reference for the ETLs created by this workgroup

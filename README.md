@@ -1,34 +1,31 @@
 # ETL-Synthea-Python
 Release date: Feb 16, 2020
 
-This project contains the source code to convert the public
-Centers for Medicare & Medicaid Services (CMS) Data Entrepreneurs'
-[Synthetic Public Use File](<https://www.cms.gov/Research-Statistics-Data-and-Systems/Downloadable-Public-Use-Files/SynPUFs/DE_Syn_PUF.html>) (DE-SynPUF) to .csv files suitable for loading into an OMOP Common Data Model v5.2 database.
+This project contains the source code to convert Synthea csv data to csv files suitable for loading into an OMOP Common Data Model v5.3.1 and v6 database.
 
-Synthea is able to generate an unlimited amount of patient records in multiple countries
+Synthea is able to generate an unlimited amount of patient records for multiple countries.
 
-This tools is capable of creating massive v5 and v6 patient records using the OMOP CDM for multiple countries
+This tool is capable of converting synthea csv to OMOP CDM v5 and v6.
 
 ## What's in Here?
 
 
 ### python_etl
 A complete Python-based ETL of the Synthea data into CDMv5 and CDMv6 compatible CSV
-files. See the [README.md](https://github.com/OHDSI/ETL-CMS/blob/master/python_etl/README.md) file therein for detailed instructions for
+files. See the [README.md](https://github.com/scivm/ETL-Synthea-Python/blob/master/python_etl/README.md) file therein for detailed instructions for
 running the ETL, as well as creating and loading the data into a CDMv5 database.
 
 
 ### scripts
 The scripts folder holds handy scripts for downloading and munging some of the raw
 data used in the ETL process. Instructions for their use can be found
-in the [python_etl/README.md](https://github.com/OHDSI/ETL-CMS/blob/master/python_etl/README.md) file.
+in the [python_etl/README.md](https://github.com/scivm/ETL-Synthea-Python/blob/master/python_etl/README.md) file.
 
 
 ### hand_conversion
 hand-converted a couple patients worth of SynPUF data into CDMv5.  
 
 ### Additional Resources
-- [Partial ETL of SEER Medicare to OMOP CDMv4](https://github.com/outcomesinsights/seer_to_omop_cdmv4) - [Outcomes Insights](http://outins.com) has released their partial implementation of a SEER Medicare ETL, along with their specification document to serve as a reference for the ETLs created by this workgroup
  - The [OHDSI Medicare ETL SynPUF.pdf](https://github.com/OHDSI/ETL-CMS/blob/master/OHDSI%20Medicare%20ETL%20SynPuf.pdf) provides a light overview of the differences between SynPUF and other Medicare datasets, such as SEER Medicare and Medicare LDS.  This presentation was presented to the OHDSI CMS ETL workgroup on February 2015 by Jennifer Duryea at [Outcomes Insights](http://outins.com).
 
 #History of contributions

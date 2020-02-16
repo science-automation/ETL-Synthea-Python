@@ -42,7 +42,7 @@ Here is an example PostgreSQL psql client copy command to load the concept file 
  
 \copy cdm.concept from '/download_directory_path/concept' null as '\\000' delimiter ','
 
-The CDM V5.3.1 was built by modifying the original Synpuf converter CMS-ETL found in OHDSI GitHub.
+The CDM V5.3.1 was built by modifying the original Synpuf converter CMS-ETL and ETL-Synthea found in OHDSI GitHub.
 
 You are completed after this step.
 
@@ -97,17 +97,15 @@ Edit the variables in the .env file which specify various directories used durin
 Example .env files are provided for Windows (.env.example.windows) and unix (.env.example.unix) runs,
 differing only in path name constructs.
 
-- Set BASE\_SYNPUF\_INPUT\_DIRECTORY to where the downloaded CMS
-directories are contained, that is, the DE\_1 through DE\_20 directories.
+- Set BASE\_SYNTHEA\_INPUT\_DIRECTORY to where the generated synthea csv
+directories are contained.
 - Set BASE\_OMOP\_INPUT\_DIRECTORY to the CDM v5 vocabulary directory, for example: /data/vocab_download_v5.
 - Create a directory and set its path to BASE\_OUTPUT\_DIRECTORY. This
 directory will contain all of the output files after running the ETL.
 - Create a directory and set its path to
 BASE\_ETL\_CONTROL\_DIRECTORY. This contains files used for
 auto-incrementing record numbers and keeping track of physicians
-and physician institutions over the 20 parts so that the seperate DE\_1 through
-DE\_20 directories can be processed sequentially. These
-files need to be deleted if you want to restart numbering.
+and physician institutions when running multiple sets of synthea files
 
 ## 5. Test ETL with DE_0 CMS test data
 We have provided the directory named DE_0 inside the
@@ -129,7 +127,7 @@ Clean out the control files in BASE\_ETL\_CONTROL\_DIRECTORY before running the 
 To process any of the DE_1 to DE_20 folders, run:
 
 - ``python CMS_SynPuf_ETL_CDM_v5.py <sample number>``
-    - Where ``<sample number>`` is the number of one of the samples you downloaded from CMS
+    - Where ``<sample number>`` is the number of one of the samples you created from synthea
     - e.g. ``python CMS_SynPuf_ETL_CDM_v5.py 4`` will run the ETL on the SynPUF data in the DE_4 directory
     - The resulting output files should be suitable for bulk loading into a CDM v5 database.
 

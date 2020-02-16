@@ -202,32 +202,3 @@ g) Though the database will create indexes for primary keys, but the queries wil
 
 
 ## 9. Open issues and caveats with the ETL
-a) As per OHDSI documentation for the [observation](http://www.ohdsi.org/web/wiki/doku.php?id=documentation:cdm:observation) and [measurement](http://www.ohdsi.org/web/wiki/doku.php?id=documentation:cdm:measurement) tables, the fields 'value_as_string', 'value_as_number', and 'value_as_concept_id' in both tables are not mandatory, but Achilles Heels gives an error when all of these 3 fields are NULL. Achilles Heels requires one of these fields
-    should have non-NULL value. So, to fix this error, field 'value_as_concept_id' has been populated with '0' in both the measurement and observation output .csv files.
-
-b) The concepts for Unknown Race, Non-white, and Other Race (8552, 9178, and 8522) have been deprecated, so race_concept_id in Person file has been populated with
-    '0' for these deprecated concepts.
-
-c) Only two ethnicity concepts (38003563, 38003564) are available.  38003563: Hispanic and  38003564: Non-Hispanic.
-
-d) When a concept id has no mapping in the CONCEPT_RELATIONSHIP table:
-- If there is no mapping from OMOP (ICD9) to OMOP (SNOMED) for an ICD9 concept id, target_concept_id for such ICD9 concept id is populated with '0' .
-- If there is no self-mapping from OMOP (HCPCS/CPT4) to OMOP (HCPCS/CPT4) for an HCPCS/CPT4 concept id, target_concept_id for such HCPCS/CPT4 concept id is populated with '0' .
-- If there is no mapping from OMOP (NCD) to OMOP (RxNorm) for an NCD concept id, target_concept_id for such NCD concept id is populated with '0'.
-
-e) The source data contains concepts that appear in the CONCEPT.csv file but do not have relationship mappings to target vocabularies. For these, we create records with concept_id 0 and include the source_concept_id in the record. Achilles Heel will give warnings about these concepts for the Condition, Observation, Procedure, and Drug tables as follows. If condition_concept_id or observation_concept_id or procedure_concept_id or drug_concept_id is '0' respectively:
-- WARNING: 400-Number of persons with at least one condition occurrence, by condition_concept_id; data with unmapped concepts
-- WARNING: 800-Number of persons with at least one observation occurrence, by observation_concept_id; data with unmapped concepts
-- WARNING: 600-Number of persons with at least one procedure occurrence, by procedure_concept_id; data with unmapped concepts
-- WARNING: 700-Number of persons with at least one drug exposure, by drug_concept_id; data with unmapped concepts
-
-f) About 6% of the records in the drug_exposure file have either days_supply or quantity or both set to '0' (e.g. days_supply = 10 & quantity=0 OR quantity=120 & days_supply=0). Though such
-    values are present in the input file, they don't seem to be correct. Because of this, dosage calculations would result in division by zero, hence effective_drug_dose has not been calculated. For that reason we have also left the dose_era table empty. The CMS documentation says the following about both quantity and days_supply, "This variable was imputed/suppressed/coarsened as part of disclosure treatment. Analyses using this variable should be interpreted with caution. Analytic inferences to the Medicare population should not be made when using this variable.""
-
-g) The locations provided in the DE_SynPUF data use [SSA codes](https://www.resdac.org/cms-data/variables/state-code-claim-ssa), and we mapped them to 2-letter state codes. However SSA codes for Puerto Rico('40') and
-    Virgin Islands ('48') as well other extra-USA locations have been coded in source and target data as '54' representing Others, where Others= PUERTO RICO, VIRGIN ISLANDS, AFRICA, ASIA OR CALIFORNIA; INSTITUTIONAL PROVIDER OF SERVICES (IPS) ONLY, CANADA & ISLANDS, CENTRAL AMERICA AND WEST INDIES, EUROPE, MEXICO, OCEANIA, PHILIPPINES, SOUTH AMERICA, U.S. POSSESSIONS, AMERICAN SAMOA, GUAM, SAIPAN OR
-    NORTHERN MARIANAS, TEXAS; INSTITUTIONAL PROVIDER OF SERVICES (IPS) ONLY, NORTHERN MARIANAS, GUAM, UNKNOWN.
-
-h) As per OMOP CDMv5 [visit_cost](http://www.ohdsi.org/web/wiki/doku.php?id=documentation:cdm:visit_cost) documentation, the cost of the visit may contain just board and food,
-    but could also include the entire cost of everything that was happening to the patient during the visit. As the input data doesn't have any specific data
-    for visit cost, we are not writing any information to visit_cost file.

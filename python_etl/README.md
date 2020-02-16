@@ -35,14 +35,19 @@ what can be done when running a single sql query against a postgres database.
 
 ## 0. Shortcut: download ready-to-go data
 
-### CDM V5.2
+We provide several downloads of ready to go data for CDMv5.3.1 and CDMv6 for multiple countries
+
+### CDM V5.3.1
 We have prepared a downloadable OMOP CDMv5.3.1 version.  The data can be retrieved from our github [Github](https://).  The file is called synthea_100k.tar.gz. It is approximately 3 GB in size. It contains synthetic v5.3.1 CDM data files for 100,000 persons. The .gz files in this file will need to be extracted and decompressed after download. The decompressed files have no file suffixes but they are comma delimited text files. There are no header records in the files. The CDM vocabulary version is "v5.0 05-NOV-17".
+
+### CDM V6
+We have prepared a downloadable OMOP CDMv6 version.  The data can be retrieved from our github [Github](https://).  The file is called synthea_100k.tar.gz. It is approximately 3 GB in size. It contains synthetic v6 CDM data files for 100,000 persons. The .gz files in this file will need to be extracted and decompressed after download. The decompressed files have no file suffixes but they are comma delimited text files. There are no header records in the files. The CDM vocabulary version is "v5.0 05-NOV-17"
+
+### Sample Postgres Upload Script
  
 Here is an example PostgreSQL psql client copy command to load the concept file into the concept table in a schema called 'cdm'. 
  
 \copy cdm.concept from '/download_directory_path/concept' null as '\\000' delimiter ','
-
-The CDM V5.3.1 was built by modifying the original Synpuf converter CMS-ETL and ETL-Synthea found in OHDSI GitHub.
 
 You are completed after this step.
 

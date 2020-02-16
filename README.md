@@ -1,25 +1,19 @@
-# ETL-CMS version 2.0.0
-Release date: May 7, 2018
+# ETL-Synthea-Python
+Release date: Feb 16, 2020
 
 This project contains the source code to convert the public
 Centers for Medicare & Medicaid Services (CMS) Data Entrepreneurs'
 [Synthetic Public Use File](<https://www.cms.gov/Research-Statistics-Data-and-Systems/Downloadable-Public-Use-Files/SynPUFs/DE_Syn_PUF.html>) (DE-SynPUF) to .csv files suitable for loading into an OMOP Common Data Model v5.2 database.
 
-The DE-SynPUF dataset contains 2.33 million synthetic patients, and we
-anticipate that this resource will be useful for researchers in
-developing OHDSI tools, as well as serve as a testbed for the analysis
-of observational health records.
+Synthea is able to generate an unlimited amount of patient records in multiple countries
 
-The processed data can be retrieved from [ftp://ftp.ohdsi.org/synpuf](ftp://ftp.ohdsi.org/synpuf). More details can be found [here](https://github.com/OHDSI/ETL-CMS/blob/master/python_etl/README.md).
-
-This marks the first availability of a massive open CDM v5-adhering synthetic dataset. 
-
+This tools is capable of creating massive v5 and v6 patient records using the OMOP CDM for multiple countries
 
 ## What's in Here?
 
 
 ### python_etl
-A complete Python-based ETL of the DE-SynPUF data into CDMv5-compatible CSV
+A complete Python-based ETL of the Synthea data into CDMv5 and CDMv6 compatible CSV
 files. See the [README.md](https://github.com/OHDSI/ETL-CMS/blob/master/python_etl/README.md) file therein for detailed instructions for
 running the ETL, as well as creating and loading the data into a CDMv5 database.
 

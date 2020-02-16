@@ -1,4 +1,4 @@
-# Python-based ETL of Synthea data to CDMv5 or CSMv6 compatible CSV files
+# Python-based ETL of Synthea data to OMOP CSV files
 
 This is an implementation of the Synthea Extract-Transform-Load (ETL)
 specification designed to generate a set of CDMv5 or CDMv6 compatible CSV files

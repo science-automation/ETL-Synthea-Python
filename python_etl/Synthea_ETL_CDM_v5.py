@@ -687,7 +687,7 @@ if __name__ == '__main__':
                     print(rec)
 
          except BaseException:
-            print '** ERROR reading file, record number ', recs_in, '\n record-> ', rec
+            print('** ERROR reading file, record number ', recs_in, '\n record-> ', rec)
             raise
 
     #- save look up tables & last-used-ids

@@ -694,4 +694,4 @@ if __name__ == '__main__':
 #    persist_lookup_tables()
 #    table_ids.Save(table_ids_filename)
 
-    print '** done **'
+    print('** done **')

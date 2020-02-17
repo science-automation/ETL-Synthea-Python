@@ -653,6 +653,8 @@ if __name__ == '__main__':
     print('BASE_OUTPUT_DIRECTORY           =' + BASE_OUTPUT_DIRECTORY)
     print('BASE_ETL_CONTROL_DIRECTORY      =' + BASE_ETL_CONTROL_DIRECTORY)
 
+    # check files look ok
+
     print '-'*80
     print '-- all files present....'
     print '-'*80
@@ -661,54 +663,35 @@ if __name__ == '__main__':
     write_header_records()
 
     # load the vocab flies
-    build_maps()
+    #build_maps()
    
+    # we only need to consider one synthea input file at a time to make the mapping
     synthea_file_list =  ['conditions.csv','careplans.csv','observations.csv','procedures.csv','immunizations.csv','imaging_studies.csv','imaging_studies.csv','encounters.csv','organizations.csv','providers.csv','providers.csv','payer_transitions.csv','allergies.csv','patients.csv','medications.csv']
     synthea_file_list = ['patients.csv']
-#    for file in synthea_file_list:
-#        current =  
-#        with open(current,'w') as fout:
-        # Open each type of synthea input file
+    for inputfile in synthea_file_list:
+         recs_in = 0
+         rec=''
+         inputdata = os.path.join(BASE_SYNTHEA_INPUT_DIRECTORY,inputfile)
+         print('-'*80)
+         print('reading file -> '+ inputfile)
 
-#        fd = file_control.get_Descriptor('beneficiary')
+         try:
+            with open(inputdata) as fin:
+                # Skip header record
+                rec = fin.readline()
 
-#        print('-'*80)
-#        print('reading file -> '+ beneficiary_fd.complete_pathname)
-#        print('last_person_id starting value   -> ' + str(table_ids.last_person_id))
+                for rec in fin:
+                    recs_in += 1
+                    if recs_in % 10000 == 0: print inputfile + ': ', recs_in
+                    # read each record of the file
+                    print(rec)
 
-#        try:
-#            with fd.open() as fin:
-#                # Skip header record
-#                rec = fin.readline()
-#
-#                for rec in fin:
-#                   # read each record of the file
-#
-#        except BaseException:
-#            print '** ERROR reading file, record number ', recs_in, '\n record-> ', rec
-#            raise
-#
-#        fd.increment_recs_read(recs_in)
-#        print('last_person_id ending value -> ' + str(table_ids.last_person_id))
-#        print('Done: total records read ={0}, unique IDs={1}'.format(recs_in, unique_DESYNTHEA_ID_count))
-#
-#    file_control.close_all()
+         except BaseException:
+            print '** ERROR reading file, record number ', recs_in, '\n record-> ', rec
+            raise
 
     #- save look up tables & last-used-ids
 #    persist_lookup_tables()
 #    table_ids.Save(table_ids_filename)
-
-#    print('SYNTHEA_ETL done')
-#    print('Input Records------')
-#    for token in sorted(file_control.descriptor_list(which='input')):
-#        fd = file_control.get_Descriptor(token)
-#        print('\tFile: {0:50}, records_read={1:10}'.format(fd.token, fd.records_read))
-
-#    print('Output Records------')
-#    for token in sorted(file_control.descriptor_list(which='output')):
-#        fd = file_control.get_Descriptor(token)
-#        if fd.records_written > 1:
-#            print('\tFile: {0:50}, records_written={1:10}'.format(fd.token, fd.records_written))
-
 
     print '** done **'

@@ -547,3 +547,4 @@ class ModelOmopPandas:
             'condition_era_end_date': 'object',
             'condition_occurrence_count': 'int32'
         }
+        return model_schema

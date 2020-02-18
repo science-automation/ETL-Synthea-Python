@@ -2,7 +2,6 @@ import pandas as pd
 import os
 import dotenv
 import ModelSyntheaPandas
-import ModelSyntheaPandasObject
 import ModelOmopPandas
 import Utils
 
@@ -29,8 +28,15 @@ BASE_SYNTHEA_INPUT_DIRECTORY     = os.environ['BASE_SYNTHEA_INPUT_DIRECTORY']
 BASE_OMOP_INPUT_DIRECTORY       = os.environ['BASE_OMOP_INPUT_DIRECTORY']
 # Path to the directory where CDM-compatible CSV files should be saved
 BASE_OUTPUT_DIRECTORY           = os.environ['BASE_OUTPUT_DIRECTORY']
-SYNTHEA_DIR_FORMAT               = os.environ['SYNTHEA_DIR_FORMAT']
-SYNTHEA_FILE_LIST =  ['conditions','careplans','observations','procedures','immunizations','imaging_studies','imaging_studies','encounters','organizations','providers','payer_transitions','allergies','patients','medications']
+# List of synthea input files
+SYNTHEA_FILE_LIST =  ['patients','conditions','careplans','observations','procedures','immunizations','imaging_studies','imaging_studies','encounters','organizations','providers','payer_transitions','allergies','medications']
+# Synthea input file chunk size.
+INPUT_CHUNK_SIZE = int(os.environ['INPUT_CHUNK_SIZE'])
+
+
+# hash function for patient id to convert synthea string to omop integer
+def patienthash(id):
+    return hash(id) & ((1<<64)-1)
 
 #---------------------------------
 # start of the program
@@ -51,13 +57,78 @@ if __name__ == '__main__':
 
     # load the synthea model
     model_synthea = ModelSyntheaPandas.ModelSyntheaPandas()
+    model_omop = ModelOmopPandas.ModelOmopPandas()
+    print(model_omop.model_schema['person'])
     #model_synthea = ModelSyntheaPandasObject.ModelSyntheaPandas()
 
     # we only need to consider one synthea input file at a time to make the mapping
     # so only put one in memory at a time.  
+    # we can read csv in chunks
     for datatype in SYNTHEA_FILE_LIST:
         inputfile = datatype + ".csv.gz"
         inputdata = os.path.join(BASE_SYNTHEA_INPUT_DIRECTORY,inputfile)
-        df = pd.read_csv(inputdata, dtype=model_synthea.model_schema[datatype])
-        print(datatype + ": " + util.mem_usage(df))
-            
+        output = os.path.join(BASE_OUTPUT_DIRECTORY,inputfile)
+        header = True
+        for df in pd.read_csv(inputdata, dtype=model_synthea.model_schema[datatype], chunksize=INPUT_CHUNK_SIZE):
+            print(datatype + ": " + util.mem_usage(df))
+
+            print(model_omop.model_schema['person'].keys())
+            if (datatype == 'patients'):
+                 person = pd.DataFrame(columns=model_omop.model_schema['person'].keys())
+                 person['person_id'] = df['Id'].apply(patienthash)
+                 person['person_source_value'] = df['Id']
+                 person['gender_concept_id'] = df['Id']
+                 person['year_of_birth'] = df['Id']
+                 person['month_of_birth'] = df['Id']
+                 person['day_of_birth'] = df['Id']
+                 person['race_concept_id'] =  df['Id']
+                 person['ethnicity_concept_id'] = df['ETHNICITY']
+                 person['person_source_value'] = df['Id']
+                 person['race_source_value'] = df['RACE']
+                 person['ethnicity_source_value'] = df['ETHNICITY']
+                 # write output.  write header only if this is the first chunk
+                 output = os.path.join(BASE_OUTPUT_DIRECTORY,'person.csv')
+                 person.to_csv(output, mode='a', header=header, index=False)
+
+                 # create location record 
+                 location = pd.DataFrame(columns=model_omop.model_schema['location'].keys())
+                 location['location_id'] = df['Id'].apply(patienthash)
+                 location['address_1'] = df['ADDRESS']
+                 location['city'] = df['CITY']
+                 location['state'] = df['STATE']
+                 location['zip'] = df['ZIP']
+                 location['county'] = df['COUNTY']
+                 location['location_source_value'] = df['Id']
+                 # write output.  write header only if this is the first chunk
+                 output = os.path.join(BASE_OUTPUT_DIRECTORY,'location.csv')
+                 location.to_csv(output, mode='a', header=header, index=False)
+
+                 # create death record
+                 death = pd.DataFrame(columns=model_omop.model_schema['death'].keys())
+                 death['person_id'] = df['Id'].apply(patienthash)
+                 death['deathdate'] = df['DEATHDATE']
+                 death =  death[death.deathdate.notnull()]
+                 # write output.  write header only if this is the first chunk
+                 output = os.path.join(BASE_OUTPUT_DIRECTORY,'death.csv')
+                 death.to_csv(output, mode='a', header=header, index=False)
+                 header=False
+                 exit(1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

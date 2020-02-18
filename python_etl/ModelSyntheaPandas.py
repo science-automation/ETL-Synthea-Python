@@ -29,7 +29,7 @@ class ModelSyntheaPandas:
         }
 
         model_schema['careplans'] = {
-            'ID': 'object',
+            'Id': 'object',
             'START': 'object',
             'STOP': 'object',
             'PATIENT': 'object',
@@ -50,11 +50,11 @@ class ModelSyntheaPandas:
         }
 
         model_schema['encounters'] = {
-            'ID': 'object',
+            'Id': 'object',
             'START': 'object',
             'STOP': 'object',
             'PATIENT': 'category',
-            'PROVIDER': 'category',
+            'PROVIdER': 'category',
             'PAYER': 'category',
             'ENCOUNTERCLASS': 'category',
             'CODE': 'category',
@@ -67,7 +67,7 @@ class ModelSyntheaPandas:
         }
 
         model_schema['imaging_studies'] = {
-            'ID': 'object',
+            'Id': 'object',
             'DATE': 'object',
             'PATIENT': 'object',
             'ENCOUNTER': 'object',
@@ -116,7 +116,7 @@ class ModelSyntheaPandas:
         }
 
         model_schema['organizations'] = {
-            'ID': 'object',
+            'Id': 'object',
             'NAME': 'object',
             'ADDRESS': 'object',
             'CITY': 'category',
@@ -130,7 +130,7 @@ class ModelSyntheaPandas:
         }
 
         model_schema['patients'] = {
-            'ID': 'object',
+            'Id': 'object',
             'BIRTHDATE': 'object',
             'DEATHDATE': 'object',
             'SSN': 'object',
@@ -167,7 +167,7 @@ class ModelSyntheaPandas:
         }
 
         model_schema['payers'] = {
-            'ID': 'object',
+            'Id': 'object',
             'NAME': 'object',
             'ADDRESS': 'object',
             'CITY': 'object',
@@ -201,7 +201,7 @@ class ModelSyntheaPandas:
         }
 
         model_schema['providers'] = {
-            'ID': 'object',
+            'Id': 'object',
             'ORGANIZATION': 'object',
             'NAME': 'object',
             'GENDER': 'category',

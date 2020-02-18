@@ -1,5 +1,5 @@
 
-Letting pandas set the values:
+Letting pandas set the date types when importing csv:
 
 conditions: 287.00 MB
 careplans: 170.00 MB
@@ -18,3 +18,21 @@ patients: 120.00 MB
 medications: 2166.00 MB
 
 Using hand coded custom datatypes to decrease the memory used:
+
+conditions: 224.00 MB
+careplans: 120.00 MB
+observations: 750.00 MB
+procedures: 604.00 MB
+immunizations: 341.00 MB
+imaging_studies: 28.00 MB
+imaging_studies: 28.00 MB
+encounters: 1257.00 MB
+organizations: 0.00 MB
+providers: 0.00 MB
+providers: 0.00 MB
+payer_transitions: 18.00 MB
+allergies: 13.00 MB
+patients: 52.00 MB
+medications: 863.00 MB
+
+Getting rid of fields we don't convert to omop.  Important tables to try to drop columns from are observations, procedures, encounters and medications.  This will allow program to handler large amount of patients

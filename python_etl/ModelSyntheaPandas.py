@@ -64,7 +64,6 @@ class ModelSyntheaPandas:
             'PAYER_COVERAGE': 'float16',
             'REASONCODE': 'category',
             'REASONDESCRIPTION': 'category'
-
         }
 
         model_schema['imaging_studies'] = {
@@ -92,15 +91,15 @@ class ModelSyntheaPandas:
         model_schema['medications'] = {
             'START': 'object',
             'STOP': 'object',
-            'PATIENT': 'object',
+            'PATIENT': 'category',
             'PAYER': 'category',
             'ENCOUNTER': 'object',
             'CODE': 'category',
             'DESCRIPTION': 'category',
             'BASE_COST': 'float32',
-            'PAYER_coverage': 'float32',
-            'DISPENSES': 'int8',  # small int
-            'TOTALCOST': 'float32',
+            'PAYER_coverage': 'float16',
+            'DISPENSES': 'int8',
+            'TOTALCOST': 'float16',
             'REASONCODE': 'category',
             'REASONDESCRIPTION': 'category'
         }

@@ -30,7 +30,7 @@ BASE_OMOP_INPUT_DIRECTORY       = os.environ['BASE_OMOP_INPUT_DIRECTORY']
 # Path to the directory where CDM-compatible CSV files should be saved
 BASE_OUTPUT_DIRECTORY           = os.environ['BASE_OUTPUT_DIRECTORY']
 SYNTHEA_DIR_FORMAT               = os.environ['SYNTHEA_DIR_FORMAT']
-SYNTHEA_FILE_LIST =  ['conditions','careplans','observations','procedures','immunizations','imaging_studies','imaging_studies','encounters','organizations','providers','providers','payer_transitions','allergies','patients','medications']
+SYNTHEA_FILE_LIST =  ['conditions','careplans','observations','procedures','immunizations','imaging_studies','imaging_studies','encounters','organizations','providers','payer_transitions','allergies','patients','medications']
 
 #---------------------------------
 # start of the program
@@ -54,12 +54,10 @@ if __name__ == '__main__':
     #model_synthea = ModelSyntheaPandasObject.ModelSyntheaPandas()
 
     # we only need to consider one synthea input file at a time to make the mapping
+    # so only put one in memory at a time.  
     for datatype in SYNTHEA_FILE_LIST:
         inputfile = datatype + ".csv.gz"
         inputdata = os.path.join(BASE_SYNTHEA_INPUT_DIRECTORY,inputfile)
-        #print(model_synthea.model_schema[datatype])
         df = pd.read_csv(inputdata, dtype=model_synthea.model_schema[datatype])
         print(datatype + ": " + util.mem_usage(df))
-        #print(df.dtypes)
-        #if (datatype = "observations") :
             

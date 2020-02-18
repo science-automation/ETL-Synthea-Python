@@ -1,7 +1,7 @@
 #
 # define types for omop schema
 #
-class Model:
+class ModelOmopPandas:
     #
     # Check the model matches
     #

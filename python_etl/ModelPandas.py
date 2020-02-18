@@ -356,109 +356,115 @@ class Model:
         }
 
         model_schema[note] = {
-  note_id    'integer',
-  person_id  'integer',
-  note_date  'object'  ,
-  note_datetime'object',
-  note_type_concept_id'integer',
-  note_class_concept_id 'integer',
-  note_title  'category'2,
-  note_text  'object',
-  encoding_concept_id'integer',
-  language_concept_id'integer',
-  provider_id  'integer',
-  visit_occurrence_id'integer',
-  visit_detail_id       'integer'  ,
-  note_source_value'category'
+            'note_id': 'integer',
+            'person_id': 'integer',
+            'note_date': 'object'  ,
+            'note_datetime': 'object',
+            'note_type_concept_id': 'integer',
+            'note_class_concept_id': 'integer',
+            'note_title': 'category',
+            'note_text': 'object',
+            'encoding_concept_id': 'integer',
+            'language_concept_id': 'integer',
+            'provider_id': 'integer',
+            'visit_occurrence_id': 'integer',
+            'visit_detail_id': 'integer',
+            'note_source_value': 'category'
+        }
 
-        model_schema[note_nlp
-  note_nlp_id        'integer',
-  note_id          'integer',
-  section_concept_id    'integer',
-  snippet          'category'2,
-  "offset"          'category'2,
-  lexical_variant      'category'2,
-  note_nlp_concept_id    'integer',
-  note_nlp_source_concept_id  'integer',
-  nlp_system        'category'2,
-  nlp_date        'object'  ,
-  nlp_datetime      'object',
-  term_exists        'category'1),
-  term_temporal      'category',
-  term_modifiers      'category'2000)
+        model_schema[note_nlp] = {
+            'note_nlp_id': 'integer',
+            'note_id': 'integer',
+            'section_concept_id': 'integer',
+            'snippet': 'category',
+            'offset': 'category',
+            'lexical_variant': 'category',
+            'note_nlp_concept_id': 'integer',
+            'note_nlp_source_concept_id': 'integer',
+            'nlp_system': 'category',
+            'nlp_date': 'object',
+            'nlp_datetime': 'object',
+            'term_exists': 'category',
+            'term_temporal': 'category',
+            'term_modifiers': 'category'
+        }
 
-        model_schema[observation
-  observation_id      'integer',
-  person_id          'integer',
-  observation_concept_id  'integer',
-  observation_date      'object',
-  observation_datetime  'object',
-  observation_type_concept_id  'integer',
-  value_as_number        'float',
-  value_as_string        'category'60),
-  value_as_concept_id      'integer',
-  qualifier_concept_id    'integer',
-  unit_concept_id        'integer',
-  provider_id          'integer',
-  visit_occurrence_id      'integer',
-  visit_detail_id               'integer',
-  observation_source_value  'category',
-  observation_source_concept_id'integer',
-  unit_source_value      'category',
-  qualifier_source_value  'category'
+        model_schema[observation] = {
+            'observation_id': 'integer',
+            'person_id': 'integer',
+            'observation_concept_id': 'integer',
+            'observation_date': 'object',
+            'observation_datetime': 'object',
+            'observation_type_concept_id': 'integer',
+            'value_as_number': 'float',
+            'value_as_string': 'category'),
+            'value_as_concept_id': 'integer',
+            'qualifier_concept_id': 'integer',
+            'unit_concept_id': 'integer',
+            'provider_id': 'integer',
+            'visit_occurrence_id': 'integer',
+            'visit_detail_id': 'integer',
+            'observation_source_value': 'category',
+            'observation_source_concept_id': 'integer',
+            'unit_source_value': 'category',
+            'qualifier_source_value': 'category'
+        }
 
-        model_schema[fact_relationship
-  domain_concept_id_1'integer',
-  fact_id_1    'integer',
-  domain_concept_id_2'integer',
-  fact_id_2    'integer',
-  relationship_concept_id'integer'
+        model_schema[fact_relationship] = {
+            'domain_concept_id_1': 'integer',
+            'fact_id_1': 'integer',
+            'domain_concept_id_2': 'integer',
+            'fact_id_2': 'integer',
+            'relationship_concept_id': 'integer'
+        }
 
-# Standardized health system data
-        model_schema[location
-  location_id  'integer',
-  address_1  'category',
-  address_2  'category',
-  city    'category',
-  state    'category'2),
-  zip      'category'9),
-  county  'category',
-  location_source_value 'category'
+        # Standardized health system data
+        model_schema[location] = {
+            'location_id':  'integer',
+            'address_1': 'category',
+            'address_2': 'category',
+            'city': 'category',
+            'state': 'category',
+            'zip': 'category',
+            'county': 'category',
+            'location_source_value': 'category'
+        }
 
-        model_schema[care_site
-  care_site_id      'integer',
-  care_site_name    'category'255,
-  place_of_service_concept_id  'integer',
-  location_id        'integer',
-  care_site_source_value  'category',
-  place_of_service_source_value 'category'
+        model_schema[care_site] = { 
+            'care_site_id': 'integer',
+            'care_site_name': 'category',
+            'place_of_service_concept_id': 'integer',
+            'location_id': 'integer',
+            'care_site_source_value': 'category',
+            'place_of_service_source_value': 'category'
+        }
 
-        model_schema[provider
-  provider_id        'integer',
-  provider_name      'category',
-  NPI            'category',
-  DEA            'category',
-  specialty_concept_id  'integer',
-  care_site_id      'integer',
-  year_of_birth      'integer',
-  gender_concept_id    'integer',
-  provider_source_value  'category',
-  specialty_source_value'category',
-  specialty_source_concept_id'integer',
-  gender_source_value    'category',
-  gender_source_concept_id'integer'  
+        model_schema[provider] = {
+            'provider_id': 'integer',
+            'provider_name': 'category',
+            'NPI': 'category',
+            'DEA': 'category',
+            'specialty_concept_id': 'integer',
+            'care_site_id': 'integer',
+            'year_of_birth': 'integer',
+            'gender_concept_id': 'integer',
+            'provider_source_value': 'category',
+            'specialty_source_value': 'category',
+            'specialty_source_concept_id': 'integer',
+            'gender_source_value': 'category',
+            'gender_source_concept_id': 'integer'  
+        }
 
-# Standardized health economics
-
-        model_schema[payer_plan_period
+        # Standardized health economics
+        model_schema[payer_plan_period] = {
             'payer_plan_period_id': 'integer',
             'person_id': 'integer',
-            'payer_plan_period_start_date':  'object',
+            'payer_plan_period_start_date': 'object',
             'payer_plan_period_end_date': 'object',
             'payer_concept_id': 'integer',
             'payer_source_value': 'category',
             'payer_source_concept_id': 'integer',
-            'plan_concept_id: 'integer',
+            'plan_concept_id': 'integer',
             'plan_source_value': 'category',
             'plan_source_concept_id': 'integer',
             'sponsor_concept_id': 'integer',
@@ -468,69 +474,76 @@ class Model:
             'stop_reason_concept_id': 'integer',
             'stop_reason_source_value': 'category',
             'stop_reason_source_concept_id': 'integer'       
+        }
 
-        model_schema[cost
-  cost_id          'integer'  ,
-  cost_event_id             'integer',
-  cost_domain_id            'category'20,
-  cost_type_concept_id      'integer',
-  currency_concept_id  'integer',
-  total_charge  'float',
-  total_cost    'float',
-  total_paid    'float',
-  paid_by_payer    'float',
-  paid_by_patient'float',
-  paid_patient_copay'float',
-  paid_patient_coinsurance  'float',
-  paid_patient_deductible'float',
-  paid_by_primary'float',
-  paid_ingredient_cost'float',
-  paid_dispensing_fee'float',
-  payer_plan_period_id'integer',
-  amount_allowed        'float',
-  revenue_code_concept_id'integer',
-  reveue_code_source_value  'category'50,
-  drg_concept_id      'integer',
-  drg_source_value    'category'3)
+        model_schema[cost] = {
+            'cost_id': 'integer'  ,
+            'cost_event_id': 'integer',
+            'cost_domain_id': 'category'20,
+            'cost_type_concept_id': 'integer',
+            'currency_concept_id': 'integer',
+            'total_charge': 'float',
+            'total_cost': 'float',
+            'total_paid': 'float',
+            'paid_by_payer': 'float',
+            'paid_by_patient': 'float',
+            'paid_patient_copay': 'float',
+            'paid_patient_coinsurance': 'float',
+            'paid_patient_deductible': 'float',
+            'paid_by_primary': 'float',
+            'paid_ingredient_cost': 'float',
+            'paid_dispensing_fee': 'float',
+            'payer_plan_period_id': 'integer',
+            'amount_allowed': 'float',
+            'revenue_code_concept_id': 'integer',
+            'reveue_code_source_value': 'category',
+            'drg_concept_id': 'integer',
+            'drg_source_value': 'category'
+        }
 
-# Standardized derived elements
-        model_schema[cohort
-            cohort_definition_id:'integer',
-            subject_id:'integer',
-            cohort_start_date:'object',
-            cohort_end_date:'object'
+        # Standardized derived elements
+        model_schema[cohort] = {
+            'cohort_definition_id': 'integer',
+            'subject_id': 'integer',
+            'cohort_start_date:': 'object',
+            'cohort_end_date:': 'object'
+        }
 
-        model_schema[cohort_attribute
-            cohort_definition_id: 'integer',
-            subject_id: 'integer',
-            cohort_start_date: 'object',
-            cohort_end_date: 'object',
-            attribute_definition_id: 'integer',
-            value_as_number: 'float',
-            value_as_concept_id: 'integer'
+        model_schema[cohort_attribute] = {
+            'cohort_definition_id': 'integer',
+            'subject_id': 'integer',
+            'cohort_start_date': 'object',
+            'cohort_end_date': 'object',
+            'attribute_definition_id': 'integer',
+            'value_as_number': 'float',
+            'value_as_concept_id': 'integer'
+        }
 
-        model_schema[drug_era
-            drug_era_id: 'integer',
-            person_id: 'integer',
-            drug_concept_id: 'integer',
-            drug_era_start_date: 'object',
-            drug_era_end_date: 'object',
-            drug_exposure_count: 'integer',
-            gap_days: 'integer'
+        model_schema[drug_era] = {
+            'drug_era_id': 'integer',
+            'person_id': 'integer',
+            'drug_concept_id': 'integer',
+            'drug_era_start_date': 'object',
+            'drug_era_end_date': 'object',
+            'drug_exposure_count': 'integer',
+            'gap_days': 'integer'
+        }
 
-        model_schema[dose_era
-            dose_era_id  'integer',
-            person_id  'integer',
-            drug_concept_id'integer',
-            unit_concept_id'integer',
-            dose_value'float',
-            dose_era_start_date'object',
-            dose_era_end_date    'object'  
+        model_schema[dose_era] = {
+            'dose_era_id': 'integer',
+            'person_id': 'integer',
+            'drug_concept_id': 'integer',
+            'unit_concept_id': 'integer',
+            'dose_value': 'float',
+            'dose_era_start_date': 'object',
+            'dose_era_end_date': 'object'  
+        }
 
-        model_schema[condition_era
-            condition_era_id    'integer',
-            person_id        'integer',
-            condition_concept_id  'integer',
-            condition_era_start_date'object',
-            condition_era_end_date'object',
-            condition_occurrence_count'integer'
+        model_schema[condition_era] = {
+            'condition_era_id': 'integer',
+            'person_id': 'integer',
+            'condition_concept_id': 'integer',
+            'condition_era_start_date': 'object',
+            'condition_era_end_date': 'object',
+            'condition_occurrence_count': 'integer'
+        }

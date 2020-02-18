@@ -1,7 +1,10 @@
-import pandas as pd:
+import pandas as pd
+import os
 import dotenv
 import ModelSyntheaPandas
+import ModelSyntheaPandasObject
 import ModelOmopPandas
+import Utils
 
 #------------------------------------------------------
 # This scripts performs an ETL from Synthea to omop CDM.
@@ -27,6 +30,7 @@ BASE_OMOP_INPUT_DIRECTORY       = os.environ['BASE_OMOP_INPUT_DIRECTORY']
 # Path to the directory where CDM-compatible CSV files should be saved
 BASE_OUTPUT_DIRECTORY           = os.environ['BASE_OUTPUT_DIRECTORY']
 SYNTHEA_DIR_FORMAT               = os.environ['SYNTHEA_DIR_FORMAT']
+SYNTHEA_FILE_LIST =  ['conditions','careplans','observations','procedures','immunizations','imaging_studies','imaging_studies','encounters','organizations','providers','providers','payer_transitions','allergies','patients','medications']
 
 #---------------------------------
 # start of the program
@@ -35,24 +39,27 @@ if __name__ == '__main__':
     if not os.path.exists(BASE_OUTPUT_DIRECTORY): os.makedirs(BASE_OUTPUT_DIRECTORY)
     if not os.path.exists(BASE_ETL_CONTROL_DIRECTORY): os.makedirs(BASE_ETL_CONTROL_DIRECTORY)
 
-    current_stats_filename = os.path.join(BASE_OUTPUT_DIRECTORY,'etl_stats.txt')
     print('SYNTHEA_ETL starting')
     print('BASE_SYNTHEA_INPUT_DIRECTORY     =' + BASE_SYNTHEA_INPUT_DIRECTORY)
     print('BASE_OUTPUT_DIRECTORY           =' + BASE_OUTPUT_DIRECTORY)
     print('BASE_ETL_CONTROL_DIRECTORY      =' + BASE_ETL_CONTROL_DIRECTORY)
 
+    # load utils
+    util = Utils.Utils()
+
     # check files look ok
 
-    # Build the object to manage access to all the files
-    write_header_records()
+    # load the synthea model
+    model_synthea = ModelSyntheaPandas.ModelSyntheaPandas()
+    #model_synthea = ModelSyntheaPandasObject.ModelSyntheaPandas()
 
-    # load the vocab flies
-    #build_maps()
-   
     # we only need to consider one synthea input file at a time to make the mapping
-    synthea_file_list =  ['conditions.csv','careplans.csv','observations.csv','procedures.csv','immunizations.csv','imaging_studies.csv','imaging_studies.csv','encounters.csv','organizations.csv','providers.csv','providers.csv','payer_transitions.csv','allergies.csv','patients.csv','medications.csv']
-    synthea_file_list = ['patients.csv']
-    for inputfile in synthea_file_list:
+    for datatype in SYNTHEA_FILE_LIST:
+        inputfile = datatype + ".csv.gz"
         inputdata = os.path.join(BASE_SYNTHEA_INPUT_DIRECTORY,inputfile)
-        df = pd.read_csv(inputdata, dtype='object')
-
+        #print(model_synthea.model_schema[datatype])
+        df = pd.read_csv(inputdata, dtype=model_synthea.model_schema[datatype])
+        print(datatype + ": " + util.mem_usage(df))
+        #print(df.dtypes)
+        #if (datatype = "observations") :
+            

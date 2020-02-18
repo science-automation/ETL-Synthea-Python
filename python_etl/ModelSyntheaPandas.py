@@ -1,5 +1,5 @@
 #
-# define types for omop schema
+# define types for synthea schema
 #
 class ModelSyntheaPandas:
     #
@@ -10,7 +10,7 @@ class ModelSyntheaPandas:
 
     #
     # define omop schema here
-    # The date fields are read in as string.  They can be converted to date
+    # The DATE fields are read in as string.  They can be converted to DATE
     # objects if necessary
     # OMOP V5.3.1
     #
@@ -20,198 +20,199 @@ class ModelSyntheaPandas:
         # Standardized vocabulary
         #
         model_schema['allergies'] = {
-            'start': 'object',
-            'stop': 'object',
-            'patient': 'object',
-            'encounter': 'object',
-            'code': 'category',
-            'description': 'category'
+            'START': 'object',
+            'STOP': 'object',
+            'PATIENT': 'object',
+            'ENCOUNTER': 'object',
+            'CODE': 'category',
+            'DESCRIPTION': 'category'
         }
 
         model_schema['careplans'] = {
-            'id': 'object',
-            'start': 'object',
-            'stop': 'object',
-            'patient': 'object',
-            'encounter': 'object',
-            'code': 'category',
-            'description': 'category',
-            'reasoncode': 'category',
-            'reasondescription': 'category'
+            'ID': 'object',
+            'START': 'object',
+            'STOP': 'object',
+            'PATIENT': 'object',
+            'ENCOUNTER': 'object',
+            'CODE': 'category',
+            'DESCRIPTION': 'category',
+            'REASONCODE': 'category',
+            'REASONDESCRIPTION': 'category'
         }
 
         model_schema['conditions'] = {
-            'start': 'object',
-            'stop': 'object',
-            'patient': 'object',
-            'encounter': 'object',
-            'code': 'category',
-            'description': 'category'
+            'START': 'object',
+            'STOP': 'object',
+            'PATIENT': 'object',
+            'ENCOUNTER': 'object',
+            'CODE': 'category',
+            'DESCRIPTION': 'category'
         }
 
         model_schema['encounters'] = {
-            'id': 'object',
-            'start': 'object',
-            'stop': 'object',
-            'patient': 'object',
-            'provider': 'category',
-            'payer': 'object',
-            'encounterclass': 'category',
-            'code': 'category',
-            'description': 'category',
-            'base_encounter_cost': 'float',
-            'total_claim_cost': 'float',
-            'payer_coverage': 'float',
-            'reasoncode': 'category',
-            'reasondescription': 'category'
+            'ID': 'object',
+            'START': 'object',
+            'STOP': 'object',
+            'PATIENT': 'category',
+            'PROVIDER': 'category',
+            'PAYER': 'category',
+            'ENCOUNTERCLASS': 'category',
+            'CODE': 'category',
+            'DESCRIPTION': 'category',
+            'BASE_ENCOUNTER_COST': 'float16',
+            'TOTAL_CLAIM_COST': 'float16',
+            'PAYER_COVERAGE': 'float16',
+            'REASONCODE': 'category',
+            'REASONDESCRIPTION': 'category'
 
         }
 
         model_schema['imaging_studies'] = {
-            'id': 'object',
-            'date': 'object',
-            'patient': 'object',
-            'encounter': 'object',
-            'body_site_code': 'category',
-            'body_site_description': 'category',
-            'modality_code': 'category',
-            'modality_description': 'category',
-            'sop_code': 'category',
-            'sop_description': 'category'
+            'ID': 'object',
+            'DATE': 'object',
+            'PATIENT': 'object',
+            'ENCOUNTER': 'object',
+            'BODY_SITE_CODE': 'category',
+            'BODY_SITE_DESCRIPTION': 'category',
+            'MODALITY_CODE': 'category',
+            'MODALITY_DESCRIPTION': 'category',
+            'SOP_CODE': 'category',
+            'SOP_DESCRIPTION': 'category'
         }
 
         model_schema['immunizations'] = {
-            'date': 'object',
-            'patient': 'object',
-            'encounter': 'object',
-            'code': 'category',
-            'description': 'category',
-            'cost': 'float'
+            'DATE': 'object',
+            'PATIENT': 'object',
+            'ENCOUNTER': 'object',
+            'CODE': 'category',
+            'DESCRIPTION': 'category',
+            'COST': 'float32'
         }
 
         model_schema['medications'] = {
-            'start': 'object',
-            'stop': 'object',
-            'patient': 'object',
-            'payer': 'category',
-            'encounter': 'object',
-            'code': 'category',
-            'description': 'category',
-            'base_cost': 'float',
-            'payer_coverage': 'float',
-            'dispenses': 'integer',  # small int
-            'totalcost': 'float',
-            'reasoncode': 'category',
-            'reasondescription': 'category'
+            'START': 'object',
+            'STOP': 'object',
+            'PATIENT': 'object',
+            'PAYER': 'category',
+            'ENCOUNTER': 'object',
+            'CODE': 'category',
+            'DESCRIPTION': 'category',
+            'BASE_COST': 'float32',
+            'PAYER_coverage': 'float32',
+            'DISPENSES': 'int8',  # small int
+            'TOTALCOST': 'float32',
+            'REASONCODE': 'category',
+            'REASONDESCRIPTION': 'category'
         }
 
         model_schema['observations'] = {
-            'date': 'object',
-            'patient': 'object',
-            'encounter': 'object',
-            'code': 'category',
-            'description': 'category',
-            'value': 'category',
-            'units': 'category',
-            'type': 'category'
+            'DATE': 'category',
+            'PATIENT': 'category',
+            'ENCOUNTER': 'category',
+            'CODE': 'category',
+            'DESCRIPTION': 'category',
+            'VALUE': 'category',
+            'UNITS': 'category',
+            'TYPE': 'category'
         }
 
         model_schema['organizations'] = {
-            'id': 'object',
-            'name': 'object',
-            'address': 'object',
-            'city': 'category',
-            'state': 'category',
-            'zip': 'category',
-            'lat': 'float',
-            'lon': 'float',
-            'phone': 'object',
-            'revenue': 'float',
-            'utilization': 'float'
+            'ID': 'object',
+            'NAME': 'object',
+            'ADDRESS': 'object',
+            'CITY': 'category',
+            'STATE': 'category',
+            'ZIP': 'category',
+            'LAT': 'float32',
+            'LON': 'float32',
+            'PHONE': 'object',
+            'REVENUE': 'float32',
+            'utilization': 'float32'
         }
 
         model_schema['patients'] = {
-            'id': 'object',
-            'birthdate': 'object',
-            'deathdate': 'object',
-            'ssn': 'object',
-            'drivers': 'object',
-            'passport': 'object',
-            'prefix': 'category',
-            'first': 'category',
-            'last': 'category',
-            'suffix': 'category',
-            'maiden': 'category',
-            'marital': 'category',
-            'race': 'category',
-            'ethnicity': 'category',
-            'gender': 'category',
-            'birthplace': 'category',
-            'address': 'object',
-            'city': 'category',
-            'county': 'category',
-            'state': 'category',
-            'zip': 'category',
-            'lat': 'float',
-            'lon': 'float',
-            'healthcare_expense': 'float',
-            'healthcare_coverage': 'float'
+            'ID': 'object',
+            'BIRTHDATE': 'object',
+            'DEATHDATE': 'object',
+            'SSN': 'object',
+            'DRIVERS': 'object',
+            'PASSPORT': 'object',
+            'PREFIX': 'category',
+            'FIRST': 'category',
+            'LAST': 'category',
+            'SUFFIX': 'category',
+            'MAIDEN': 'category',
+            'MARITAL': 'category',
+            'RACE': 'category',
+            'ETHNICITY': 'category',
+            'GENDER': 'category',
+            'BIRTHPLACE': 'category',
+            'ADDRESS': 'object',
+            'CITY': 'category',
+            'COUNTY': 'category',
+            'STATE': 'category',
+            'ZIP': 'category',
+            'LAT': 'float32',
+            'LON': 'float32',
+            'HEALTHCARE_EXPENSE': 'float32',
+            'HEALTHCARE_COVERAGE': 'float32'
         }
 
         model_schema['payer_transitions'] = {
-            'patient': 'object',
-            'start_year': 'object',
-            'stop_year': 'object',
-            'patient': 'object',
-            'payer': 'category',
-            'ownership': 'category'
+            'PATIENT': 'object',
+            'START_YEAR': 'object',
+            'STOP_YEAR': 'object',
+            'PATIENT': 'object',
+            'PAYER': 'category',
+            'OWNERSHIP': 'category'
         }
 
         model_schema['payers'] = {
-            'id': 'object',
-            'name': 'object',
-            'address': 'object',
-            'city': 'object',
-            'state_headquartered': 'category',
-            'zip': 'category',
-            'phone': 'cateogry',
-            'amount_covered': 'float',
-            'revenue': 'float',
-            'covered_encounters': 'float',
-            'uncovered_encounters': 'float',
-            'covered_medications': 'float',
-            'uncovered_medications': 'float',
-            'covered_procedures': 'float',
-            'uncovered_procedures': 'float',
-            'covered_immunizations': 'float',
-            'uncovered_immunizations': 'float',
-            'unique_customers': 'float',
-            'qols_avg': 'float',
-            'member_months': 'float'
+            'ID': 'object',
+            'NAME': 'object',
+            'ADDRESS': 'object',
+            'CITY': 'object',
+            'STATE_HEADQUARTERED': 'category',
+            'ZIP': 'category',
+            'PHONE': 'cateogry',
+            'AMOUNT_COVERED': 'float32',
+            'REVENUE': 'float32',
+            'COVERED_ENCOUNTERs': 'float32',
+            'UNCOVERED_ENCOUNTERs': 'float32',
+            'COVERED_MEDICATIONS': 'float32',
+            'UNCOVERED_MEDICATIONS': 'float32',
+            'COVERED_PROCESURES': 'float32',
+            'UNCOVERED_PROCESURES': 'float32',
+            'COVERED_IMMUNIZATIONS': 'float32',
+            'UNCOVERED_IMMUNIZATIONS': 'float32',
+            'UNIQUE_CUSTOMERS': 'float32',
+            'QOLS_AVG': 'float32',
+            'MEMBER_MONTHS': 'float32'
         }
 
         model_schema['procedures'] = {
-            'date': 'object',
-            'patient': 'object',
-            'encounter': 'object',
-            'code': 'category',
-            'description': 'category',
-            'base_cost': 'category',
-            'reasoncode': 'category',
-            'reasondescription': 'category'
+            'DATE': 'object',
+            'PATIENT': 'category',
+            'ENCOUNTER': 'object',
+            'CODE': 'category',
+            'DESCRIPTION': 'category',
+            'BASE_COST': 'category',
+            'REASONCODE': 'category',
+            'REASONDESCRIPTION': 'category'
         }
 
         model_schema['providers'] = {
-            'id': 'object',
-            'organization': 'object',
-            'name': 'object',
-            'gender': 'category',
-            'speciality': 'category',
-            'address': 'object',
-            'city': 'category',
-            'state': 'state',
-            'zip': 'float',
-            'lat': 'float',
-            'lon': 'float',
-            'utilization': 'float'
+            'ID': 'object',
+            'ORGANIZATION': 'object',
+            'NAME': 'object',
+            'GENDER': 'category',
+            'SPECIALITY': 'category',
+            'ADDRESS': 'object',
+            'CITY': 'category',
+            'STATE': 'category',
+            'ZIP': 'float32',
+            'LAT': 'float32',
+            'LON': 'float32',
+            'UTILIZATION': 'float32'
         }
+        return model_schema

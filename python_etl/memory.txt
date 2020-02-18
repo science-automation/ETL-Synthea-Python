@@ -1,0 +1,20 @@
+
+Letting pandas set the values:
+
+conditions: 287.00 MB
+careplans: 170.00 MB
+observations: 13446.00 MB
+procedures: 1210.00 MB
+immunizations: 473.00 MB
+imaging_studies: 46.00 MB
+imaging_studies: 46.00 MB
+encounters: 3627.00 MB
+organizations: 0.00 MB
+providers: 0.00 MB
+providers: 0.00 MB
+payer_transitions: 29.00 MB
+allergies: 17.00 MB
+patients: 120.00 MB
+medications: 2166.00 MB
+
+Using hand coded custom datatypes to decrease the memory used:

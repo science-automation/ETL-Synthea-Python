@@ -4,6 +4,7 @@ import dotenv
 import ModelSyntheaPandas
 import ModelOmopPandas
 import Utils
+import datetime
 
 #------------------------------------------------------
 # This scripts performs an ETL from Synthea to omop CDM.
@@ -38,6 +39,45 @@ INPUT_CHUNK_SIZE = int(os.environ['INPUT_CHUNK_SIZE'])
 def patienthash(id):
     return hash(id) & ((1<<64)-1)
 
+# given date in synthea format return the year
+def getYearFromSyntheaDate(date):
+    return datetime.datetime.strptime(date, "%Y-%m-%d").year
+
+# given date in synthea format return the month
+def getMonthFromSyntheaDate(date):
+    return datetime.datetime.strptime(date, "%Y-%m-%d").month
+
+# given date in synthea format return the day
+def getDayFromSyntheaDate(date):
+    return datetime.datetime.strptime(date, "%Y-%m-%d").day
+
+# given gender as M or F return the OMOP concept code
+def getGenderConceptCode(gender):
+    gendre = gender.upper()
+    if gender=='M':
+        return '8507'
+    else:
+        return '8532'
+
+# given synthea race code return omop code
+def getRaceConceptCode(race):
+    race = race.upper()
+    if race=='WHITE':
+        return '8527'
+    elif race=='BLACK':
+        return '8516'
+    elif race=='ASIAN':
+        return 8515
+    else:
+        return '0'
+
+def getEthnicityConceptCode(eth):
+    eth = eth.upper()
+    if eth=='HISPANIC':
+        return '38003563'
+    else:
+        return '0'
+
 #---------------------------------
 # start of the program
 #---------------------------------
@@ -45,7 +85,6 @@ if __name__ == '__main__':
     if not os.path.exists(BASE_OUTPUT_DIRECTORY): os.makedirs(BASE_OUTPUT_DIRECTORY)
     if not os.path.exists(BASE_ETL_CONTROL_DIRECTORY): os.makedirs(BASE_ETL_CONTROL_DIRECTORY)
 
-    print('SYNTHEA_ETL starting')
     print('BASE_SYNTHEA_INPUT_DIRECTORY     =' + BASE_SYNTHEA_INPUT_DIRECTORY)
     print('BASE_OUTPUT_DIRECTORY           =' + BASE_OUTPUT_DIRECTORY)
     print('BASE_ETL_CONTROL_DIRECTORY      =' + BASE_ETL_CONTROL_DIRECTORY)
@@ -58,7 +97,6 @@ if __name__ == '__main__':
     # load the synthea model
     model_synthea = ModelSyntheaPandas.ModelSyntheaPandas()
     model_omop = ModelOmopPandas.ModelOmopPandas()
-    print(model_omop.model_schema['person'])
     #model_synthea = ModelSyntheaPandasObject.ModelSyntheaPandas()
 
     # we only need to consider one synthea input file at a time to make the mapping
@@ -69,6 +107,7 @@ if __name__ == '__main__':
         inputdata = os.path.join(BASE_SYNTHEA_INPUT_DIRECTORY,inputfile)
         output = os.path.join(BASE_OUTPUT_DIRECTORY,inputfile)
         header = True
+        mode = 'w'
         for df in pd.read_csv(inputdata, dtype=model_synthea.model_schema[datatype], chunksize=INPUT_CHUNK_SIZE):
             print(datatype + ": " + util.mem_usage(df))
 
@@ -76,19 +115,18 @@ if __name__ == '__main__':
             if (datatype == 'patients'):
                  person = pd.DataFrame(columns=model_omop.model_schema['person'].keys())
                  person['person_id'] = df['Id'].apply(patienthash)
-                 person['person_source_value'] = df['Id']
-                 person['gender_concept_id'] = df['Id']
-                 person['year_of_birth'] = df['Id']
-                 person['month_of_birth'] = df['Id']
-                 person['day_of_birth'] = df['Id']
-                 person['race_concept_id'] =  df['Id']
-                 person['ethnicity_concept_id'] = df['ETHNICITY']
+                 person['gender_concept_id'] = df['GENDER'].apply(getGenderConceptCode)
+                 person['year_of_birth'] = df['BIRTHDATE'].apply(getYearFromSyntheaDate)
+                 person['month_of_birth'] = df['BIRTHDATE'].apply(getMonthFromSyntheaDate)
+                 person['day_of_birth'] = df['BIRTHDATE'].apply(getDayFromSyntheaDate)
+                 person['race_concept_id'] =  df['Id'].apply(getRaceConceptCode)
+                 person['ethnicity_concept_id'] = df['ETHNICITY'].apply(getEthnicityConceptCode)
                  person['person_source_value'] = df['Id']
                  person['race_source_value'] = df['RACE']
                  person['ethnicity_source_value'] = df['ETHNICITY']
                  # write output.  write header only if this is the first chunk
                  output = os.path.join(BASE_OUTPUT_DIRECTORY,'person.csv')
-                 person.to_csv(output, mode='a', header=header, index=False)
+                 person.to_csv(output, mode=mode, header=header, index=False)
 
                  # create location record 
                  location = pd.DataFrame(columns=model_omop.model_schema['location'].keys())
@@ -101,7 +139,7 @@ if __name__ == '__main__':
                  location['location_source_value'] = df['Id']
                  # write output.  write header only if this is the first chunk
                  output = os.path.join(BASE_OUTPUT_DIRECTORY,'location.csv')
-                 location.to_csv(output, mode='a', header=header, index=False)
+                 location.to_csv(output, mode=mode, header=header, index=False)
 
                  # create death record
                  death = pd.DataFrame(columns=model_omop.model_schema['death'].keys())
@@ -110,8 +148,10 @@ if __name__ == '__main__':
                  death =  death[death.deathdate.notnull()]
                  # write output.  write header only if this is the first chunk
                  output = os.path.join(BASE_OUTPUT_DIRECTORY,'death.csv')
-                 death.to_csv(output, mode='a', header=header, index=False)
+                 death.to_csv(output, mode=mode, header=header, index=False)
+                 # no longer write header and append to file
                  header=False
+                 mode='a'
                  exit(1)
 
 

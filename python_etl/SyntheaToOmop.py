@@ -55,7 +55,7 @@ class SyntheaToOmop:
     #
     # synthea patients to omop
     #
-    def syntheaPatientsToOmop(self, df):
+    def patientsToOmop(self, df):
         model_schema = {}
         #
         # Standardized vocabulary
@@ -88,3 +88,49 @@ class SyntheaToOmop:
         death['deathdate'] = df['DEATHDATE']
         death =  death[death.deathdate.notnull()]
         return (person, location, death)
+
+    def conditionsToOmop(self, df):
+        condition_occurrence = pd.DataFrame(columns=self.model_schema['condition_occurrence'].keys())
+        drug_exposure = pd.DataFrame(columns=self.model_schema['drug_exposure'].keys())
+        observation = pd.DataFrame(columns=self.model_schema['observation'].keys())
+        return (condition_occurrence, drug_exposure, observation)
+
+    def careplansToOmop(self, df):
+        pass
+
+    def observationsToOmop(self, df):
+        measurement = pd.DataFrame(columns=self.model_schema['measurement'].keys())
+        return measurement
+
+    def proceduresToOmop(self, df):
+        measurement = pd.DataFrame(columns=self.model_schema['measurement'].keys())
+        procedure_occurrence = pd.DataFrame(columns=self.model_schema['procedure_occurrence'].keys())
+        return (measurement, procedure_occurrence)
+
+    def immunizationsToOmop(self, df):
+        drug_exposure = pd.DataFrame(columns=self.model_schema['drug_exposure'].keys())
+        return drug_exposure
+
+    def encountersToOmop(self, df):
+        observation_period = pd.DataFrame(columns=self.model_schema['observation_period'].keys())
+        visit_occurrence = pd.DataFrame(columns=self.model_schema['visit_occurrence'].keys())
+        return (observation_period, visit_occurrence)
+
+    def organizationsToOmop(self, df):
+        care_site = pd.DataFrame(columns=self.model_schema['care_site'].keys())
+        return care_site
+
+    def providersToOmop(self, df):
+        provider = pd.DataFrame(columns=self.model_schema['provider'].keys())
+        return provider
+
+    def payertransitionToOmop(self, df):
+        pass
+
+    def allergiesToOmop(self, df):
+        observations = pd.DataFrame(columns=self.model_schema['observations'].keys())
+        return observations
+
+    def medicationsToOmop(self, df):
+        drug_exposure = pd.DataFrame(columns=self.model_schema['drug_exposure'].keys())
+        return drug_exposure

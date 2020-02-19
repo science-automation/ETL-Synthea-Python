@@ -32,7 +32,7 @@ BASE_OMOP_INPUT_DIRECTORY       = os.environ['BASE_OMOP_INPUT_DIRECTORY']
 BASE_OUTPUT_DIRECTORY           = os.environ['BASE_OUTPUT_DIRECTORY']
 # List of synthea input files
 SYNTHEA_FILE_LIST =  ['patients','conditions','careplans','observations','procedures','immunizations','imaging_studies','imaging_studies','encounters','organizations','providers','payer_transitions','allergies','medications']
-SYNTHEA_FILE_LIST =  ['patients']
+#SYNTHEA_FILE_LIST =  ['patients']
 # Synthea input file chunk size.
 INPUT_CHUNK_SIZE = int(os.environ['INPUT_CHUNK_SIZE'])
 
@@ -73,50 +73,55 @@ if __name__ == '__main__':
         print(datatype),
         for df in pd.read_csv(inputdata, dtype=model_synthea.model_schema[datatype], chunksize=INPUT_CHUNK_SIZE):
             if (datatype == 'patients'):
-                (person, location, death) = convert.syntheaPatientsToOmop(df)
+                (person, location, death) = convert.patientsToOmop(df)
                 person.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'person.csv'), mode=mode, header=header, index=False)
                 location.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'location.csv'), mode=mode, header=header, index=False)
                 death.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'death.csv'), mode=mode, header=header, index=False)
-                # no longer write header and append to file. write . so we know program is still running
-                print('.'),
-                sys.stdout.flush()
-                header=False
-                mode='a'
             elif (datatype == 'conditions'):
-                pass
+                (condition_occurrence, drug_exposure, observation) = convert.conditionsToOmop(df)
+                condition_occurrence.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'condition_occurrence.csv'), mode=mode, header=header, index=False)
+                drug_exposure.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'drug_exposure.csv'), mode=mode, header=header, index=False)
+                observation.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'observation.csv'), mode=mode, header=header, index=False)
             elif (datatype == 'careplans'):
                 pass
             elif (datatype == 'observations'):
-                pass
+                measurement = convert.observationsToOmop(df)
+                measurement.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'measurement.csv'), mode=mode, header=header, index=False)
             elif (datatype == 'procedures'):
-                pass
+                (measurement, procedure_occurrence) = convert.proceduresToOmop(df)
+                measurement.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'measurement.csv'), mode=mode, header=header, index=False)
+                procedure_occurrence.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'procedure_occurrence.csv'), mode=mode, header=header, index=False)
             elif (datatype == 'immunizations'):
-                pass
+                drug_exposure = convert.immunizationsToOmop(df)
+                drug_exposure.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'drug_exposure.csv'), mode=mode, header=header, index=False)
             elif (datatype == 'imaging_studies'):
                 pass
             elif (datatype == 'encounters'):
-                pass
+                (observation_period, visit_occurrence) = convert.encountersToOmop(df)
+                observation_period.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'observation_period.csv'), mode=mode, header=header, index=False)
+                visit_occurrence.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'visit_occurrence.csv'), mode=mode, header=header, index=False)
             elif (datatype == 'organizations'):
-                pass
+                care_site = convert.organizationsToOmop(df)
+                care_site.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'care_site.csv'), mode=mode, header=header, index=False)
             elif (datatype == 'providers'):
-                pass
+                provider = convert.providersToOmop(df)
+                provider.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'provider.csv'), mode=mode, header=header, index=False)
             elif (datatype == 'payer_transitions'):
                 pass
             elif (datatype == 'allergies'):
-                pass
+                observations = convert.allergiesToOmop(df)
+                person.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'observations.csv'), mode=mode, header=header, index=False)
             elif (datatype == 'medications'):
-                pass
+                drug_exposure = convert.medicationsToOmop(df)
+                drug_exposure.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'drug_exposure.csv'), mode=mode, header=header, index=False)
+            else:
+                print("Unknown input type: " + datatype)
+            # no longer write header and append to file. write . so we know program is still running
+            print('.'),
+            sys.stdout.flush()
+            header=False
+            mode='a'
  
-
-
-
-
-
-
-
-
-
-
 
 
 

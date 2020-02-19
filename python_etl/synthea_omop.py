@@ -5,6 +5,7 @@ import ModelSyntheaPandas
 import ModelOmopPandas
 import Utils
 import datetime
+import sys
 
 #------------------------------------------------------
 # This scripts performs an ETL from Synthea to omop CDM.
@@ -109,6 +110,7 @@ if __name__ == '__main__':
         output = os.path.join(BASE_OUTPUT_DIRECTORY,inputfile)
         header = True
         mode = 'w'
+        print(datatype),
         for df in pd.read_csv(inputdata, dtype=model_synthea.model_schema[datatype], chunksize=INPUT_CHUNK_SIZE):
             if (datatype == 'patients'):
                  person = pd.DataFrame(columns=model_omop.model_schema['person'].keys())
@@ -119,6 +121,7 @@ if __name__ == '__main__':
                  person['day_of_birth'] = df['BIRTHDATE'].apply(getDayFromSyntheaDate)
                  person['race_concept_id'] =  df['RACE'].apply(getRaceConceptCode)
                  person['ethnicity_concept_id'] = df['ETHNICITY'].apply(getEthnicityConceptCode)
+                 person['location_id'] = df['Id'].apply(patienthash)
                  person['person_source_value'] = df['Id']
                  person['race_source_value'] = df['RACE']
                  person['ethnicity_source_value'] = df['ETHNICITY']
@@ -147,7 +150,9 @@ if __name__ == '__main__':
                  # write output.  write header only if this is the first chunk
                  output = os.path.join(BASE_OUTPUT_DIRECTORY,'death.csv')
                  death.to_csv(output, mode=mode, header=header, index=False)
-                 # no longer write header and append to file
+                 # no longer write header and append to file. write . so we know program is still running
+                 print('.'),
+                 sys.stdout.flush()
                  header=False
                  mode='a'
 

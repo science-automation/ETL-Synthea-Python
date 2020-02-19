@@ -21,7 +21,7 @@ class ModelOmopPandas:
         #
         model_schema['concept'] = {
             'concept_id': 'int32',
-            'concept_name': 'category',
+            'concept_name': 'object',
             'domain_id': 'category',
             'vocabulary_id': 'category',
             'concept_class_id': 'category',
@@ -62,7 +62,7 @@ class ModelOmopPandas:
         }
 
         model_schema['relationship'] = {
-            'relationship_id': 'category',
+            'relationship_id': 'object',
             'relationship_name': 'category',
             'is_hierarchical': 'category',
             'defines_ancestry': 'category',

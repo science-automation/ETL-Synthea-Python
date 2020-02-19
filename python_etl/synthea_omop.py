@@ -3,8 +3,8 @@ import os
 import dotenv
 import ModelSyntheaPandas
 import ModelOmopPandas
+import SyntheaToOmop
 import Utils
-import datetime
 import sys
 
 #------------------------------------------------------
@@ -37,49 +37,6 @@ SYNTHEA_FILE_LIST =  ['patients']
 INPUT_CHUNK_SIZE = int(os.environ['INPUT_CHUNK_SIZE'])
 
 
-# hash function for patient id to convert synthea string to omop integer
-def patienthash(id):
-    return hash(id) & ((1<<64)-1)
-
-# given date in synthea format return the year
-def getYearFromSyntheaDate(date):
-    return datetime.datetime.strptime(date, "%Y-%m-%d").year
-
-# given date in synthea format return the month
-def getMonthFromSyntheaDate(date):
-    return datetime.datetime.strptime(date, "%Y-%m-%d").month
-
-# given date in synthea format return the day
-def getDayFromSyntheaDate(date):
-    return datetime.datetime.strptime(date, "%Y-%m-%d").day
-
-# given gender as M or F return the OMOP concept code
-def getGenderConceptCode(gender):
-    gendre = gender.upper()
-    if gender=='M':
-        return '8507'
-    else:
-        return '8532'
-
-# given synthea race code return omop code
-def getRaceConceptCode(race):
-    race = race.upper()
-    if race=='WHITE':
-        return '8527'
-    elif race=='BLACK':
-        return '8516'
-    elif race=='ASIAN':
-        return 8515
-    else:
-        return '0'
-
-def getEthnicityConceptCode(eth):
-    eth = eth.upper()
-    if eth=='HISPANIC':
-        return '38003563'
-    else:
-        return '0'
-
 #---------------------------------
 # start of the program
 #---------------------------------
@@ -99,7 +56,10 @@ if __name__ == '__main__':
     # load the synthea model
     model_synthea = ModelSyntheaPandas.ModelSyntheaPandas()
     model_omop = ModelOmopPandas.ModelOmopPandas()
-    #model_synthea = ModelSyntheaPandasObject.ModelSyntheaPandas()
+    convert = SyntheaToOmop.SyntheaToOmop(model_omop.model_schema)
+
+    # load the vocabulary into memory
+    #vocab = util.loadVocabulary(BASE_OMOP_INPUT_DIRECTORY)
 
     # we only need to consider one synthea input file at a time to make the mapping
     # so only put one in memory at a time.  
@@ -113,54 +73,40 @@ if __name__ == '__main__':
         print(datatype),
         for df in pd.read_csv(inputdata, dtype=model_synthea.model_schema[datatype], chunksize=INPUT_CHUNK_SIZE):
             if (datatype == 'patients'):
-                 person = pd.DataFrame(columns=model_omop.model_schema['person'].keys())
-                 person['person_id'] = df['Id'].apply(patienthash)
-                 person['gender_concept_id'] = df['GENDER'].apply(getGenderConceptCode)
-                 person['year_of_birth'] = df['BIRTHDATE'].apply(getYearFromSyntheaDate)
-                 person['month_of_birth'] = df['BIRTHDATE'].apply(getMonthFromSyntheaDate)
-                 person['day_of_birth'] = df['BIRTHDATE'].apply(getDayFromSyntheaDate)
-                 person['race_concept_id'] =  df['RACE'].apply(getRaceConceptCode)
-                 person['ethnicity_concept_id'] = df['ETHNICITY'].apply(getEthnicityConceptCode)
-                 person['location_id'] = df['Id'].apply(patienthash)
-                 person['person_source_value'] = df['Id']
-                 person['race_source_value'] = df['RACE']
-                 person['ethnicity_source_value'] = df['ETHNICITY']
-                 # write output.  write header only if this is the first chunk
-                 output = os.path.join(BASE_OUTPUT_DIRECTORY,'person.csv')
-                 person.to_csv(output, mode=mode, header=header, index=False)
-
-                 # create location record 
-                 location = pd.DataFrame(columns=model_omop.model_schema['location'].keys())
-                 location['location_id'] = df['Id'].apply(patienthash)
-                 location['address_1'] = df['ADDRESS']
-                 location['city'] = df['CITY']
-                 location['state'] = df['STATE']
-                 location['zip'] = df['ZIP']
-                 location['county'] = df['COUNTY']
-                 location['location_source_value'] = df['Id']
-                 # write output.  write header only if this is the first chunk
-                 output = os.path.join(BASE_OUTPUT_DIRECTORY,'location.csv')
-                 location.to_csv(output, mode=mode, header=header, index=False)
-
-                 # create death record
-                 death = pd.DataFrame(columns=model_omop.model_schema['death'].keys())
-                 death['person_id'] = df['Id'].apply(patienthash)
-                 death['deathdate'] = df['DEATHDATE']
-                 death =  death[death.deathdate.notnull()]
-                 # write output.  write header only if this is the first chunk
-                 output = os.path.join(BASE_OUTPUT_DIRECTORY,'death.csv')
-                 death.to_csv(output, mode=mode, header=header, index=False)
-                 # no longer write header and append to file. write . so we know program is still running
-                 print('.'),
-                 sys.stdout.flush()
-                 header=False
-                 mode='a'
-
-
-
-
-
-
+                (person, location, death) = convert.syntheaPatientsToOmop(df)
+                person.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'person.csv'), mode=mode, header=header, index=False)
+                location.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'location.csv'), mode=mode, header=header, index=False)
+                death.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'death.csv'), mode=mode, header=header, index=False)
+                # no longer write header and append to file. write . so we know program is still running
+                print('.'),
+                sys.stdout.flush()
+                header=False
+                mode='a'
+            elif (datatype == 'conditions'):
+                pass
+            elif (datatype == 'careplans'):
+                pass
+            elif (datatype == 'observations'):
+                pass
+            elif (datatype == 'procedures'):
+                pass
+            elif (datatype == 'immunizations'):
+                pass
+            elif (datatype == 'imaging_studies'):
+                pass
+            elif (datatype == 'encounters'):
+                pass
+            elif (datatype == 'organizations'):
+                pass
+            elif (datatype == 'providers'):
+                pass
+            elif (datatype == 'payer_transitions'):
+                pass
+            elif (datatype == 'allergies'):
+                pass
+            elif (datatype == 'medications'):
+                pass
+ 
 
 
 

@@ -36,3 +36,14 @@ patients: 52.00 MB
 medications: 863.00 MB
 
 Getting rid of fields we don't convert to omop.  Important tables to try to drop columns from are observations, procedures, encounters and medications.  This will allow program to handler large amount of patients
+
+
+Vocabulary
+
+Hand optimized vocabulary memory usage:
+
+concept: 1484.00 MB
+concept_relationship: 4138.00 MB
+concept_synonym: 709.00 MB
+concept_ancestor: 709.00 MB
+concept_class: 0.00 MB

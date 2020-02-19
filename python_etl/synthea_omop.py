@@ -31,6 +31,7 @@ BASE_OMOP_INPUT_DIRECTORY       = os.environ['BASE_OMOP_INPUT_DIRECTORY']
 BASE_OUTPUT_DIRECTORY           = os.environ['BASE_OUTPUT_DIRECTORY']
 # List of synthea input files
 SYNTHEA_FILE_LIST =  ['patients','conditions','careplans','observations','procedures','immunizations','imaging_studies','imaging_studies','encounters','organizations','providers','payer_transitions','allergies','medications']
+SYNTHEA_FILE_LIST =  ['patients']
 # Synthea input file chunk size.
 INPUT_CHUNK_SIZE = int(os.environ['INPUT_CHUNK_SIZE'])
 
@@ -109,9 +110,6 @@ if __name__ == '__main__':
         header = True
         mode = 'w'
         for df in pd.read_csv(inputdata, dtype=model_synthea.model_schema[datatype], chunksize=INPUT_CHUNK_SIZE):
-            print(datatype + ": " + util.mem_usage(df))
-
-            print(model_omop.model_schema['person'].keys())
             if (datatype == 'patients'):
                  person = pd.DataFrame(columns=model_omop.model_schema['person'].keys())
                  person['person_id'] = df['Id'].apply(patienthash)
@@ -119,7 +117,7 @@ if __name__ == '__main__':
                  person['year_of_birth'] = df['BIRTHDATE'].apply(getYearFromSyntheaDate)
                  person['month_of_birth'] = df['BIRTHDATE'].apply(getMonthFromSyntheaDate)
                  person['day_of_birth'] = df['BIRTHDATE'].apply(getDayFromSyntheaDate)
-                 person['race_concept_id'] =  df['Id'].apply(getRaceConceptCode)
+                 person['race_concept_id'] =  df['RACE'].apply(getRaceConceptCode)
                  person['ethnicity_concept_id'] = df['ETHNICITY'].apply(getEthnicityConceptCode)
                  person['person_source_value'] = df['Id']
                  person['race_source_value'] = df['RACE']
@@ -152,7 +150,6 @@ if __name__ == '__main__':
                  # no longer write header and append to file
                  header=False
                  mode='a'
-                 exit(1)
 
 
 

@@ -57,8 +57,6 @@ class SyntheaToOmop:
     #
     def patientsToOmop(self, df):
         model_schema = {}
-        #
-        # Standardized vocabulary
         person = pd.DataFrame(columns=self.model_schema['person'].keys())
         person['person_id'] = df['Id'].apply(self.patienthash)
         person['gender_concept_id'] = df['GENDER'].apply(self.getGenderConceptCode)
@@ -71,8 +69,6 @@ class SyntheaToOmop:
         person['person_source_value'] = df['Id']
         person['race_source_value'] = df['RACE']
         person['ethnicity_source_value'] = df['ETHNICITY']
-
-        # create location record
         location = pd.DataFrame(columns=self.model_schema['location'].keys())
         location['location_id'] = df['Id'].apply(self.patienthash)
         location['address_1'] = df['ADDRESS']
@@ -81,12 +77,10 @@ class SyntheaToOmop:
         location['zip'] = df['ZIP']
         location['county'] = df['COUNTY']
         location['location_source_value'] = df['Id']
-
-        # create death record
         death = pd.DataFrame(columns=self.model_schema['death'].keys())
         death['person_id'] = df['Id'].apply(self.patienthash)
         death['deathdate'] = df['DEATHDATE']
-        death =  death[death.deathdate.notnull()]
+        death =  death[death.deathdate.notnull()]  # remove records where no death occurred
         return (person, location, death)
 
     def conditionsToOmop(self, df):
@@ -100,7 +94,24 @@ class SyntheaToOmop:
         condition_occurrence['condition_source_concept_id'] = df['CODE']
         condition_occurrence['condition_type_concept_id'] = '32020'
         drug_exposure = pd.DataFrame(columns=self.model_schema['drug_exposure'].keys())
+        drug_exposure['person_id'] = df['PATIENT'].apply(self.patienthash)
+        drug_exposure['drug_exposure_start_date'] = df['START']
+        drug_exposure['drug_exposure_end_date'] = df['STOP']
+        drug_exposure['verbatim_end_date'] = df['STOP']
+        drug_exposure['visit_occurrence_id'] = df['ENCOUNTER']
+        drug_exposure['drug_concept_id'] = df['CODE']
+        drug_exposure['drug_source_value'] = df['CODE']
+        drug_exposure['drug_source_concept_id'] = df['CODE']
+        drug_exposure['drug_type_concept_id'] = '581452'
+        drug_exposure['days_supply'] = '1' # how does synthea-etl handle days_supply for immunization?
         observation = pd.DataFrame(columns=self.model_schema['observation'].keys())
+        observation['person_id'] = df['PATIENT'].apply(self.patienthash)
+        observation['observation_date'] = df['START']
+        observation['visit_occurrence_id'] = df['ENCOUNTER']
+        observation['observation_concept_id'] = df['CODE']
+        observation['observation_source_value'] = df['CODE']
+        observation['observation_source_concept_id'] = df['CODE']
+        observation['observation_type_concept_id'] = '38000280'
         return (condition_occurrence, drug_exposure, observation)
 
     def careplansToOmop(self, df):
@@ -108,10 +119,29 @@ class SyntheaToOmop:
 
     def observationsToOmop(self, df):
         measurement = pd.DataFrame(columns=self.model_schema['measurement'].keys())
+        measurement['person_id'] = df['PATIENT'].apply(self.patienthash)
+        measurement['measurement_date'] = df['DATE']
+        measurement['measurement_time'] = df['DATE']  # check
+        measurement['visit_occurrence_id'] = df['ENCOUNTER']
+        measurement['measurement_concept_id'] = df['CODE']
+        measurement['measurement_source_value'] = df['CODE']
+        measurement['measurement_source_concept_id'] = df['CODE']
+        measurement['measurement_type_concept_id'] = '5001'
         return measurement
 
     def proceduresToOmop(self, df):
         measurement = pd.DataFrame(columns=self.model_schema['measurement'].keys())
+        measurement['person_id'] = df['PATIENT'].apply(self.patienthash)
+        measurement['measurement_date'] = df['DATE']
+        measurement['measurement_time'] = df['DATE']  # check
+        measurement['value_as_number'] = df['VALUE']
+        measurement['visit_occurrence_id'] = df['CODE']
+        measurement['measurement_concept_id'] = df['CODE']
+        measurement['measurement_type_concept_id'] = '5001'
+        measurement['measurement_source_value'] = df['CODE']
+        measurement['measurement_source_concept_id'] = df['CODE']
+        measurement['unit_source_value'] = df['UNITS']
+        measurement['value_source_value'] = df['VALUE']
         procedure_occurrence = pd.DataFrame(columns=self.model_schema['procedure_occurrence'].keys())
         procedure_occurrence['person_id'] = df['PATIENT'].apply(self.patienthash)
         procedure_occurrence['procedure_date'] = df['DATE']
@@ -142,6 +172,12 @@ class SyntheaToOmop:
         observation_period['observation_period_end_date'] = df['STOP']
         observation_period['period_type_concept_id'] = '44814724'
         visit_occurrence = pd.DataFrame(columns=self.model_schema['visit_occurrence'].keys())
+        visit_occurrence['person_id'] = df['PATIENT'].apply(self.patienthash)
+        visit_occurrence['visit_start_date'] = df['START']
+        visit_occurrence['visit_end_date'] = df['STOP']
+        visit_occurrence['visit_concept_id'] = df['ENCOUNTERCLASS']
+        visit_occurrence['visit_source_value'] = df['ENCOUNTERCLASS']
+        visit_occurrence['visit_type_concept_id'] = '44818517'
         return (observation_period, visit_occurrence)
 
     def organizationsToOmop(self, df):
@@ -165,7 +201,7 @@ class SyntheaToOmop:
         drug_exposure['drug_exposure_start_date'] = df['START']
         drug_exposure['drug_exposure_end_date'] = df['STOP']
         drug_exposure['verbatim_end_date'] = df['STOP']
-        drug_exposure['visit_occurrence_id'] = df['encounter']
+        drug_exposure['visit_occurrence_id'] = df['ENCOUNTER']
         drug_exposure['drug_concept_id'] = df['CODE']
         drug_exposure['drug_source_vaule'] = df['CODE']
         drug_exposure['drug_source_concept_id'] = df['CODE']

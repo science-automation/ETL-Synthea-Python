@@ -6,6 +6,7 @@ import ModelOmopPandas
 import SyntheaToOmop
 import Utils
 import sys
+import shutil
 
 #------------------------------------------------------
 # This scripts performs an ETL from Synthea to omop CDM.
@@ -22,8 +23,6 @@ dotenv.load_dotenv(".env")
 # -----------------------------------
 
 # Edit your .env file to change which directories to use in the ETL process
-# Path to the directory where control files should be saved (input/output
-BASE_ETL_CONTROL_DIRECTORY      = os.environ['BASE_ETL_CONTROL_DIRECTORY']
 # Path to the directory containing the downloaded SynPUF files
 BASE_SYNTHEA_INPUT_DIRECTORY     = os.environ['BASE_SYNTHEA_INPUT_DIRECTORY']
 # Path to the directory containing the OMOP Vocabulary v5 files (can be downloaded from http://www.ohdsi.org/web/athena/)
@@ -41,12 +40,14 @@ INPUT_CHUNK_SIZE = int(os.environ['INPUT_CHUNK_SIZE'])
 # start of the program
 #---------------------------------
 if __name__ == '__main__':
-    if not os.path.exists(BASE_OUTPUT_DIRECTORY): os.makedirs(BASE_OUTPUT_DIRECTORY)
-    if not os.path.exists(BASE_ETL_CONTROL_DIRECTORY): os.makedirs(BASE_ETL_CONTROL_DIRECTORY)
+    if not os.path.exists(BASE_OUTPUT_DIRECTORY): 
+        os.makedirs(BASE_OUTPUT_DIRECTORY)
+    else:
+        shutil.rmtree(BASE_OUTPUT_DIRECTORY)
+        os.makedirs(BASE_OUTPUT_DIRECTORY)
 
     print('BASE_SYNTHEA_INPUT_DIRECTORY     =' + BASE_SYNTHEA_INPUT_DIRECTORY)
     print('BASE_OUTPUT_DIRECTORY           =' + BASE_OUTPUT_DIRECTORY)
-    print('BASE_ETL_CONTROL_DIRECTORY      =' + BASE_ETL_CONTROL_DIRECTORY)
 
     # load utils
     util = Utils.Utils()
@@ -69,7 +70,7 @@ if __name__ == '__main__':
         inputdata = os.path.join(BASE_SYNTHEA_INPUT_DIRECTORY,inputfile)
         output = os.path.join(BASE_OUTPUT_DIRECTORY,inputfile)
         header = True
-        mode = 'w'
+        mode = 'wa'
         print("")
         print(datatype),
         for df in pd.read_csv(inputdata, dtype=model_synthea.model_schema[datatype], chunksize=INPUT_CHUNK_SIZE):
@@ -121,7 +122,7 @@ if __name__ == '__main__':
             print('.'),
             sys.stdout.flush()
             header=False
-            mode='a'
+            mode='wa'
  
 
 

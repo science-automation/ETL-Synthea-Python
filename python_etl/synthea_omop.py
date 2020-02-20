@@ -31,7 +31,7 @@ BASE_OMOP_INPUT_DIRECTORY       = os.environ['BASE_OMOP_INPUT_DIRECTORY']
 # Path to the directory where CDM-compatible CSV files should be saved
 BASE_OUTPUT_DIRECTORY           = os.environ['BASE_OUTPUT_DIRECTORY']
 # List of synthea input files
-SYNTHEA_FILE_LIST =  ['patients','conditions','careplans','observations','procedures','immunizations','imaging_studies','imaging_studies','encounters','organizations','providers','payer_transitions','allergies','medications']
+SYNTHEA_FILE_LIST =  ['patients','conditions','careplans','observations','procedures','immunizations','imaging_studies','encounters','organizations','providers','payer_transitions','allergies','medications']
 #SYNTHEA_FILE_LIST =  ['patients']
 # Synthea input file chunk size.
 INPUT_CHUNK_SIZE = int(os.environ['INPUT_CHUNK_SIZE'])
@@ -70,6 +70,7 @@ if __name__ == '__main__':
         output = os.path.join(BASE_OUTPUT_DIRECTORY,inputfile)
         header = True
         mode = 'w'
+        print("")
         print(datatype),
         for df in pd.read_csv(inputdata, dtype=model_synthea.model_schema[datatype], chunksize=INPUT_CHUNK_SIZE):
             if (datatype == 'patients'):
@@ -109,8 +110,8 @@ if __name__ == '__main__':
             elif (datatype == 'payer_transitions'):
                 pass
             elif (datatype == 'allergies'):
-                observations = convert.allergiesToOmop(df)
-                person.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'observations.csv'), mode=mode, header=header, index=False)
+                observation = convert.allergiesToOmop(df)
+                person.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'observation.csv'), mode=mode, header=header, index=False)
             elif (datatype == 'medications'):
                 drug_exposure = convert.medicationsToOmop(df)
                 drug_exposure.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'drug_exposure.csv'), mode=mode, header=header, index=False)

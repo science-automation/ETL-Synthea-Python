@@ -91,6 +91,14 @@ class SyntheaToOmop:
 
     def conditionsToOmop(self, df):
         condition_occurrence = pd.DataFrame(columns=self.model_schema['condition_occurrence'].keys())
+        condition_occurrence['person_id'] = df['PATIENT'].apply(self.patienthash)
+        condition_occurrence['condition_start_date'] = df['START']
+        condition_occurrence['condition_end_date'] = df['STOP']
+        condition_occurrence['visit_occurrence_id'] = df['ENCOUNTER']
+        condition_occurrence['condition_concept_id'] = df['CODE']
+        condition_occurrence['condition_source_value'] = df['CODE']
+        condition_occurrence['condition_source_concept_id'] = df['CODE']
+        condition_occurrence['condition_type_concept_id'] = '32020'
         drug_exposure = pd.DataFrame(columns=self.model_schema['drug_exposure'].keys())
         observation = pd.DataFrame(columns=self.model_schema['observation'].keys())
         return (condition_occurrence, drug_exposure, observation)
@@ -105,14 +113,34 @@ class SyntheaToOmop:
     def proceduresToOmop(self, df):
         measurement = pd.DataFrame(columns=self.model_schema['measurement'].keys())
         procedure_occurrence = pd.DataFrame(columns=self.model_schema['procedure_occurrence'].keys())
+        procedure_occurrence['person_id'] = df['PATIENT'].apply(self.patienthash)
+        procedure_occurrence['procedure_date'] = df['DATE']
+        procedure_occurrence['visit_occurrence_id'] = df['ENCOUNTER']
+        procedure_occurrence['procedure_concept_id'] = df['CODE']
+        procedure_occurrence['procedure_source_value'] = df['CODE']
+        procedure_occurrence['procedure_source_concept_id'] = df['CODE']
         return (measurement, procedure_occurrence)
 
     def immunizationsToOmop(self, df):
         drug_exposure = pd.DataFrame(columns=self.model_schema['drug_exposure'].keys())
+        drug_exposure['person_id'] = df['PATIENT'].apply(self.patienthash)
+        drug_exposure['drug_exposure_start_date'] = df['DATE']
+        drug_exposure['drug_exposure_end_date'] = df['DATE']
+        drug_exposure['verbatim_end_date'] = df['DATE']
+        drug_exposure['visit_occurrence_id'] = df['ENCOUNTER']
+        drug_exposure['drug_concept_id'] = df['CODE']
+        drug_exposure['drug_source_value'] = df['CODE']
+        drug_exposure['drug_source_concept_id'] = df['CODE']
+        drug_exposure['drug_type_concept_id'] = '581452'
+        drug_exposure['days_supply'] = '1' # how does synthea-etl handle days_supply for immunization?
         return drug_exposure
 
     def encountersToOmop(self, df):
         observation_period = pd.DataFrame(columns=self.model_schema['observation_period'].keys())
+        observation_period['person_id'] = df['PATIENT'].apply(self.patienthash)
+        observation_period['observation_period_start_date'] = df['START']
+        observation_period['observation_period_end_date'] = df['STOP']
+        observation_period['period_type_concept_id'] = '44814724'
         visit_occurrence = pd.DataFrame(columns=self.model_schema['visit_occurrence'].keys())
         return (observation_period, visit_occurrence)
 
@@ -128,9 +156,19 @@ class SyntheaToOmop:
         pass
 
     def allergiesToOmop(self, df):
-        observations = pd.DataFrame(columns=self.model_schema['observations'].keys())
-        return observations
+        observation = pd.DataFrame(columns=self.model_schema['observation'].keys())
+        return observation
 
     def medicationsToOmop(self, df):
         drug_exposure = pd.DataFrame(columns=self.model_schema['drug_exposure'].keys())
+        drug_exposure['person_id'] = df['PATIENT'].apply(self.patienthash)
+        drug_exposure['drug_exposure_start_date'] = df['START']
+        drug_exposure['drug_exposure_end_date'] = df['STOP']
+        drug_exposure['verbatim_end_date'] = df['STOP']
+        drug_exposure['visit_occurrence_id'] = df['encounter']
+        drug_exposure['drug_concept_id'] = df['CODE']
+        drug_exposure['drug_source_vaule'] = df['CODE']
+        drug_exposure['drug_source_concept_id'] = df['CODE']
+        drug_exposure['drug_type_concept_id'] = '38000177'
+        drug_exposure['days_supply'] = '1' # how does synthea-etl handle days_supply for medication?
         return drug_exposure

@@ -548,7 +548,7 @@ class ModelOmopPandas:
             'condition_occurrence_count': 'int64'
         }
 
-        # source to standard
+        # source to standard name mapping
         model_schema['source_to_standard_source'] = {
             'concept_code': 'source_code',
             'concept_id': 'source_concept_id',

@@ -32,8 +32,11 @@ class SyntheaToOmop:
         gendre = gender.upper()
         if gender=='M':
             return '8507'
-        else:
+        elif gender=='F':
             return '8532'
+        else:
+            return 0
+
     # given synthea race code return omop code
     def getRaceConceptCode(self, race):
         race = race.upper()
@@ -48,7 +51,8 @@ class SyntheaToOmop:
 
     def getEthnicityConceptCode(self, eth):
         eth = eth.upper()
-        if eth=='HISPANIC':
+        #if race=='HISPANIC' or eth=='CENTRAL_AMERICAN' or eth=='DOMINICAN' or eth=='MEXICAN' or eth=='PUERTO_RICAN' or eth=='SOUTH_AMERICAN':
+        if eth=='CENTRAL_AMERICAN' or eth=='DOMINICAN' or eth=='MEXICAN' or eth=='PUERTO_RICAN' or eth=='SOUTH_AMERICAN':
             return '38003563'
         else:
             return '0'
@@ -69,6 +73,8 @@ class SyntheaToOmop:
         person['person_source_value'] = df['Id']
         person['race_source_value'] = df['RACE']
         person['ethnicity_source_value'] = df['ETHNICITY']
+        # filter out person's with missing or unknown gender
+        person = person[person['gender_concept_id'] != 0]
         location = pd.DataFrame(columns=self.model_schema['location'].keys())
         location['location_id'] = df['Id'].apply(self.patienthash)
         location['address_1'] = df['ADDRESS']
@@ -83,8 +89,10 @@ class SyntheaToOmop:
         death =  death[death.deathdate.notnull()]  # remove records where no death occurred
         return (person, location, death)
 
-    def conditionsToOmop(self, df):
+    def conditionsToOmop(self, df, condition_id, observation_id):
         condition_occurrence = pd.DataFrame(columns=self.model_schema['condition_occurrence'].keys())
+        condition_occurrence['condition_occurrence_id'] = range(condition_id, condition_id+len(df))
+        condition_id = condition_id+len(df)
         condition_occurrence['person_id'] = df['PATIENT'].apply(self.patienthash)
         condition_occurrence['condition_start_date'] = df['START']
         condition_occurrence['condition_end_date'] = df['STOP']
@@ -105,6 +113,8 @@ class SyntheaToOmop:
         drug_exposure['drug_type_concept_id'] = '581452'
         drug_exposure['days_supply'] = '1' # how does synthea-etl handle days_supply for immunization?
         observation = pd.DataFrame(columns=self.model_schema['observation'].keys())
+        observation['observation_id'] = range(condition_id, condition_id+len(df))
+        observation_id = observation_id+len(df)
         observation['person_id'] = df['PATIENT'].apply(self.patienthash)
         observation['observation_date'] = df['START']
         observation['visit_occurrence_id'] = df['ENCOUNTER']
@@ -112,7 +122,7 @@ class SyntheaToOmop:
         observation['observation_source_value'] = df['CODE']
         observation['observation_source_concept_id'] = df['CODE']
         observation['observation_type_concept_id'] = '38000280'
-        return (condition_occurrence, drug_exposure, observation)
+        return (condition_occurrence, drug_exposure, observation, condition_id, observation_id)
 
     def careplansToOmop(self, df):
         pass
@@ -130,18 +140,19 @@ class SyntheaToOmop:
         return measurement
 
     def proceduresToOmop(self, df):
-        measurement = pd.DataFrame(columns=self.model_schema['measurement'].keys())
-        measurement['person_id'] = df['PATIENT'].apply(self.patienthash)
-        measurement['measurement_date'] = df['DATE']
-        measurement['measurement_time'] = df['DATE']  # check
-        measurement['value_as_number'] = df['VALUE']
-        measurement['visit_occurrence_id'] = df['CODE']
-        measurement['measurement_concept_id'] = df['CODE']
-        measurement['measurement_type_concept_id'] = '5001'
-        measurement['measurement_source_value'] = df['CODE']
-        measurement['measurement_source_concept_id'] = df['CODE']
-        measurement['unit_source_value'] = df['UNITS']
-        measurement['value_source_value'] = df['VALUE']
+        # do procedures really map to measurements?  There is no value and units?
+        #measurement = pd.DataFrame(columns=self.model_schema['measurement'].keys())
+        #measurement['person_id'] = df['PATIENT'].apply(self.patienthash)
+        #measurement['measurement_date'] = df['DATE']
+        #measurement['measurement_time'] = df['DATE']  # check
+        #measurement['value_as_number'] = df['VALUE']
+        #measurement['visit_occurrence_id'] = df['CODE']
+        #measurement['measurement_concept_id'] = df['CODE']
+        #measurement['measurement_type_concept_id'] = '5001'
+        #measurement['measurement_source_value'] = df['CODE']
+        #measurement['measurement_source_concept_id'] = df['CODE']
+        #measurement['unit_source_value'] = df['UNITS']
+        #measurement['value_source_value'] = df['VALUE']
         procedure_occurrence = pd.DataFrame(columns=self.model_schema['procedure_occurrence'].keys())
         procedure_occurrence['person_id'] = df['PATIENT'].apply(self.patienthash)
         procedure_occurrence['procedure_date'] = df['DATE']
@@ -149,7 +160,7 @@ class SyntheaToOmop:
         procedure_occurrence['procedure_concept_id'] = df['CODE']
         procedure_occurrence['procedure_source_value'] = df['CODE']
         procedure_occurrence['procedure_source_concept_id'] = df['CODE']
-        return (measurement, procedure_occurrence)
+        return procedure_occurrence
 
     def immunizationsToOmop(self, df):
         drug_exposure = pd.DataFrame(columns=self.model_schema['drug_exposure'].keys())

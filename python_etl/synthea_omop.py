@@ -29,12 +29,17 @@ BASE_SYNTHEA_INPUT_DIRECTORY     = os.environ['BASE_SYNTHEA_INPUT_DIRECTORY']
 BASE_OMOP_INPUT_DIRECTORY       = os.environ['BASE_OMOP_INPUT_DIRECTORY']
 # Path to the directory where CDM-compatible CSV files should be saved
 BASE_OUTPUT_DIRECTORY           = os.environ['BASE_OUTPUT_DIRECTORY']
-# List of synthea input files
-SYNTHEA_FILE_LIST =  ['patients','conditions','careplans','observations','procedures','immunizations','imaging_studies','encounters','organizations','providers','payer_transitions','allergies','medications']
-#SYNTHEA_FILE_LIST =  ['patients']
+# Base number to start the condition_occurrence ID index
+CONDITION_ID_BASE = os.environ['CONDITION_ID_BASE']
+# Base number to start the observation_id index
+OBSERVATION_ID_BASE = os.environ['OBSERVATION_ID_BASE']
 # Synthea input file chunk size.
 INPUT_CHUNK_SIZE = int(os.environ['INPUT_CHUNK_SIZE'])
-
+# List of synthea input files
+#SYNTHEA_FILE_LIST =  ['patients']
+SYNTHEA_FILE_LIST =  ['patients','conditions','careplans','observations','procedures','immunizations','imaging_studies','encounters','organizations','providers','payer_transitions','allergies','medications']
+# List of omop output files
+OMOP_FILE_LIST = ['person','location','death','condition_occurrence','drug_exposure','observation','measurement','procedure_occurrence','observation_period','visit_occurrence','care_site','provider']
 
 #---------------------------------
 # start of the program
@@ -59,18 +64,26 @@ if __name__ == '__main__':
     model_omop = ModelOmopPandas.ModelOmopPandas()
     convert = SyntheaToOmop.SyntheaToOmop(model_omop.model_schema)
 
+    # write the headers for the output files
+    for initfile in OMOP_FILE_LIST:
+        df = pd.DataFrame(columns=model_omop.model_schema[initfile].keys())
+        initfile = initfile + ".csv"
+        df.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,initfile), mode='w', header=True, index=False)
+
     # load the vocabulary into memory
-    vocab = util.loadVocabulary(BASE_OMOP_INPUT_DIRECTORY, model_omop)
-    quit(1)
+    #vocab = util.loadConceptVocabulary(BASE_OMOP_INPUT_DIRECTORY, model_omop)
+
     # we only need to consider one synthea input file at a time to make the mapping
     # so only put one in memory at a time.  
     # we can read csv in chunks
+    condition_id = int(CONDITION_ID_BASE)
+    observation_id = int(OBSERVATION_ID_BASE)
+    header = False
+    mode='a'
     for datatype in SYNTHEA_FILE_LIST:
         inputfile = datatype + ".csv.gz"
         inputdata = os.path.join(BASE_SYNTHEA_INPUT_DIRECTORY,inputfile)
         output = os.path.join(BASE_OUTPUT_DIRECTORY,inputfile)
-        header = True
-        mode = 'wa'
         print("")
         print(datatype),
         for df in pd.read_csv(inputdata, dtype=model_synthea.model_schema[datatype], chunksize=INPUT_CHUNK_SIZE):
@@ -80,7 +93,7 @@ if __name__ == '__main__':
                 location.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'location.csv'), mode=mode, header=header, index=False)
                 death.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'death.csv'), mode=mode, header=header, index=False)
             elif (datatype == 'conditions'):
-                (condition_occurrence, drug_exposure, observation) = convert.conditionsToOmop(df)
+                (condition_occurrence, drug_exposure, observation, condition_id, observation_id) = convert.conditionsToOmop(df, condition_id, observation_id)
                 condition_occurrence.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'condition_occurrence.csv'), mode=mode, header=header, index=False)
                 drug_exposure.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'drug_exposure.csv'), mode=mode, header=header, index=False)
                 observation.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'observation.csv'), mode=mode, header=header, index=False)
@@ -90,7 +103,7 @@ if __name__ == '__main__':
                 measurement = convert.observationsToOmop(df)
                 measurement.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'measurement.csv'), mode=mode, header=header, index=False)
             elif (datatype == 'procedures'):
-                (measurement, procedure_occurrence) = convert.proceduresToOmop(df)
+                procedure_occurrence = convert.proceduresToOmop(df)
                 measurement.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'measurement.csv'), mode=mode, header=header, index=False)
                 procedure_occurrence.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'procedure_occurrence.csv'), mode=mode, header=header, index=False)
             elif (datatype == 'immunizations'):
@@ -121,9 +134,6 @@ if __name__ == '__main__':
             # no longer write header and append to file. write . so we know program is still running
             print('.'),
             sys.stdout.flush()
-            header=False
-            mode='wa'
- 
 
 
 

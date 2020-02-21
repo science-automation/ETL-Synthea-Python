@@ -1,6 +1,5 @@
 import os
 import pandas as pd
-import pandasql as ps
 
 
 class Utils:
@@ -37,26 +36,35 @@ class Utils:
 
     # create the mapping from concept to concept relation
     # passing in a vocabulary dictionary, return the mapping dictionary
+    # following standard omop query for source to standard mapping is implemented in python pandas
+    #   SELECT c.concept_code AS SOURCE_CODE, c.concept_id AS SOURCE_CONCEPT_ID,
+    #         c.concept_name AS SOURCE_CODE_DESCRIPTION,
+    #         c.vocabulary_id AS SOURCE_VOCABULARY_ID, c.domain_id AS SOURCE_DOMAIN_ID,
+    #         c.CONCEPT_CLASS_ID AS SOURCE_CONCEPT_CLASS_ID, c.VALID_START_DATE AS SOURCE_VALID_START_DATE,
+    #         c.VALID_END_DATE AS SOURCE_VALID_END_DATE, c.INVALID_REASON AS SOURCE_INVALID_REASON,
+    #         c1.concept_id AS TARGET_CONCEPT_ID, c1.concept_name AS TARGET_CONCEPT_NAME,
+    #         c1.VOCABULARY_ID AS TARGET_VOCABULARY_ID, c1.domain_id AS TARGET_DOMAIN_ID,
+    #         c1.concept_class_id AS TARGET_CONCEPT_CLASS_ID,
+    #         c1.INVALID_REASON AS TARGET_INVALID_REASON,
+    #         c1.standard_concept AS TARGET_STANDARD_CONCEPT
+    #   FROM CONCEPT C
+    #   JOIN CONCEPT_RELATIONSHIP CR
+    #         ON C.CONCEPT_ID = CR.CONCEPT_ID_1
+    #         AND CR.invalid_reason IS NULL
+    #         AND lower(cr.relationship_id) = 'maps to'
+    #   JOIN CONCEPT C1
+    #         ON CR.CONCEPT_ID_2 = C1.CONCEPT_ID
+    #         AND C1.INVALID_REASON IN (NULL,'')
     def sourceToStandardVocabMap(self, vocab):
-       # source to standard vocabulary mapping 
-       CONCEPT = vocab['concept']
-       CONCEPT_RELATIONSHIP = vocab['concept_relationship']
-       source_to_standard_vocab_map = """SELECT c.concept_code AS SOURCE_CODE, c.concept_id AS SOURCE_CONCEPT_ID, 
-             c.concept_name AS SOURCE_CODE_DESCRIPTION, 
-	     c.vocabulary_id AS SOURCE_VOCABULARY_ID, c.domain_id AS SOURCE_DOMAIN_ID,
-             c.CONCEPT_CLASS_ID AS SOURCE_CONCEPT_CLASS_ID, c.VALID_START_DATE AS SOURCE_VALID_START_DATE,
-             c.VALID_END_DATE AS SOURCE_VALID_END_DATE, c.INVALID_REASON AS SOURCE_INVALID_REASON,
-             c1.concept_id AS TARGET_CONCEPT_ID, c1.concept_name AS TARGET_CONCEPT_NAME,
-             c1.VOCABULARY_ID AS TARGET_VOCABULARY_ID, c1.domain_id AS TARGET_DOMAIN_ID, 
-	     c1.concept_class_id AS TARGET_CONCEPT_CLASS_ID,
-             c1.INVALID_REASON AS TARGET_INVALID_REASON, 
-	     c1.standard_concept AS TARGET_STANDARD_CONCEPT
-             FROM CONCEPT C
-             JOIN CONCEPT_RELATIONSHIP CR
-                        ON C.CONCEPT_ID = CR.CONCEPT_ID_1
-                        AND CR.invalid_reason IS NULL
-                        AND lower(cr.relationship_id) = 'maps to'
-             JOIN CONCEPT C1
-                        ON CR.CONCEPT_ID_2 = C1.CONCEPT_ID
-                        AND C1.INVALID_REASON IN (NULL,'')"""    
-       print(ps.sqldf(source_to_standard_vocab_map, locals()))
+        concept = vocab['concept']
+        concept_relationship = vocab['concept_relationship']
+        source = concept[source_columns.keys()]  # get rid of columns we don't need
+        source = source.rename(columns=source_columns)
+        target = concept[target_columns.keys()]  # get rid of columns we don't need
+        target = target.rename(columns=target_columns)
+        source_result = pd.merge(source,concept_relationship[concept_relationship["invalid_reason"].isnull() & concept_relationship["relationship_id"].str.contains('Maps to')], \
+            how='inner', left_on='source_concept_id', right_on='concept_id_1')
+        target_result = pd.merge(target,concept_relationship[concept_relationship["invalid_reason"].isnull()], \
+            how='inner', left_on='target_concept_id', right_on='concept_id_2')
+        result = pd.merge(source_result, target_result, how='inner', left_on='source_concept_id', right_on='target_concept_id')
+        return result

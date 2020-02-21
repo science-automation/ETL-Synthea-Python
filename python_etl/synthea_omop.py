@@ -60,8 +60,8 @@ if __name__ == '__main__':
     convert = SyntheaToOmop.SyntheaToOmop(model_omop.model_schema)
 
     # load the vocabulary into memory
-    #vocab = util.loadVocabulary(BASE_OMOP_INPUT_DIRECTORY)
-
+    vocab = util.loadVocabulary(BASE_OMOP_INPUT_DIRECTORY, model_omop)
+    quit(1)
     # we only need to consider one synthea input file at a time to make the mapping
     # so only put one in memory at a time.  
     # we can read csv in chunks

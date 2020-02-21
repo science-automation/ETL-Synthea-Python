@@ -547,4 +547,28 @@ class ModelOmopPandas:
             'condition_era_end_date': 'object',
             'condition_occurrence_count': 'int64'
         }
+
+        # source to standard
+        model_schema['source_to_standard_source'] = {
+            'concept_code': 'source_code',
+            'concept_id': 'source_concept_id',
+            'concept_name': 'source_code_description',
+            'domain_id': 'source_domain_id',
+            'vocabulary_id': 'source_vocabulary_id',
+            'concept_class_id': 'source_concept_class_id',
+            'valid_start_date': 'source_valid_start_date',
+            'valid_end_date': 'source_valid_end_date',
+            'invalid_reason': 'source_invalid_reason'
+        }
+
+        model_schema['source_to_standard_target'] = {
+            'concept_id': 'target_concept_id',
+            'concept_name': 'target_code_description',
+            'vocabulary_id': 'target_vocabulary_id',
+            'domain_id': 'target_domain_id',
+            'concept_class_id': 'target_concept_class_id',
+            'invalid_reason': 'target_invalid_reason',
+            'standard_concept': 'target_standard_concept'
+        }
+
         return model_schema

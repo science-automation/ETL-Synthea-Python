@@ -37,6 +37,7 @@ class Utils:
     # create the mapping from concept to concept relation
     # passing in a vocabulary dictionary, return the mapping dictionary
     # following standard omop query for source to standard mapping is implemented in python pandas
+    #
     #   SELECT c.concept_code AS SOURCE_CODE, c.concept_id AS SOURCE_CONCEPT_ID,
     #         c.concept_name AS SOURCE_CODE_DESCRIPTION,
     #         c.vocabulary_id AS SOURCE_VOCABULARY_ID, c.domain_id AS SOURCE_DOMAIN_ID,
@@ -55,13 +56,13 @@ class Utils:
     #   JOIN CONCEPT C1
     #         ON CR.CONCEPT_ID_2 = C1.CONCEPT_ID
     #         AND C1.INVALID_REASON IN (NULL,'')
-    def sourceToStandardVocabMap(self, vocab):
+    def sourceToStandardVocabMap(self, vocab, model_omop):
         concept = vocab['concept']
         concept_relationship = vocab['concept_relationship']
         source = concept[source_columns.keys()]  # get rid of columns we don't need
-        source = source.rename(columns=source_columns)
+        source = source.rename(columns=model_schema['source_to_standard_source'])
         target = concept[target_columns.keys()]  # get rid of columns we don't need
-        target = target.rename(columns=target_columns)
+        target = target.rename(columns=model_schema['source_to_standard_target'])
         source_result = pd.merge(source,concept_relationship[concept_relationship["invalid_reason"].isnull() & concept_relationship["relationship_id"].str.contains('Maps to')], \
             how='inner', left_on='source_concept_id', right_on='concept_id_1')
         target_result = pd.merge(target,concept_relationship[concept_relationship["invalid_reason"].isnull()], \

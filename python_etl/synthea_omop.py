@@ -71,11 +71,13 @@ if __name__ == '__main__':
         df.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,initfile), mode='w', header=True, index=False)
 
     # load the vocabulary into memory
-    #vocab = util.loadConceptVocabulary(BASE_OMOP_INPUT_DIRECTORY, model_omop)
+    vocab_concept = util.loadConceptVocabulary(BASE_OMOP_INPUT_DIRECTORY, model_omop)
+
+    # create source to standard mapping
+    srctostdvm = util.sourceToStandardVocabMap(vocab_concept,model_omop) 
 
     # we only need to consider one synthea input file at a time to make the mapping
-    # so only put one in memory at a time.  
-    # we can read csv in chunks
+    # so only put one in memory at a time and read in chunks to avoid memory issues  
     condition_id = int(CONDITION_ID_BASE)
     observation_id = int(OBSERVATION_ID_BASE)
     header = False
@@ -93,7 +95,7 @@ if __name__ == '__main__':
                 location.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'location.csv'), mode=mode, header=header, index=False)
                 death.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'death.csv'), mode=mode, header=header, index=False)
             elif (datatype == 'conditions'):
-                (condition_occurrence, drug_exposure, observation, condition_id, observation_id) = convert.conditionsToOmop(df, condition_id, observation_id)
+                (condition_occurrence, drug_exposure, observation, condition_id, observation_id) = convert.conditionsToOmop(df, srctostdvm, condition_id, observation_id)
                 condition_occurrence.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'condition_occurrence.csv'), mode=mode, header=header, index=False)
                 drug_exposure.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'drug_exposure.csv'), mode=mode, header=header, index=False)
                 observation.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'observation.csv'), mode=mode, header=header, index=False)

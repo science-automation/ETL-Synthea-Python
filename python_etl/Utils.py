@@ -78,10 +78,10 @@ class Utils:
     def sourceToStandardVocabMap(self, vocab, model_omop):
         concept = vocab['concept']
         concept_relationship = vocab['concept_relationship']
-        source = concept[model_schema['source_to_standard_source'].keys()]  # get rid of columns we don't need
-        source = source.rename(columns=model_schema['source_to_standard_source'])
-        target = concept[model_schema['source_to_standard_target'].keys()]  # get rid of columns we don't need
-        target = target.rename(columns=model_schema['source_to_standard_target'])
+        source = concept[model_omop.model_schema['source_to_standard_source'].keys()]  # get rid of columns we don't need
+        source = source.rename(columns=model_omop.model_schema['source_to_standard_source'])
+        target = concept[model_omop.model_schema['source_to_standard_target'].keys()]  # get rid of columns we don't need
+        target = target.rename(columns=model_omop.model_schema['source_to_standard_target'])
         source_result = pd.merge(source,concept_relationship[concept_relationship["invalid_reason"].isnull() & concept_relationship["relationship_id"].str.contains('Maps to')], \
             how='inner', left_on='source_concept_id', right_on='concept_id_1')
         target_result = pd.merge(target,concept_relationship[concept_relationship["invalid_reason"].isnull()], \

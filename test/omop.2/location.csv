@@ -1,3 +1,3 @@
-location_id,address_1,address_2,city,state,zip,county,country,location_source_value,latitude,longitude
-1,225 Bibani Katu Unit 82,,Helsinki,,670,Helsinki,FI,0519145c-6e92-40e2-96fd-f004bdeb0808,60.242673109303,25.064779688398
-2,356 Axén Katu Apt 9,,Helsinki,,780,Helsinki,FI,5f4130a2-7677-4ea7-955e-95a29b9815f4,60.1087573750831,24.9048828990716
+location_id,address_1,address_2,city,state,zip,county,location_source_value
+17846980468282338791,356 Axén Katu Apt 9,,Helsinki,Uusimaa,00780,Helsinki,5f4130a2-7677-4ea7-955e-95a29b9815f4
+13735702703776693343,225 Bibani Katu Unit 82,,Helsinki,Uusimaa,00670,Helsinki,0519145c-6e92-40e2-96fd-f004bdeb0808

@@ -59,20 +59,28 @@ class SyntheaToOmop:
     #
     # synthea patients to omop
     #
-    def patientsToOmop(self, df):
+    def patientsToOmop(self, df, person_id, location_id):
         model_schema = {}
         person = pd.DataFrame(columns=self.model_schema['person'].keys())
-        person['person_id'] = df['Id'].apply(self.patienthash)
+        print("---------")
+        print(person_id)
+        print("---------")
+        person['person_id'] = df.index + person_id
         person['gender_concept_id'] = df['GENDER'].apply(self.getGenderConceptCode)
         person['year_of_birth'] = df['BIRTHDATE'].apply(self.getYearFromSyntheaDate)
         person['month_of_birth'] = df['BIRTHDATE'].apply(self.getMonthFromSyntheaDate)
         person['day_of_birth'] = df['BIRTHDATE'].apply(self.getDayFromSyntheaDate)
         person['race_concept_id'] =  df['RACE'].apply(self.getRaceConceptCode)
         person['ethnicity_concept_id'] = df['ETHNICITY'].apply(self.getEthnicityConceptCode)
-        person['location_id'] = df['Id'].apply(self.patienthash)
+        person['location_id'] = df.index + location_id
+        person['gender_source_value'] = df['GENDER']
         person['person_source_value'] = df['Id']
+        person['gender_source_concept_id'] = '0'
         person['race_source_value'] = df['RACE']
+        person['race_source_concept_id'] = '0'
         person['ethnicity_source_value'] = df['ETHNICITY']
+        person['ethnicity_source_concept_id'] = '0'
+        print(person)
         # filter out person's with missing or unknown gender
         person = person[person['gender_concept_id'] != 0]
         location = pd.DataFrame(columns=self.model_schema['location'].keys())
@@ -87,7 +95,7 @@ class SyntheaToOmop:
         death['person_id'] = df['Id'].apply(self.patienthash)
         death['deathdate'] = df['DEATHDATE']
         death =  death[death.deathdate.notnull()]  # remove records where no death occurred
-        return (person, location, death)
+        return (person, location, death, person_id, location_id)
 
     def conditionsToOmop(self, df, srctostdvm, condition_id, observation_id):
         condition_occurrence = pd.DataFrame(columns=self.model_schema['condition_occurrence'].keys())

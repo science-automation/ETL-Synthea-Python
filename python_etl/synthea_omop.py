@@ -30,10 +30,6 @@ BASE_SYNTHEA_INPUT_DIRECTORY     = os.environ['BASE_SYNTHEA_INPUT_DIRECTORY']
 BASE_OMOP_INPUT_DIRECTORY       = os.environ['BASE_OMOP_INPUT_DIRECTORY']
 # Path to the directory where CDM-compatible CSV files should be saved
 BASE_OUTPUT_DIRECTORY           = os.environ['BASE_OUTPUT_DIRECTORY']
-# Base number to start the condition_occurrence ID index
-CONDITION_ID_BASE = os.environ['CONDITION_ID_BASE']
-# Base number to start the observation_id index
-OBSERVATION_ID_BASE = os.environ['OBSERVATION_ID_BASE']
 # Synthea input file chunk size.
 INPUT_CHUNK_SIZE = int(os.environ['INPUT_CHUNK_SIZE'])
 # List of synthea input files
@@ -79,8 +75,10 @@ if __name__ == '__main__':
 
     # we only need to consider one synthea input file at a time to make the mapping
     # so only put one in memory at a time and read in chunks to avoid memory issues  
-    condition_id = int(CONDITION_ID_BASE)
-    observation_id = int(OBSERVATION_ID_BASE)
+    person_id = int(os.environ['PERSON_ID_BASE'])
+    location_id = int(os.environ['LOCATION_ID_BASE'])
+    condition_id = int(os.environ['CONDITION_ID_BASE'])
+    observation_id = int(os.environ['OBSERVATION_ID_BASE'])
     header = False
     mode='a'
     for datatype in SYNTHEA_FILE_LIST:
@@ -99,7 +97,7 @@ if __name__ == '__main__':
         print(datatype),
         for df in pd.read_csv(inputdata, dtype=model_synthea.model_schema[datatype], chunksize=INPUT_CHUNK_SIZE, compression=compression):
             if (datatype == 'patients'):
-                (person, location, death) = convert.patientsToOmop(df)
+                (person, location, death, person_id, location_id) = convert.patientsToOmop(df, person_id, location_id)
                 person.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'person.csv'), mode=mode, header=header, index=False)
                 location.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'location.csv'), mode=mode, header=header, index=False)
                 death.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'death.csv'), mode=mode, header=header, index=False)

@@ -84,12 +84,20 @@ if __name__ == '__main__':
     header = False
     mode='a'
     for datatype in SYNTHEA_FILE_LIST:
-        inputfile = datatype + ".csv.gz"
+        if (os.path.exists(os.path.join(BASE_SYNTHEA_INPUT_DIRECTORY,datatype + '.csv'))):
+            inputfile = datatype + '.csv'
+            compression=None
+        elif (os.path.exists(os.path.join(BASE_SYNTHEA_INPUT_DIRECTORY,datatype + '.csv.gz'))):
+            inputfile = datatype + '.csv.gz'
+            compression='gzip'
+        else:
+            print("Error:  Could not find " + inputfile + " synthea file")
+            exit(1)
         inputdata = os.path.join(BASE_SYNTHEA_INPUT_DIRECTORY,inputfile)
         output = os.path.join(BASE_OUTPUT_DIRECTORY,inputfile)
         print("")
         print(datatype),
-        for df in pd.read_csv(inputdata, dtype=model_synthea.model_schema[datatype], chunksize=INPUT_CHUNK_SIZE):
+        for df in pd.read_csv(inputdata, dtype=model_synthea.model_schema[datatype], chunksize=INPUT_CHUNK_SIZE, compression=compression):
             if (datatype == 'patients'):
                 (person, location, death) = convert.patientsToOmop(df)
                 person.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'person.csv'), mode=mode, header=header, index=False)

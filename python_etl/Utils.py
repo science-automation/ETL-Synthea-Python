@@ -19,38 +19,46 @@ class Utils:
  
     #
     # load the concept vocabulary into dataframes
+    # can be gz compressed or plain text
     #
     def loadConceptVocabulary(self, BASE_OMOP_INPUT_DIRECTORY, model_omop):
         vocab = {}
-        vocab['concept'] = pd.read_csv(os.path.join(BASE_OMOP_INPUT_DIRECTORY,'CONCEPT.csv.gz'), \
-                sep='\t', dtype=model_omop.model_schema['concept'], error_bad_lines=False)
-        vocab['concept_relationship'] = pd.read_csv(os.path.join(BASE_OMOP_INPUT_DIRECTORY,'CONCEPT_RELATIONSHIP.csv.gz'), \
-                sep='\t', dtype=model_omop.model_schema['concept_relationship'])
+        vocabfiledict = {}
+        vocablist = ['CONCEPT', 'CONCEPT_RELATIONSHIP']
+        # determine if vocabulary files exists and whether they are compressed
+        for vocabfile in vocablist:
+            if (os.path.exists(os.path.join(BASE_OMOP_INPUT_DIRECTORY,vocabfile + '.csv'))):
+                vocabfiledict[vocabfile] = os.path.join(BASE_OMOP_INPUT_DIRECTORY,vocabfile + '.csv')
+                compression=None
+            elif (os.path.exists(os.path.join(BASE_OMOP_INPUT_DIRECTORY,vocabfile + '.csv.gz'))):
+                vocabfiledict[vocabfile] = os.path.join(BASE_OMOP_INPUT_DIRECTORY,vocabfile + '.csv.gz')
+                compression='gzip'
+            else:
+                print("Error:  Could not find " + vocabfile + " vocabulary file")
+                exit(1)
+            vocab[vocabfile.lower()] = pd.read_csv(vocabfiledict[vocabfile], sep='\t', dtype=model_omop.model_schema[vocabfile.lower()], compression=compression)
         return vocab
 
     #
-    # load the vocabulary into dataframes
+    # load the full vocabulary into dataframes
+    # can be gz compressed or plain text
     #
     def loadVocabulary(self, BASE_OMOP_INPUT_DIRECTORY, model_omop):
         vocab = {}
-        vocab['concept'] = pd.read_csv(os.path.join(BASE_OMOP_INPUT_DIRECTORY,'CONCEPT.csv.gz'), \
-             sep='\t', dtype=model_omop.model_schema['concept'], error_bad_lines=False)
-        print('concept: ' + self.mem_usage(vocab['concept']))
-        vocab['concept_relationship'] = pd.read_csv(os.path.join(BASE_OMOP_INPUT_DIRECTORY,'CONCEPT_RELATIONSHIP.csv.gz'), \
-             sep='\t', dtype=model_omop.model_schema['concept_relationship'])
-        print('concept_relationship: ' + self.mem_usage(vocab['concept_relationship']))
-        vocab['concept_synonym'] = pd.read_csv(os.path.join(BASE_OMOP_INPUT_DIRECTORY,'CONCEPT_SYNONYM.csv.gz'), \
-             sep='\t', dtype=model_omop.model_schema['concept_synonym'])
-        print('concept_synonym: ' + self.mem_usage(vocab['concept_synonym']))
-        vocab['concept_ancestor'] = pd.read_csv(os.path.join(BASE_OMOP_INPUT_DIRECTORY,'CONCEPT_ANCESTOR.csv.gz'), \
-             sep='\t', dtype=model_omop.model_schema['concept_ancestor'])
-        print('concept_ancestor: ' + self.mem_usage(vocab['concept_synonym']))
-        vocab['concept_class'] = pd.read_csv(os.path.join(BASE_OMOP_INPUT_DIRECTORY,'CONCEPT_CLASS.csv.gz'), \
-             sep='\t', dtype=model_omop.model_schema['concept_class'])
-        print('concept_class: ' + self.mem_usage(vocab['concept_class']))
-        vocab['drug_strength'] = pd.read_csv(os.path.join(BASE_OMOP_INPUT_DIRECTORY,'DRUG_STRENGTH.csv.gz'), \
-             sep='\t', dtype=model_omop.model_schema['drug_strength'])
-        print(util.mem_usage(vocab['drug_strength']))
+        vocabfiledict = {}
+        vocablist = ['CONCEPT', 'CONCEPT_RELATIONSHIP', 'CONCEPT_SYNONYM', 'CONCEPT_ANCESTOR', 'CONCEPT_CLASS', 'DRUG_STRENGTH']
+        # determine if vocabulary files exists and whether they are compressed
+        for vocabfile in vocablist:
+            if (os.path.exists(os.path.join(BASE_OMOP_INPUT_DIRECTORY,vocabfile + '.csv'))):
+                vocabfiledict[vocabfile] = os.path.join(BASE_OMOP_INPUT_DIRECTORY,vocabfile + '.csv')
+                compression=None
+            elif (os.path.exists(os.path.join(BASE_OMOP_INPUT_DIRECTORY,vocabfile + '.csv.gz'))):
+                vocabfiledict[vocabfile] = os.path.join(BASE_OMOP_INPUT_DIRECTORY,vocabfile + '.csv.gz')
+                compression='gzip'
+            else:
+                print("Error:  Could not find " + vocabfile + " vocabulary file")
+                exit(1)
+            vocab[vocabfile.lower()] = pd.read_csv(vocabfiledict[vocabfile], sep='\t', dtype=model_omop.model_schema[vocabfile.lower()], compression=compression)
         return vocab
 
     #
@@ -82,7 +90,7 @@ class Utils:
         source = source.rename(columns=model_omop.model_schema['source_to_standard_source'])
         target = concept[model_omop.model_schema['source_to_standard_target'].keys()]  # get rid of columns we don't need
         target = target.rename(columns=model_omop.model_schema['source_to_standard_target'])
-        source_result = pd.merge(source,concept_relationship[concept_relationship["invalid_reason"].isnull() & concept_relationship["relationship_id"].str.contains('Maps to')], \
+        source_result = pd.merge(source,concept_relationship[(concept_relationship["invalid_reason"].isnull()) & (concept_relationship["relationship_id"].str.contains('Maps to'))], \
             how='inner', left_on='source_concept_id', right_on='concept_id_1')
         target_result = pd.merge(target,concept_relationship[concept_relationship["invalid_reason"].isnull()], \
             how='inner', left_on='target_concept_id', right_on='concept_id_2')

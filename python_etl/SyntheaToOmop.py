@@ -94,8 +94,8 @@ class SyntheaToOmop:
         condition_occurrence['condition_occurrence_id'] = range(condition_id, condition_id+len(df))
         condition_id = condition_id+len(df)
         condition_occurrence['person_id'] = df['PATIENT'].apply(self.patienthash)
-        condition_occurrence['condition_concept_id'] = pd.merge(df['CODE'],srctostdvm[srctostdvm["target_domain_id"]=='Condition' & srctostdvm["target_vocabulary_id"]=='SNOMED' & srctostdvm["source_vocabulary_id"]=='SNOMED' & srctostdvm["target_standard_concept"]=='SNOMED' & srctostdvm["target_invalid_reason"].isNull()], left_on='CODE', right_on='source_code', how='left')
-        condition_occurrence['condition_concept_id'].fillna(0)
+        condition_occurrence['condition_concept_id'] = pd.merge(df['CODE'],srctostdvm[(srctostdvm["target_domain_id"]=='Condition') & (srctostdvm["target_vocabulary_id"]=='SNOMED') & (srctostdvm["source_vocabulary_id"]=='SNOMED') & (srctostdvm["target_standard_concept"]=='SNOMED') & (srctostdvm["target_invalid_reason"].isnull())], left_on='CODE', right_on='source_code', how='left')
+        condition_occurrence['condition_concept_id'].fillna('0')
         condition_occurrence['condition_start_date'] = df['START']
         condition_occurrence['condition_end_date'] = df['STOP']
         condition_occurrence['visit_occurrence_id'] = df['ENCOUNTER']

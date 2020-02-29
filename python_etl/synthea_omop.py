@@ -17,6 +17,7 @@ import shutil
 # load env
 # ------------------------
 dotenv.load_dotenv(".env")
+dotenv.load_dotenv(".envbase")  # base numbers for id that is updated after run
 
 # -----------------------------------
 # - Configuration

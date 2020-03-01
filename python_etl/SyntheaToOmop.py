@@ -100,11 +100,12 @@ class SyntheaToOmop:
         death =  death[death.deathdate.notnull()]  # remove records where no death occurred
         return (person, location, death, personmap)
 
-    def conditionsToOmop(self, df, srctostdvm, condition_occurrence_id, drug_exposure_id, observation_id, personmap):
+    def conditionsToOmop(self, df, srctostdvm, condition_occurrence_id, drug_exposure_id, observation_id, personmap, visitmap):
         df['conditiontmp'] = df.index + condition_occurrence_id # copy index into a temp column.
         df['drugexposuretmp'] = df.index + drug_exposure_id # copy index into a temp column.
         df['observationtmp'] = df.index + observation_id # copy index into a temp column. 
         df = pd.merge(df, personmap, left_on='PATIENT', right_on='synthea_patient_id', how='left')
+        df = pd.merge(df, visitmap, left_on='ENCOUNTER', right_on='synthea_encounter_id', how='left')
         condition_occurrence = pd.DataFrame(columns=self.model_schema['condition_occurrence'].keys())
         condition_occurrence['condition_occurrence_id'] = df['conditiontmp']
         condition_occurrence['person_id'] = df['person_id']
@@ -115,7 +116,7 @@ class SyntheaToOmop:
         condition_occurrence['condition_concept_id'] = df['CODE']
         condition_occurrence['condition_type_concept_id'] = '32020'
         condition_occurrence['stop_reason'] = '0'
-        condition_occurrence['visit_occurrence_id'] = df['ENCOUNTER']
+        condition_occurrence['visit_occurrence_id'] = df['visit_occurrence_id']
         condition_occurrence['visit_detail_id'] = '0'
         condition_occurrence['condition_source_value'] = df['CODE']
         condition_occurrence['condition_source_concept_id'] = df['CODE']
@@ -203,7 +204,7 @@ class SyntheaToOmop:
         drug_exposure['days_supply'] = '1' # how does synthea-etl handle days_supply for immunization?
         return drug_exposure
 
-    def encountersToOmop(self, df, observation_period_id, visit_occurrence_id, personmap):
+    def encountersToOmop(self, df, observation_period_id, visit_occurrence_id, personmap, visitmap):
         df['obvervationtmp'] = df.index + observation_period_id # copy index into a temp column.
         df['visittmp'] = df.index + visit_occurrence_id # copy index into a temp column.
         df = pd.merge(df, personmap, left_on='PATIENT', right_on='synthea_patient_id', how='left')
@@ -221,7 +222,11 @@ class SyntheaToOmop:
         visit_occurrence['visit_concept_id'] = df['ENCOUNTERCLASS']
         visit_occurrence['visit_source_value'] = df['ENCOUNTERCLASS']
         visit_occurrence['visit_type_concept_id'] = '44818517'
-        return (observation_period, visit_occurrence)
+        visitappend = pd.DataFrame(columns=["visit_occurrence_id","synthea_encounter_id"])
+        visitappend["visit_occurrence_id"] = visit_occurrence['visit_occurrence_id']
+        visitappend["synthea_encounter_id"] = df['Id']
+        visitmap = visitmap.append(visitappend)
+        return (observation_period, visit_occurrence, visitmap)
 
     def organizationsToOmop(self, df, care_site_id):
         care_site = pd.DataFrame(columns=self.model_schema['care_site'].keys())

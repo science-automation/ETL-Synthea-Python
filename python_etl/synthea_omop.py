@@ -34,7 +34,8 @@ BASE_OUTPUT_DIRECTORY           = os.environ['BASE_OUTPUT_DIRECTORY']
 INPUT_CHUNK_SIZE = int(os.environ['INPUT_CHUNK_SIZE'])
 # List of synthea input files
 #SYNTHEA_FILE_LIST =  ['patients']
-SYNTHEA_FILE_LIST =  ['patients','conditions','careplans','observations','procedures','immunizations','imaging_studies','encounters','organizations','providers','payer_transitions','allergies','medications']
+# patients and encounters are first so that we can create dataframes to lookup ids
+SYNTHEA_FILE_LIST =  ['patients','encounters','conditions','careplans','observations','procedures','immunizations','imaging_studies','organizations','providers','payer_transitions','allergies','medications']
 # List of omop output files
 OMOP_FILE_LIST = ['person','location','death','condition_occurrence','drug_exposure','observation','measurement','procedure_occurrence','observation_period','visit_occurrence','care_site','provider']
 
@@ -92,8 +93,9 @@ if __name__ == '__main__':
     care_site_id = int(os.environ['CARE_SITE_ID_BASE'])
     provider_id = int(os.environ['PROVIDER_ID_BASE'])
 
-    # create person id to source mapping
+    # create mapping for to lookup id's
     personmap = pd.DataFrame(columns=["person_id","synthea_patient_id"])
+    visitmap = pd.DataFrame(columns=["visit_occurrence_id","synthea_encounter_id"])
     
     # we dont need a header when appending
     header = False
@@ -122,9 +124,9 @@ if __name__ == '__main__':
                 person.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'person.csv'), mode=mode, header=header, index=False)
                 location.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'location.csv'), mode=mode, header=header, index=False)
                 death.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'death.csv'), mode=mode, header=header, index=False)
-                personmap.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'personmap.csv'), mode='w', header=header, index=False)
+                personmap.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'personmap.csv'), mode='w', header=True, index=False)
             elif (datatype == 'conditions'):
-                (condition_occurrence, drug_exposure, observation, condition_occurrence_id, drug_exposure_id, observation_id) = convert.conditionsToOmop(df, srctostdvm, condition_occurrence_id, drug_exposure_id, observation_id, personmap)
+                (condition_occurrence, drug_exposure, observation, condition_occurrence_id, drug_exposure_id, observation_id) = convert.conditionsToOmop(df, srctostdvm, condition_occurrence_id, drug_exposure_id, observation_id, personmap, visitmap)
                 condition_occurrence.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'condition_occurrence.csv'), mode=mode, header=header, index=False)
                 drug_exposure.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'drug_exposure.csv'), mode=mode, header=header, index=False)
                 observation.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'observation.csv'), mode=mode, header=header, index=False)
@@ -143,9 +145,10 @@ if __name__ == '__main__':
             elif (datatype == 'imaging_studies'):
                 pass
             elif (datatype == 'encounters'):
-                (observation_period, visit_occurrence) = convert.encountersToOmop(df, observation_period_id, visit_occurrence_id, personmap)
+                (observation_period, visit_occurrence, visitmap) = convert.encountersToOmop(df, observation_period_id, visit_occurrence_id, personmap, visitmap)
                 observation_period.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'observation_period.csv'), mode=mode, header=header, index=False)
                 visit_occurrence.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'visit_occurrence.csv'), mode=mode, header=header, index=False)
+                visitmap.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'visitmap.csv'), mode='w', header=True, index=False)
             elif (datatype == 'organizations'):
                 care_site = convert.organizationsToOmop(df, care_site_id)
                 care_site.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'care_site.csv'), mode=mode, header=header, index=False)

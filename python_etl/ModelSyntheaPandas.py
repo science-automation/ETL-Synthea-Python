@@ -54,7 +54,7 @@ class ModelSyntheaPandas:
             'START': 'object',
             'STOP': 'object',
             'PATIENT': 'category',
-            'PROVIdER': 'category',
+            'PROVIDER': 'category',
             'PAYER': 'category',
             'ENCOUNTERCLASS': 'category',
             'CODE': 'category',

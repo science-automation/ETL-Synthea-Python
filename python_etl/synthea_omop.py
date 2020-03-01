@@ -73,14 +73,35 @@ if __name__ == '__main__':
     # create source to standard mapping
     srctostdvm = util.sourceToStandardVocabMap(vocab_concept,model_omop) 
 
-    # we only need to consider one synthea input file at a time to make the mapping
-    # so only put one in memory at a time and read in chunks to avoid memory issues  
+    # base numbers to start id's
     person_id = int(os.environ['PERSON_ID_BASE'])
     location_id = int(os.environ['LOCATION_ID_BASE'])
-    condition_id = int(os.environ['CONDITION_ID_BASE'])
+    observation_period_id = int(os.environ['OBSERVATION_PERIOD_ID_BASE'])
+    specimen_id = int(os.environ['SPECIMEN_ID_BASE'])
+    visit_occurrence_id = int(os.environ['VISIT_OCCURRENCE_ID_BASE'])
+    visit_detail_id = int(os.environ['VISIT_DETAIL_ID_BASE'])
+    procedure_occurrence_id = int(os.environ['PROCEDURE_OCCURRENCE_ID_BASE'])
+    drug_exposure_id = int(os.environ['DRUG_EXPOSURE_ID_BASE'])
+    condition_era_id = int(os.environ['CONDITION_ERA_ID_BASE'])
+    condition_occurrence_id = int(os.environ['CONDITION_OCCURRENCE_ID_BASE'])
+    device_exposure_id = int(os.environ['DEVICE_EXPOSURE_BASE'])
     observation_id = int(os.environ['OBSERVATION_ID_BASE'])
+    measurement_id = int(os.environ['MEASUREMENT_ID_BASE'])
+    note_id = int(os.environ['NOTE_ID_BASE'])
+    note_id_nlp = int(os.environ['NOTE_ID_NLP_BASE'])
+    care_site_id = int(os.environ['CARE_SITE_ID_BASE'])
+    provider_id = int(os.environ['PROVIDER_ID_BASE'])
+
+    # create person id to source mapping
+    personmap = pd.DataFrame(columns=["person_id","synthea_patient_id"])
+    
+    # we dont need a header when appending
     header = False
     mode='a'
+
+    # start looping through the synthea files
+    # we only need to consider one synthea input file at a time to make the mapping
+    # so only put one in memory at a time and read in chunks to avoid memory issues
     for datatype in SYNTHEA_FILE_LIST:
         if (os.path.exists(os.path.join(BASE_SYNTHEA_INPUT_DIRECTORY,datatype + '.csv'))):
             inputfile = datatype + '.csv'
@@ -95,48 +116,49 @@ if __name__ == '__main__':
         output = os.path.join(BASE_OUTPUT_DIRECTORY,inputfile)
         print("")
         print(datatype),
-        for df in pd.read_csv(inputdata, dtype=model_synthea.model_schema[datatype], chunksize=INPUT_CHUNK_SIZE, compression=compression):
+        for df in pd.read_csv(inputdata, dtype=model_synthea.model_schema[datatype], chunksize=INPUT_CHUNK_SIZE, iterator=True, compression=compression):
             if (datatype == 'patients'):
-                (person, location, death, person_id, location_id) = convert.patientsToOmop(df, person_id, location_id)
+                (person, location, death, personmap) = convert.patientsToOmop(df, personmap, person_id, location_id)
                 person.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'person.csv'), mode=mode, header=header, index=False)
                 location.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'location.csv'), mode=mode, header=header, index=False)
                 death.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'death.csv'), mode=mode, header=header, index=False)
+                personmap.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'personmap.csv'), mode='w', header=header, index=False)
             elif (datatype == 'conditions'):
-                (condition_occurrence, drug_exposure, observation, condition_id, observation_id) = convert.conditionsToOmop(df, srctostdvm, condition_id, observation_id)
+                (condition_occurrence, drug_exposure, observation, condition_occurrence_id, drug_exposure_id, observation_id) = convert.conditionsToOmop(df, srctostdvm, condition_occurrence_id, drug_exposure_id, observation_id, personmap)
                 condition_occurrence.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'condition_occurrence.csv'), mode=mode, header=header, index=False)
                 drug_exposure.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'drug_exposure.csv'), mode=mode, header=header, index=False)
                 observation.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'observation.csv'), mode=mode, header=header, index=False)
             elif (datatype == 'careplans'):
                 pass
             elif (datatype == 'observations'):
-                measurement = convert.observationsToOmop(df)
+                measurement = convert.observationsToOmop(df, measurement_id, personmap)
                 measurement.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'measurement.csv'), mode=mode, header=header, index=False)
             elif (datatype == 'procedures'):
-                procedure_occurrence = convert.proceduresToOmop(df)
-                measurement.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'measurement.csv'), mode=mode, header=header, index=False)
+                procedure_occurrence = convert.proceduresToOmop(df, procedure_occurrence_id, personmap)
+                #measurement.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'measurement.csv'), mode=mode, header=header, index=False)
                 procedure_occurrence.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'procedure_occurrence.csv'), mode=mode, header=header, index=False)
             elif (datatype == 'immunizations'):
-                drug_exposure = convert.immunizationsToOmop(df)
+                drug_exposure = convert.immunizationsToOmop(df, drug_exposure_id, personmap)
                 drug_exposure.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'drug_exposure.csv'), mode=mode, header=header, index=False)
             elif (datatype == 'imaging_studies'):
                 pass
             elif (datatype == 'encounters'):
-                (observation_period, visit_occurrence) = convert.encountersToOmop(df)
+                (observation_period, visit_occurrence) = convert.encountersToOmop(df, observation_period_id, visit_occurrence_id, personmap)
                 observation_period.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'observation_period.csv'), mode=mode, header=header, index=False)
                 visit_occurrence.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'visit_occurrence.csv'), mode=mode, header=header, index=False)
             elif (datatype == 'organizations'):
-                care_site = convert.organizationsToOmop(df)
+                care_site = convert.organizationsToOmop(df, care_site_id)
                 care_site.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'care_site.csv'), mode=mode, header=header, index=False)
             elif (datatype == 'providers'):
-                provider = convert.providersToOmop(df)
+                provider = convert.providersToOmop(df, provider_id)
                 provider.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'provider.csv'), mode=mode, header=header, index=False)
             elif (datatype == 'payer_transitions'):
                 pass
             elif (datatype == 'allergies'):
-                observation = convert.allergiesToOmop(df)
+                observation = convert.allergiesToOmop(df, observation_id, personmap)
                 person.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'observation.csv'), mode=mode, header=header, index=False)
             elif (datatype == 'medications'):
-                drug_exposure = convert.medicationsToOmop(df)
+                drug_exposure = convert.medicationsToOmop(df, drug_exposure_id, personmap)
                 drug_exposure.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'drug_exposure.csv'), mode=mode, header=header, index=False)
             else:
                 print("Unknown input type: " + datatype)

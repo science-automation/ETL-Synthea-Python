@@ -1,5 +1,6 @@
 import pandas as pd
 import datetime
+import dateutil.parser
 
 #
 # given a synthea object, covert it to it's equivalent omop objects
@@ -56,6 +57,11 @@ class SyntheaToOmop:
             return '38003563'
         else:
             return '0'
+
+    # convert a synthea timestamp like 2020-02-16T05:05:49Z to omop datestamp like 2020-02-16
+    def isoTimestampToDate(self, timestamp):
+        date = dateutil.parser.parse(timestamp)
+        return datetime.date.strftime(date, '%Y-%m-%d')
 
     #
     # synthea patients to omop
@@ -205,15 +211,23 @@ class SyntheaToOmop:
         return drug_exposure
 
     def encountersToOmop(self, df, observation_period_id, visit_occurrence_id, personmap, visitmap):
-        df['obvervationtmp'] = df.index + observation_period_id # copy index into a temp column.
         df['visittmp'] = df.index + visit_occurrence_id # copy index into a temp column.
         df = pd.merge(df, personmap, left_on='PATIENT', right_on='synthea_patient_id', how='left')
+        # preprocess df 
+        df['observation_period_start_date'] = df['START'].apply(self.isoTimestampToDate)
+        df['observation_period_end_date'] = df['STOP'].apply(self.isoTimestampToDate)
+        start = df.groupby('person_id')['observation_period_start_date'].agg(['first']).reset_index()
+        stop = df.groupby('person_id')['observation_period_end_date'].agg(['last']).reset_index()
+        observation_tmp = pd.merge(start, stop, on='person_id', how='inner')
         observation_period = pd.DataFrame(columns=self.model_schema['observation_period'].keys())
-        observation_period['observation_period_id'] = df['obvervationtmp']
-        observation_period['person_id'] = df['person_id']
-        observation_period['observation_period_start_date'] = df['START']
-        observation_period['observation_period_end_date'] = df['STOP']
+        observation_period['observationtmp'] = observation_tmp.index + observation_period_id
+        observation_period['observation_period_id'] = observation_period['observationtmp']
+        observation_period['person_id'] = observation_tmp['person_id']
+        observation_period['observation_period_start_date'] = observation_tmp['first']
+        observation_period['observation_period_end_date'] = observation_tmp['last']
         observation_period['period_type_concept_id'] = '44814724'
+        observation_period = observation_period.drop('observationtmp', 1)
+        observation_period_id = observation_period_id + len(observation_period)
         visit_occurrence = pd.DataFrame(columns=self.model_schema['visit_occurrence'].keys())
         visit_occurrence['visit_occurrence_id'] = df['visittmp']
         visit_occurrence['person_id'] = df['person_id']
@@ -226,7 +240,7 @@ class SyntheaToOmop:
         visitappend["visit_occurrence_id"] = visit_occurrence['visit_occurrence_id']
         visitappend["synthea_encounter_id"] = df['Id']
         visitmap = visitmap.append(visitappend)
-        return (observation_period, visit_occurrence, visitmap)
+        return (observation_period, visit_occurrence, observation_period_id, visitmap)
 
     def organizationsToOmop(self, df, care_site_id):
         care_site = pd.DataFrame(columns=self.model_schema['care_site'].keys())

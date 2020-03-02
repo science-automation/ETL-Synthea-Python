@@ -116,8 +116,8 @@ if __name__ == '__main__':
             exit(1)
         inputdata = os.path.join(BASE_SYNTHEA_INPUT_DIRECTORY,inputfile)
         output = os.path.join(BASE_OUTPUT_DIRECTORY,inputfile)
-        print("")
-        print(datatype),
+        #print("")
+        #print(datatype),
         for df in pd.read_csv(inputdata, dtype=model_synthea.model_schema[datatype], chunksize=INPUT_CHUNK_SIZE, iterator=True, compression=compression):
             if (datatype == 'patients'):
                 (person, location, death, personmap) = convert.patientsToOmop(df, personmap, person_id, location_id)
@@ -145,7 +145,7 @@ if __name__ == '__main__':
             elif (datatype == 'imaging_studies'):
                 pass
             elif (datatype == 'encounters'):
-                (observation_period, visit_occurrence, visitmap) = convert.encountersToOmop(df, observation_period_id, visit_occurrence_id, personmap, visitmap)
+                (observation_period, visit_occurrence, observation_period_id, visitmap) = convert.encountersToOmop(df, observation_period_id, visit_occurrence_id, personmap, visitmap)
                 observation_period.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'observation_period.csv'), mode=mode, header=header, index=False)
                 visit_occurrence.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'visit_occurrence.csv'), mode=mode, header=header, index=False)
                 visitmap.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'visitmap.csv'), mode='w', header=True, index=False)

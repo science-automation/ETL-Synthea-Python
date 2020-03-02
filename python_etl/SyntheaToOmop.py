@@ -226,7 +226,9 @@ class SyntheaToOmop:
         drug_exposure['drug_exposure_id'] = df['drugexposuretmp']
         drug_exposure['person_id'] = df['person_id']
         drug_exposure['drug_exposure_start_date'] = df['DATE']
+        drug_exposure['drug_exposure_start_datetime'] = df['DATE'].apply(self.getDefaultTimestamp)
         drug_exposure['drug_exposure_end_date'] = df['DATE']
+        drug_exposure['drug_exposure_end_datetime'] = df['DATE'].apply(self.getDefaultTimestamp)
         drug_exposure['verbatim_end_date'] = df['DATE']
         drug_exposure['visit_occurrence_id'] = df['visit_occurrence_id']
         drug_exposure['drug_concept_id'] = df['CODE']

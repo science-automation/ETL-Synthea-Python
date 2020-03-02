@@ -133,7 +133,7 @@ if __name__ == '__main__':
             elif (datatype == 'careplans'):
                 pass
             elif (datatype == 'observations'):
-                measurement = convert.observationsToOmop(df, measurement_id, personmap)
+                measurement = convert.observationsToOmop(df, measurement_id, personmap, visitmap)
                 measurement.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'measurement.csv'), mode=mode, header=header, index=False)
             elif (datatype == 'procedures'):
                 procedure_occurrence = convert.proceduresToOmop(df, procedure_occurrence_id, personmap)

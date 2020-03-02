@@ -63,6 +63,10 @@ class SyntheaToOmop:
         date = dateutil.parser.parse(timestamp)
         return datetime.date.strftime(date, '%Y-%m-%d')
 
+    # given a datestamp, return on timestamp with default 0 hour
+    def getDefaultTimestamp(self, datestamp):
+        return datestamp + " 00:00:00"
+
     #
     # synthea patients to omop
     #
@@ -132,7 +136,7 @@ class SyntheaToOmop:
         drug_exposure['drug_exposure_start_date'] = df['START']
         drug_exposure['drug_exposure_end_date'] = df['STOP']
         drug_exposure['verbatim_end_date'] = df['STOP']
-        drug_exposure['visit_occurrence_id'] = df['ENCOUNTER']
+        drug_exposure['visit_occurrence_id'] = df['visit_occurrence_id']
         drug_exposure['drug_concept_id'] = df['CODE']
         drug_exposure['drug_source_value'] = df['CODE']
         drug_exposure['drug_source_concept_id'] = df['CODE']
@@ -142,7 +146,7 @@ class SyntheaToOmop:
         observation['observation_id'] = df['observationtmp']
         observation['person_id'] = df['person_id']
         observation['observation_date'] = df['START']
-        observation['visit_occurrence_id'] = df['ENCOUNTER']
+        observation['visit_occurrence_id'] = df['visit_occurrence_id']
         observation['observation_concept_id'] = df['CODE']
         observation['observation_source_value'] = df['CODE']
         observation['observation_source_concept_id'] = df['CODE']
@@ -152,19 +156,27 @@ class SyntheaToOmop:
     def careplansToOmop(self, df):
         pass
 
-    def observationsToOmop(self, df, measurement_id, personmap):
+    def observationsToOmop(self, df, measurement_id, personmap,visitmap):
         df['measurementtmp'] = df.index + measurement_id # copy index into a temp column.
         df = pd.merge(df, personmap, left_on='PATIENT', right_on='synthea_patient_id', how='left')
+        df = pd.merge(df, visitmap, left_on='ENCOUNTER', right_on='synthea_encounter_id', how='left')
         measurement = pd.DataFrame(columns=self.model_schema['measurement'].keys())
         measurement['measurement_id'] = df['measurementtmp']
         measurement['person_id'] = df['person_id']
         measurement['measurement_date'] = df['DATE']
+        measurement['measurement_datetime'] = df['DATE'].apply(self.getDefaultTimestamp)
         measurement['measurement_time'] = df['DATE']  # check
-        measurement['visit_occurrence_id'] = df['ENCOUNTER']
+        measurement['visit_occurrence_id'] = df['visit_occurrence_id']
+        measurement['visit_detail_id'] = '0'
         measurement['measurement_concept_id'] = df['CODE']
         measurement['measurement_source_value'] = df['CODE']
         measurement['measurement_source_concept_id'] = df['CODE']
         measurement['measurement_type_concept_id'] = '5001'
+        measurement['operator_concept_id'] = '0'
+        measurement['value_as_number'] = df['VALUE']
+        measurement['value_as_concept_id'] = '0'
+        measurement['unit_source_value'] = df['UNITS']
+        measurement['value_source_value'] = df['VALUE']
         return measurement
 
     def proceduresToOmop(self, df, procedure_occurrence_id, personmap):

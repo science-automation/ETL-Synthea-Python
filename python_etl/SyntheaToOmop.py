@@ -142,7 +142,12 @@ class SyntheaToOmop:
         drug_exposure['drug_source_value'] = df['CODE']
         drug_exposure['drug_source_concept_id'] = df['CODE']
         drug_exposure['drug_type_concept_id'] = '581452'
-        drug_exposure['days_supply'] = '1' # how does synthea-etl handle days_supply for immunization?
+        drug_exposure['refills'] = '0'
+        drug_exposure['quantity'] = '0'
+        drug_exposure['days_supply'] = '0'
+        drug_exposure['route_concept_id'] = '0'
+        drug_exposure['lot_number'] = '0'
+        drug_exposure['visit_detail_id'] = '0'
         #drug_exposure_id = drug_exposure_id + len(df)
         observation = pd.DataFrame(columns=self.model_schema['observation'].keys())
         observation['observation_id'] = df['observationtmp']

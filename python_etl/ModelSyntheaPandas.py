@@ -41,18 +41,18 @@ class ModelSyntheaPandas:
         }
 
         model_schema['conditions'] = {
-            'START': 'object',
-            'STOP': 'object',
-            'PATIENT': 'object',
-            'ENCOUNTER': 'object',
+            'START': 'category',
+            'STOP': 'category',
+            'PATIENT': 'category',
+            'ENCOUNTER': 'category',
             'CODE': 'category',
             'DESCRIPTION': 'category'
         }
 
         model_schema['encounters'] = {
             'Id': 'object',
-            'START': 'object',
-            'STOP': 'object',
+            'START': 'category',
+            'STOP': 'category',
             'PATIENT': 'category',
             'PROVIDER': 'category',
             'PAYER': 'category',

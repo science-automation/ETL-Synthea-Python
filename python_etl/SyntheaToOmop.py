@@ -90,7 +90,6 @@ class SyntheaToOmop:
         person['race_source_concept_id'] = '0'
         person['ethnicity_source_value'] = df['ETHNICITY']
         person['ethnicity_source_concept_id'] = '0'
-        print(person.head(5))
         personappend = pd.DataFrame(columns=["person_id","synthea_patient_id"])
         personappend["person_id"] = person['person_id']
         personappend["synthea_patient_id"] = df['Id']
@@ -134,7 +133,9 @@ class SyntheaToOmop:
         drug_exposure['drug_exposure_id'] = df['drugexposuretmp'] 
         drug_exposure['person_id'] = df['person_id']
         drug_exposure['drug_exposure_start_date'] = df['START']
+        drug_exposure['drug_exposure_start_datetime'] = df['START'].apply(self.getDefaultTimestamp)
         drug_exposure['drug_exposure_end_date'] = df['STOP']
+        drug_exposure['drug_exposure_end_datetime'] = df['STOP'].apply(self.getDefaultTimestamp)
         drug_exposure['verbatim_end_date'] = df['STOP']
         drug_exposure['visit_occurrence_id'] = df['visit_occurrence_id']
         drug_exposure['drug_concept_id'] = df['CODE']
@@ -142,11 +143,17 @@ class SyntheaToOmop:
         drug_exposure['drug_source_concept_id'] = df['CODE']
         drug_exposure['drug_type_concept_id'] = '581452'
         drug_exposure['days_supply'] = '1' # how does synthea-etl handle days_supply for immunization?
+        #drug_exposure_id = drug_exposure_id + len(df)
         observation = pd.DataFrame(columns=self.model_schema['observation'].keys())
         observation['observation_id'] = df['observationtmp']
         observation['person_id'] = df['person_id']
         observation['observation_date'] = df['START']
+        observation['observation_datetime'] = df['START'].apply(self.getDefaultTimestamp)
+        observation['value_as_concept_id'] = '0'
+        observation['qualifier_concept_id'] = '0'
+        observation['unit_concept_id'] = '0'
         observation['visit_occurrence_id'] = df['visit_occurrence_id']
+        observation['visit_detail_id'] = '0'
         observation['observation_concept_id'] = df['CODE']
         observation['observation_source_value'] = df['CODE']
         observation['observation_source_concept_id'] = df['CODE']
@@ -179,9 +186,10 @@ class SyntheaToOmop:
         measurement['value_source_value'] = df['VALUE']
         return measurement
 
-    def proceduresToOmop(self, df, procedure_occurrence_id, personmap):
+    def proceduresToOmop(self, df, procedure_occurrence_id, personmap, visitmap):
         df['proceduretmp'] = df.index + procedure_occurrence_id # copy index into a temp column.
         df = pd.merge(df, personmap, left_on='PATIENT', right_on='synthea_patient_id', how='left')
+        df = pd.merge(df, visitmap, left_on='ENCOUNTER', right_on='synthea_encounter_id', how='left')
         # do procedures really map to measurements?  There is no value and units?
         #measurement = pd.DataFrame(columns=self.model_schema['measurement'].keys())
         #measurement['person_id'] = df['PATIENT'].apply(self.patienthash)
@@ -199,27 +207,33 @@ class SyntheaToOmop:
         procedure_occurrence['procedure_occurrence_id'] = df['proceduretmp']
         procedure_occurrence['person_id'] = df['person_id']
         procedure_occurrence['procedure_date'] = df['DATE']
-        procedure_occurrence['visit_occurrence_id'] = df['ENCOUNTER']
+        procedure_occurrence['visit_occurrence_id'] = df['visit_occurrence_id']
         procedure_occurrence['procedure_concept_id'] = df['CODE']
         procedure_occurrence['procedure_source_value'] = df['CODE']
         procedure_occurrence['procedure_source_concept_id'] = df['CODE']
         return procedure_occurrence
 
-    def immunizationsToOmop(self, df, drug_exposure_id, personmap):
+    def immunizationsToOmop(self, df, drug_exposure_id, personmap, visitmap):
         df['drugexposuretmp'] = df.index + drug_exposure_id # copy index into a temp column.
         df = pd.merge(df, personmap, left_on='PATIENT', right_on='synthea_patient_id', how='left')
+        df = pd.merge(df, visitmap, left_on='ENCOUNTER', right_on='synthea_encounter_id', how='left')
         drug_exposure = pd.DataFrame(columns=self.model_schema['drug_exposure'].keys())
         drug_exposure['drug_exposure_id'] = df['drugexposuretmp']
         drug_exposure['person_id'] = df['person_id']
         drug_exposure['drug_exposure_start_date'] = df['DATE']
         drug_exposure['drug_exposure_end_date'] = df['DATE']
         drug_exposure['verbatim_end_date'] = df['DATE']
-        drug_exposure['visit_occurrence_id'] = df['ENCOUNTER']
+        drug_exposure['visit_occurrence_id'] = df['visit_occurrence_id']
         drug_exposure['drug_concept_id'] = df['CODE']
         drug_exposure['drug_source_value'] = df['CODE']
         drug_exposure['drug_source_concept_id'] = df['CODE']
         drug_exposure['drug_type_concept_id'] = '581452'
-        drug_exposure['days_supply'] = '1' # how does synthea-etl handle days_supply for immunization?
+        drug_exposure['refills'] = '0'
+        drug_exposure['quantity'] = '0'
+        drug_exposure['days_supply'] = '0'
+        drug_exposure['route_concept_id'] = '0'
+        drug_exposure['lot_number'] = '0'
+        drug_exposure['visit_detail_id'] = '0'
         return drug_exposure
 
     def encountersToOmop(self, df, observation_period_id, visit_occurrence_id, personmap, visitmap):

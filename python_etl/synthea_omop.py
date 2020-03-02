@@ -136,11 +136,11 @@ if __name__ == '__main__':
                 measurement = convert.observationsToOmop(df, measurement_id, personmap, visitmap)
                 measurement.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'measurement.csv'), mode=mode, header=header, index=False)
             elif (datatype == 'procedures'):
-                procedure_occurrence = convert.proceduresToOmop(df, procedure_occurrence_id, personmap)
+                procedure_occurrence = convert.proceduresToOmop(df, procedure_occurrence_id, personmap, visitmap)
                 #measurement.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'measurement.csv'), mode=mode, header=header, index=False)
                 procedure_occurrence.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'procedure_occurrence.csv'), mode=mode, header=header, index=False)
             elif (datatype == 'immunizations'):
-                drug_exposure = convert.immunizationsToOmop(df, drug_exposure_id, personmap)
+                drug_exposure = convert.immunizationsToOmop(df, drug_exposure_id, personmap, visitmap)
                 drug_exposure.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'drug_exposure.csv'), mode=mode, header=header, index=False)
             elif (datatype == 'imaging_studies'):
                 pass

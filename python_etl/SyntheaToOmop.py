@@ -212,7 +212,11 @@ class SyntheaToOmop:
         procedure_occurrence['procedure_occurrence_id'] = df['proceduretmp']
         procedure_occurrence['person_id'] = df['person_id']
         procedure_occurrence['procedure_date'] = df['DATE']
+        procedure_occurrence['procedure_datetime'] = df['DATE'].apply(self.getDefaultTimestamp)
         procedure_occurrence['visit_occurrence_id'] = df['visit_occurrence_id']
+        procedure_occurrence['visit_detail_id'] = '0'
+        procedure_occurrence['procedure_type_concept_id'] = '38000275'
+        procedure_occurrence['modifier_concept_id'] = '0'
         procedure_occurrence['procedure_concept_id'] = df['CODE']
         procedure_occurrence['procedure_source_value'] = df['CODE']
         procedure_occurrence['procedure_source_concept_id'] = df['CODE']

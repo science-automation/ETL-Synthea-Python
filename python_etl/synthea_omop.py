@@ -73,6 +73,7 @@ if __name__ == '__main__':
 
     # create source to standard mapping
     srctostdvm = util.sourceToStandardVocabMap(vocab_concept,model_omop) 
+    srctosrcvm = util.sourceToSourceVocabMap(vocab_concept,model_omop)
 
     # base numbers to start id's
     person_id = int(os.environ['PERSON_ID_BASE'])
@@ -116,8 +117,8 @@ if __name__ == '__main__':
             exit(1)
         inputdata = os.path.join(BASE_SYNTHEA_INPUT_DIRECTORY,inputfile)
         output = os.path.join(BASE_OUTPUT_DIRECTORY,inputfile)
-        #print("")
-        #print(datatype),
+        print("")
+        print(datatype),
         for df in pd.read_csv(inputdata, dtype=model_synthea.model_schema[datatype], chunksize=INPUT_CHUNK_SIZE, iterator=True, compression=compression):
             if (datatype == 'patients'):
                 (person, location, death, personmap) = convert.patientsToOmop(df, personmap, person_id, location_id)
@@ -133,7 +134,7 @@ if __name__ == '__main__':
             elif (datatype == 'careplans'):
                 pass
             elif (datatype == 'observations'):
-                measurement = convert.observationsToOmop(df, measurement_id, personmap, visitmap)
+                measurement = convert.observationsToOmop(df, srctostdvm, srctosrcvm, measurement_id, personmap, visitmap)
                 measurement.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'measurement.csv'), mode=mode, header=header, index=False)
             elif (datatype == 'procedures'):
                 procedure_occurrence = convert.proceduresToOmop(df, procedure_occurrence_id, personmap, visitmap)

@@ -92,8 +92,10 @@ class Utils:
         target = target.rename(columns=model_omop.model_schema['source_to_standard_target'])
         source_result = pd.merge(source,concept_relationship[(concept_relationship["invalid_reason"].isnull()) & (concept_relationship["relationship_id"].str.contains('Maps to'))], \
             how='inner', left_on='source_concept_id', right_on='concept_id_1')
+        source_result = source_result[model_omop.model_schema['source_to_standard_source'].values()].drop_duplicates()
         target_result = pd.merge(target,concept_relationship[concept_relationship["invalid_reason"].isnull()], \
             how='inner', left_on='target_concept_id', right_on='concept_id_2')
+        target_result = target_result[ model_omop.model_schema['source_to_standard_target'].values()].drop_duplicates()
         result = pd.merge(source_result, target_result, how='inner', left_on='source_concept_id', right_on='target_concept_id')
         return result
 
@@ -110,11 +112,12 @@ class Utils:
     #         c.concept_class_id AS TARGET_CONCEPT_CLASS_ID, c.INVALID_REASON AS TARGET_INVALID_REASON, 
     #         c.STANDARD_CONCEPT AS TARGET_STANDARD_CONCEPT
     #   FROM CONCEPT c
-    def sourceToSourceVocabMap(self, vobab, model_omop):
+    def sourceToSourceVocabMap(self, vocab, model_omop):
         concept = vocab['concept']
-        source = concept[model_schema['source_to_standard_source'].keys()]  # get rid of columns we don't need
-        source = source.rename(columns=model_schema['source_to_standard_source'])
-        target = concept[model_schema['source_to_standard_target'].keys()]  # get rid of columns we don't need
-        target = target.rename(columns=model_schema['source_to_standard_target'])
-        result = pd.merge(source_result, target_result, how='inner', left_on='source_concept_id', right_on='target_concept_id')
+        source = concept[model_omop.model_schema['source_to_standard_source'].keys()]  # get rid of columns we don't need
+        source = source.rename(columns=model_omop.model_schema['source_to_standard_source'])
+        target = concept[model_omop.model_schema['source_to_standard_target'].keys()]  # get rid of columns we don't need
+        target = target.rename(columns=model_omop.model_schema['source_to_standard_target'])
+        result = pd.merge(source, target, how='inner', left_on='source_concept_id', right_on='target_concept_id')
+        result = result.drop_duplicates()
         return result

@@ -118,7 +118,7 @@ class SyntheaToOmop:
         condition_occurrence = pd.DataFrame(columns=self.model_schema['condition_occurrence'].keys())
         condition_occurrence['condition_occurrence_id'] = df['conditiontmp']
         condition_occurrence['person_id'] = df['person_id']
-        condition_occurrence['condition_concept_id'] = pd.merge(df['CODE'],srctostdvm[(srctostdvm["target_domain_id"]=='Condition') & (srctostdvm["target_vocabulary_id"]=='SNOMED') & (srctostdvm["source_vocabulary_id"]=='SNOMED') & (srctostdvm["target_standard_concept"]=='SNOMED') & (srctostdvm["target_invalid_reason"].isnull())], left_on='CODE', right_on='source_code', how='left')
+        condition_occurrence['condition_concept_id'] = pd.merge(df['CODE'],srctostdvm[(srctostdvm["target_domain_id"]=='Condition') & (srctostdvm["target_vocabulary_id"]=='SNOMED') & (srctostdvm["target_standard_concept"]=='S') & (srctostdvm["target_invalid_reason"].isnull())], left_on='CODE', right_on='source_code', how='left')
         condition_occurrence['condition_concept_id'].fillna('0')
         condition_occurrence['condition_start_date'] = df['START']
         condition_occurrence['condition_end_date'] = df['STOP']
@@ -168,7 +168,7 @@ class SyntheaToOmop:
     def careplansToOmop(self, df):
         pass
 
-    def observationsToOmop(self, df, measurement_id, personmap,visitmap):
+    def observationsToOmop(self, df, srctostdvm, srctosrcvm, measurement_id, personmap,visitmap):
         df['measurementtmp'] = df.index + measurement_id # copy index into a temp column.
         df = pd.merge(df, personmap, left_on='PATIENT', right_on='synthea_patient_id', how='left')
         df = pd.merge(df, visitmap, left_on='ENCOUNTER', right_on='synthea_encounter_id', how='left')
@@ -180,7 +180,9 @@ class SyntheaToOmop:
         measurement['measurement_time'] = df['DATE']  # check
         measurement['visit_occurrence_id'] = df['visit_occurrence_id']
         measurement['visit_detail_id'] = '0'
-        measurement['measurement_concept_id'] = df['CODE']
+        srctostdvm_filtered = srctostdvm[(srctostdvm["target_domain_id"]=='Measurement') & (srctostdvm["target_standard_concept"]=='S') & (srctostdvm["target_invalid_reason"].isnull())]
+        concept_df = pd.merge(df[['CODE']],srctostdvm_filtered[['source_code','target_concept_id']], left_on='CODE', right_on='source_code', how='left')
+        measurement['measurement_concept_id'] = concept_df['target_concept_id'].fillna('0')
         measurement['measurement_source_value'] = df['CODE']
         measurement['measurement_source_concept_id'] = df['CODE']
         measurement['measurement_type_concept_id'] = '5001'

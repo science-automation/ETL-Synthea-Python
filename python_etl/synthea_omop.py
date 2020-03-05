@@ -46,8 +46,11 @@ if __name__ == '__main__':
     if not os.path.exists(BASE_OUTPUT_DIRECTORY): 
         os.makedirs(BASE_OUTPUT_DIRECTORY)
     else:
-        shutil.rmtree(BASE_OUTPUT_DIRECTORY)
-        os.makedirs(BASE_OUTPUT_DIRECTORY)
+        #shutil.rmtree(BASE_OUTPUT_DIRECTORY)
+        filesToRemove = [f for f in os.listdir(BASE_OUTPUT_DIRECTORY)]
+        for f in filesToRemove:
+            os.remove(os.path.join(BASE_OUTPUT_DIRECTORY, f))
+        #os.makedirs(BASE_OUTPUT_DIRECTORY)
 
     print('BASE_SYNTHEA_INPUT_DIRECTORY     =' + BASE_SYNTHEA_INPUT_DIRECTORY)
     print('BASE_OUTPUT_DIRECTORY           =' + BASE_OUTPUT_DIRECTORY)
@@ -57,7 +60,7 @@ if __name__ == '__main__':
 
     # check files look ok
 
-    # load the synthea model
+    # load the model files to define structure
     model_synthea = ModelSyntheaPandas.ModelSyntheaPandas()
     model_omop = ModelOmopPandas.ModelOmopPandas()
     convert = SyntheaToOmop.SyntheaToOmop(model_omop.model_schema)
@@ -162,7 +165,7 @@ if __name__ == '__main__':
                 observation = convert.allergiesToOmop(df, observation_id, personmap)
                 person.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'observation.csv'), mode=mode, header=header, index=False)
             elif (datatype == 'medications'):
-                drug_exposure = convert.medicationsToOmop(df, drug_exposure_id, personmap)
+                drug_exposure = convert.medicationsToOmop(df, srctosrcvm, drug_exposure_id, personmap)
                 drug_exposure.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'drug_exposure.csv'), mode=mode, header=header, index=False)
             else:
                 print("Unknown input type: " + datatype)

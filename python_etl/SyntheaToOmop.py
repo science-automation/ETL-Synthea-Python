@@ -314,7 +314,7 @@ class SyntheaToOmop:
         observation = pd.DataFrame(columns=self.model_schema['observation'].keys())
         return observation
 
-    def medicationsToOmop(self, df, drug_exposure_id, personmap):
+    def medicationsToOmop(self, df, srctostdvm, drug_exposure_id, personmap):
         df['drugexposuretmp'] = df.index + drug_exposure_id # copy index into a temp column.
         df = pd.merge(df, personmap, left_on='PATIENT', right_on='synthea_patient_id', how='left')
         drug_exposure = pd.DataFrame(columns=self.model_schema['drug_exposure'].keys())

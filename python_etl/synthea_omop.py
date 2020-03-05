@@ -6,7 +6,6 @@ import ModelOmopPandas
 import SyntheaToOmop
 import Utils
 import sys
-import shutil
 
 #------------------------------------------------------
 # This scripts performs an ETL from Synthea to omop CDM.
@@ -46,11 +45,10 @@ if __name__ == '__main__':
     if not os.path.exists(BASE_OUTPUT_DIRECTORY): 
         os.makedirs(BASE_OUTPUT_DIRECTORY)
     else:
-        #shutil.rmtree(BASE_OUTPUT_DIRECTORY)
+        # cleanup old files in output directory but dont delete directory
         filesToRemove = [f for f in os.listdir(BASE_OUTPUT_DIRECTORY)]
         for f in filesToRemove:
             os.remove(os.path.join(BASE_OUTPUT_DIRECTORY, f))
-        #os.makedirs(BASE_OUTPUT_DIRECTORY)
 
     print('BASE_SYNTHEA_INPUT_DIRECTORY     =' + BASE_SYNTHEA_INPUT_DIRECTORY)
     print('BASE_OUTPUT_DIRECTORY           =' + BASE_OUTPUT_DIRECTORY)

@@ -121,3 +121,26 @@ class Utils:
         result = pd.merge(source, target, how='inner', left_on='source_concept_id', right_on='target_concept_id')
         result = result.drop_duplicates()
         return result
+
+    # create a counter file to read/save id starting numbers
+    def initCounterFile(self, omoplist, initnum, file):
+        f= open(file,"w")
+        for datatype in omoplist:
+            f.write(datatype + "_id=" + str(initnum) + "\n") 
+        f.close()
+
+    # read counter into a dictionary
+    def getCounter(self, counterfile):
+        counter = {}
+        with open(counterfile) as file:
+            for line in file:
+                name, var = line.partition("=")[::2]
+                counter[name.strip()] = int(var)
+        return counter
+
+    # take dictionary and write counter
+    def writeCounter(self, counter, counterfile):
+        f= open(counterfile,"w")
+        for key, value in counter.iteritems():
+            f.write(key + "=" + str(value) + "\n")
+        f.close()

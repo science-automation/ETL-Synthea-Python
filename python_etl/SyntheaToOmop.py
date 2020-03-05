@@ -67,6 +67,15 @@ class SyntheaToOmop:
     def getDefaultTimestamp(self, datestamp):
         return datestamp + " 00:00:00"
 
+    # 
+    def getVisitConcept(self, encounterclass):
+        if encounterclass == 'emergency' or encounterclass == 'urgentcare':
+            return '9203'
+        elif encounterclass == 'ambulatory' or encounterclass == 'wellness' or encounterclass == 'outpatient':
+            return '9202'
+        else:
+            return '0'
+
     #
     # synthea patients to omop
     #
@@ -154,6 +163,9 @@ class SyntheaToOmop:
         observation = pd.DataFrame(columns=self.model_schema['observation'].keys())
         observation['observation_id'] = df['observationtmp']
         observation['person_id'] = df['person_id']
+        srctostdvm_filtered = srctostdvm[(srctostdvm["target_domain_id"]=='Observation') & (srctostdvm["target_vocabulary_id"]=='SNOMED') & (srctostdvm["target_invalid_reason"].isnull())]
+        concept_df = pd.merge(df['CODE'],srctostdvm_filtered[['source_code','target_concept_id']], left_on='CODE', right_on='source_code', how='left')
+        observation['observation_concept_id'] = concept_df['target_concept_id'].fillna('0')
         observation['observation_date'] = df['START']
         observation['observation_datetime'] = df['START'].apply(self.getDefaultTimestamp)
         observation['value_as_concept_id'] = '0'
@@ -161,7 +173,6 @@ class SyntheaToOmop:
         observation['unit_concept_id'] = '0'
         observation['visit_occurrence_id'] = df['visit_occurrence_id']
         observation['visit_detail_id'] = '0'
-        observation['observation_concept_id'] = df['CODE']
         observation['observation_source_value'] = df['CODE']
         observation['observation_source_concept_id'] = df['CODE']
         observation['observation_type_concept_id'] = '38000280'
@@ -195,7 +206,7 @@ class SyntheaToOmop:
         measurement['value_source_value'] = df['VALUE']
         return measurement
 
-    def proceduresToOmop(self, df, procedure_occurrence_id, personmap, visitmap):
+    def proceduresToOmop(self, df, srctostdvm, procedure_occurrence_id, personmap, visitmap):
         df['proceduretmp'] = df.index + procedure_occurrence_id # copy index into a temp column.
         df = pd.merge(df, personmap, left_on='PATIENT', right_on='synthea_patient_id', how='left')
         df = pd.merge(df, visitmap, left_on='ENCOUNTER', right_on='synthea_encounter_id', how='left')
@@ -215,6 +226,9 @@ class SyntheaToOmop:
         procedure_occurrence = pd.DataFrame(columns=self.model_schema['procedure_occurrence'].keys())
         procedure_occurrence['procedure_occurrence_id'] = df['proceduretmp']
         procedure_occurrence['person_id'] = df['person_id']
+        srctostdvm_filtered = srctostdvm[(srctostdvm["target_domain_id"]=='Procedure') & (srctostdvm["target_vocabulary_id"]=='SNOMED') & (srctostdvm["target_standard_concept"]=='S') & (srctostdvm["target_invalid_reason"].isnull())]
+        concept_df = pd.merge(df[['CODE']],srctostdvm_filtered[['source_code','target_concept_id']], left_on='CODE', right_on='source_code', how='left')
+        procedure_occurrence['procedure_concept_id'] = concept_df['target_concept_id'].fillna('0')
         procedure_occurrence['procedure_date'] = df['DATE']
         procedure_occurrence['procedure_datetime'] = df['DATE'].apply(self.getDefaultTimestamp)
         procedure_occurrence['visit_occurrence_id'] = df['visit_occurrence_id']
@@ -226,20 +240,22 @@ class SyntheaToOmop:
         procedure_occurrence['procedure_source_concept_id'] = df['CODE']
         return procedure_occurrence
 
-    def immunizationsToOmop(self, df, drug_exposure_id, personmap, visitmap):
+    def immunizationsToOmop(self, df, srctostdvm, drug_exposure_id, personmap, visitmap):
         df['drugexposuretmp'] = df.index + drug_exposure_id # copy index into a temp column.
         df = pd.merge(df, personmap, left_on='PATIENT', right_on='synthea_patient_id', how='left')
         df = pd.merge(df, visitmap, left_on='ENCOUNTER', right_on='synthea_encounter_id', how='left')
         drug_exposure = pd.DataFrame(columns=self.model_schema['drug_exposure'].keys())
         drug_exposure['drug_exposure_id'] = df['drugexposuretmp']
         drug_exposure['person_id'] = df['person_id']
+        srctostdvm_filtered = srctostdvm[(srctostdvm["target_domain_id"]=='Drug') & (srctostdvm["target_vocabulary_id"]=='CVX') & (srctostdvm["target_standard_concept"]=='S') & (srctostdvm["target_invalid_reason"].isnull())]
+        concept_df = pd.merge(df['CODE'],srctostdvm_filtered[['source_code','target_concept_id']], left_on='CODE', right_on='source_code', how='left')
+        drug_exposure['drug_concept_id'] = concept_df['target_concept_id'].fillna('0')
         drug_exposure['drug_exposure_start_date'] = df['DATE']
         drug_exposure['drug_exposure_start_datetime'] = df['DATE'].apply(self.getDefaultTimestamp)
         drug_exposure['drug_exposure_end_date'] = df['DATE']
         drug_exposure['drug_exposure_end_datetime'] = df['DATE'].apply(self.getDefaultTimestamp)
         drug_exposure['verbatim_end_date'] = df['DATE']
         drug_exposure['visit_occurrence_id'] = df['visit_occurrence_id']
-        drug_exposure['drug_concept_id'] = df['CODE']
         drug_exposure['drug_source_value'] = df['CODE']
         drug_exposure['drug_source_concept_id'] = df['CODE']
         drug_exposure['drug_type_concept_id'] = '581452'
@@ -274,7 +290,7 @@ class SyntheaToOmop:
         visit_occurrence['person_id'] = df['person_id']
         visit_occurrence['visit_start_date'] = df['START']
         visit_occurrence['visit_end_date'] = df['STOP']
-        visit_occurrence['visit_concept_id'] = df['ENCOUNTERCLASS']
+        visit_occurrence['visit_concept_id'] = df['ENCOUNTERCLASS'].apply(self.getVisitConcept)
         visit_occurrence['visit_source_value'] = df['ENCOUNTERCLASS']
         visit_occurrence['visit_type_concept_id'] = '44818517'
         visitappend = pd.DataFrame(columns=["visit_occurrence_id","synthea_encounter_id"])

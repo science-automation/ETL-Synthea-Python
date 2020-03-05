@@ -320,12 +320,14 @@ class SyntheaToOmop:
         drug_exposure = pd.DataFrame(columns=self.model_schema['drug_exposure'].keys())
         drug_exposure['drug_exposure_id'] = df['drugexposuretmp']
         drug_exposure['person_id'] = df['person_id']
+        srctostdvm_filtered = srctostdvm[(srctostdvm["target_domain_id"]=='Drug') & (srctostdvm["target_vocabulary_id"]=='RxNorm') & (srctostdvm["target_standard_concept"]=='S') & (srctostdvm["target_invalid_reason"].isnull())]
+        concept_df = pd.merge(df['CODE'],srctostdvm_filtered[['source_code','target_concept_id']], left_on='CODE', right_on='source_code', how='left')
+        drug_exposure['drug_concept_id'] = concept_df['target_concept_id'].fillna('0')
         drug_exposure['drug_exposure_start_date'] = df['START']
         drug_exposure['drug_exposure_end_date'] = df['STOP']
         drug_exposure['verbatim_end_date'] = df['STOP']
         drug_exposure['visit_occurrence_id'] = df['ENCOUNTER']
-        drug_exposure['drug_concept_id'] = df['CODE']
-        drug_exposure['drug_source_vaule'] = df['CODE']
+        drug_exposure['drug_source_value'] = df['CODE']
         drug_exposure['drug_source_concept_id'] = df['CODE']
         drug_exposure['drug_type_concept_id'] = '38000177'
         drug_exposure['days_supply'] = '1' # how does synthea-etl handle days_supply for medication?

@@ -116,7 +116,7 @@ class SyntheaToOmop:
         death['person_id'] = df['Id'].apply(self.patienthash)
         death['deathdate'] = df['DEATHDATE']
         death =  death[death.deathdate.notnull()]  # remove records where no death occurred
-        return (person, location, death, personmap)
+        return (person, location, death, personmap, person_id + len(person), location_id + len(location))
 
     def conditionsToOmop(self, df, srctostdvm, condition_occurrence_id, drug_exposure_id, observation_id, personmap, visitmap):
         df['conditiontmp'] = df.index + condition_occurrence_id # copy index into a temp column.
@@ -176,7 +176,7 @@ class SyntheaToOmop:
         observation['observation_source_value'] = df['CODE']
         observation['observation_source_concept_id'] = df['CODE']
         observation['observation_type_concept_id'] = '38000280'
-        return (condition_occurrence, drug_exposure, observation, condition_occurrence_id, drug_exposure_id, observation_id)
+        return (condition_occurrence, drug_exposure, observation, condition_occurrence_id + len(condition_occurrence) , drug_exposure_id + len(drug_exposure), observation_id + len(observation))
 
     def careplansToOmop(self, df):
         pass
@@ -204,7 +204,7 @@ class SyntheaToOmop:
         measurement['value_as_concept_id'] = '0'
         measurement['unit_source_value'] = df['UNITS']
         measurement['value_source_value'] = df['VALUE']
-        return measurement
+        return (measurement, measurement_id + len(measurement))
 
     def proceduresToOmop(self, df, srctostdvm, procedure_occurrence_id, personmap, visitmap):
         df['proceduretmp'] = df.index + procedure_occurrence_id # copy index into a temp column.
@@ -238,7 +238,7 @@ class SyntheaToOmop:
         procedure_occurrence['procedure_concept_id'] = df['CODE']
         procedure_occurrence['procedure_source_value'] = df['CODE']
         procedure_occurrence['procedure_source_concept_id'] = df['CODE']
-        return procedure_occurrence
+        return (procedure_occurrence, procedure_occurrence_id + len(procedure_occurrence))
 
     def immunizationsToOmop(self, df, srctostdvm, drug_exposure_id, personmap, visitmap):
         df['drugexposuretmp'] = df.index + drug_exposure_id # copy index into a temp column.
@@ -265,7 +265,7 @@ class SyntheaToOmop:
         drug_exposure['route_concept_id'] = '0'
         drug_exposure['lot_number'] = '0'
         drug_exposure['visit_detail_id'] = '0'
-        return drug_exposure
+        return (drug_exposure, drug_exposure_id + len(drug_exposure))
 
     def encountersToOmop(self, df, observation_period_id, visit_occurrence_id, personmap, visitmap):
         df['visittmp'] = df.index + visit_occurrence_id # copy index into a temp column.
@@ -297,22 +297,22 @@ class SyntheaToOmop:
         visitappend["visit_occurrence_id"] = visit_occurrence['visit_occurrence_id']
         visitappend["synthea_encounter_id"] = df['Id']
         visitmap = visitmap.append(visitappend)
-        return (observation_period, visit_occurrence, observation_period_id, visitmap)
+        return (observation_period, visit_occurrence, visit_occurrence_id + len(visit_occurrence), observation_period_id + len(observation_period), visitmap)
 
     def organizationsToOmop(self, df, care_site_id):
         care_site = pd.DataFrame(columns=self.model_schema['care_site'].keys())
-        return care_site
+        return (care_site, care_site_id + len(care_site))
 
     def providersToOmop(self, df, provider_id):
         provider = pd.DataFrame(columns=self.model_schema['provider'].keys())
-        return provider
+        return (provider, provider_id)
 
     def payertransitionToOmop(self, df):
         pass
 
     def allergiesToOmop(self, df, observation_id, personmap):
         observation = pd.DataFrame(columns=self.model_schema['observation'].keys())
-        return observation
+        return (observation, observation_id + len(observation))
 
     def medicationsToOmop(self, df, srctostdvm, drug_exposure_id, personmap):
         df['drugexposuretmp'] = df.index + drug_exposure_id # copy index into a temp column.
@@ -331,4 +331,4 @@ class SyntheaToOmop:
         drug_exposure['drug_source_concept_id'] = df['CODE']
         drug_exposure['drug_type_concept_id'] = '38000177'
         drug_exposure['days_supply'] = '1' # how does synthea-etl handle days_supply for medication?
-        return drug_exposure
+        return (drug_exposure, drug_exposure_id + len(drug_exposure))

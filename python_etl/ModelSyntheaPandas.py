@@ -209,7 +209,7 @@ class ModelSyntheaPandas:
             'ADDRESS': 'object',
             'CITY': 'category',
             'STATE': 'category',
-            'ZIP': 'float32',
+            'ZIP': 'category',
             'LAT': 'float32',
             'LON': 'float32',
             'UTILIZATION': 'float32'

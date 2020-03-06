@@ -113,6 +113,10 @@ if __name__ == '__main__':
     # Now use the concepts to find every related concept relationship
     conceptrelextract = extract.getConceptRelationshipExtract(vocab_concept['concept_relationship'], conceptextract)
 
-    print(conceptrelextract)
+    # sort rows.  This will help when putting the files to git to see what has changed
+    conceptextract = conceptextract.sort_values('concept_id')
+    conceptrelextract = conceptrelextract.sort_values(['concept_id_1','concept_id_2']) 
+
+    # write to files
     conceptextract.to_csv(os.path.join(BASE_VOCAB_OUTPUT_DIRECTORY,'CONCEPT.csv'), mode='w', header=True, index=False)
     conceptrelextract.to_csv(os.path.join(BASE_VOCAB_OUTPUT_DIRECTORY,'CONCEPT_RELATIONSHIP.csv'), mode='w', header=True, index=False)

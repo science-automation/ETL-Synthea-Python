@@ -177,7 +177,9 @@ class SyntheaToOmop:
         pass
 
     def observationsToOmop(self, df, srctostdvm, srctosrcvm, measurement_id, personmap,visitmap):
+        # filter synthea observations with no encounter (original etl does this)
         df['measurementtmp'] = df.index + measurement_id # copy index into a temp column.
+        df = df[~df.ENCOUNTER.isnull()]
         df = pd.merge(df, personmap, left_on='PATIENT', right_on='synthea_patient_id', how='left')
         df = pd.merge(df, visitmap, left_on='ENCOUNTER', right_on='synthea_encounter_id', how='left')
         measurement = pd.DataFrame(columns=self.model_schema['measurement'].keys())

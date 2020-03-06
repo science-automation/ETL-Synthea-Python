@@ -28,6 +28,8 @@ class ExtractVocab:
         syntheaconcept['code'] = syntheaconcept['code'].drop_duplicates() 
         domainconcept = concept[(concept["domain_id"]=='Measurement')]
         result = pd.merge(domainconcept, syntheaconcept, left_on='concept_code', right_on='code', how='inner').drop(columns=['code'])
+        print("printing result inside observations")
+        print(result)
         return result
 
     def proceduresExtract(self, df, vocab):

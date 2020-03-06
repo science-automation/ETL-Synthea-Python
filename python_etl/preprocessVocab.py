@@ -31,7 +31,7 @@ BASE_VOCAB_OUTPUT_DIRECTORY     = os.environ['BASE_VOCAB_OUTPUT_DIRECTORY']
 # patients and encounters are first so that we can create dataframes to lookup ids
 SYNTHEA_FILE_LIST =  ['patients','encounters','conditions','careplans','observations','procedures','immunizations','imaging_studies','organizations','providers','payer_transitions','allergies','medications']
 # Synthea input file chunk size.  We will only process one large chunk for each type
-INPUT_CHUNK_SIZE = int(os.environ['INPUT_CHUNK_SIZE'])
+INPUT_CHUNK_SIZE_EXTRACT = int(os.environ['INPUT_CHUNK_SIZE_EXTRACT'])
 
 #---------------------------------
 # start of the program
@@ -59,6 +59,9 @@ if __name__ == '__main__':
     # load the full concept vocabulary into memory
     vocab_concept = util.loadConceptVocabulary(BASE_OMOP_INPUT_DIRECTORY, model_omop)
 
+    # init the concept extraction dataframe
+    conceptextract = pd.DataFrame(columns=model_omop.model_schema['concept'])
+
     # start looping through the synthea files
     # we only need to consider one synthea input file at a time to make the extraction
     # so only put one in memory at a time and read in chunks to avoid memory issues
@@ -74,25 +77,27 @@ if __name__ == '__main__':
             exit(1)
         inputdata = os.path.join(BASE_SYNTHEA_INPUT_DIRECTORY,inputfile)
         output = os.path.join(BASE_VOCAB_OUTPUT_DIRECTORY,inputfile)
+ 
         print("")
         print(datatype),
-        for df in pd.read_csv(inputdata, dtype=model_synthea.model_schema[datatype], chunksize=INPUT_CHUNK_SIZE, iterator=True, compression=compression):
+        for df in pd.read_csv(inputdata, dtype=model_synthea.model_schema[datatype], chunksize=INPUT_CHUNK_SIZE_EXTRACT, iterator=True, compression=compression):
             if (datatype == 'patients'):
                 pass
             elif (datatype == 'conditions'):
-                concepts = extract.conditionsExtract(df, vocab_concept)
+                conceptextract = conceptextract.append(extract.conditionsExtract(df, vocab_concept))
+                print(conceptextract)
             elif (datatype == 'careplans'):
                 pass
             elif (datatype == 'observations'):
-                concepts = extract.observationsExtract(df, vocab_concept)
+                conceptextract = conceptextract.append(extract.observationsExtract(df, vocab_concept))
             elif (datatype == 'procedures'):
-                concepts = extract.proceduresExtract(df, vocab_concept)
+                conceptextract = conceptextract.append(extract.proceduresExtract(df, vocab_concept))
             elif (datatype == 'immunizations'):
                pass 
             elif (datatype == 'imaging_studies'):
                 pass
             elif (datatype == 'encounters'):
-                concepts = extract.encountersExtract(df, vocab_concept)
+                conceptextract = conceptextract.append(extract.encountersExtract(df, vocab_concept))
             elif (datatype == 'organizations'):
                 pass
             elif (datatype == 'providers'):
@@ -105,9 +110,5 @@ if __name__ == '__main__':
                 pass
             else:
                 print("Unknown input type: " + datatype)
-            # no longer write header and append to file. write . so we know program is still running
-            print('.'),
             sys.stdout.flush()
-
-
-
+    print(conceptextract)

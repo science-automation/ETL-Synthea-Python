@@ -110,5 +110,9 @@ if __name__ == '__main__':
             else:
                 print("Unknown input type: " + datatype)
             sys.stdout.flush()
-    print(conceptextract)
+    # Now use the concepts to find every related concept relationship
+    conceptrelextract = extract.getConceptRelationshipExtract(vocab_concept['concept_relationship'], conceptextract)
+
+    print(conceptrelextract)
     conceptextract.to_csv(os.path.join(BASE_VOCAB_OUTPUT_DIRECTORY,'CONCEPT.csv'), mode='w', header=True, index=False)
+    conceptrelextract.to_csv(os.path.join(BASE_VOCAB_OUTPUT_DIRECTORY,'CONCEPT_RELATIONSHIP.csv'), mode='w', header=True, index=False)

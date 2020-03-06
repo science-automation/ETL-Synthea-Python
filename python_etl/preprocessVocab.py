@@ -85,7 +85,6 @@ if __name__ == '__main__':
                 pass
             elif (datatype == 'conditions'):
                 conceptextract = conceptextract.append(extract.conditionsExtract(df, vocab_concept))
-                print(conceptextract)
             elif (datatype == 'careplans'):
                 pass
             elif (datatype == 'observations'):
@@ -112,3 +111,4 @@ if __name__ == '__main__':
                 print("Unknown input type: " + datatype)
             sys.stdout.flush()
     print(conceptextract)
+    conceptextract.to_csv(os.path.join(BASE_VOCAB_OUTPUT_DIRECTORY,'CONCEPT.csv'), mode='w', header=True, index=False)

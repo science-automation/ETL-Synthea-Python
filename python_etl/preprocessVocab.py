@@ -3,7 +3,7 @@ import os
 import dotenv
 import ModelSyntheaPandas
 import ModelOmopPandas
-import SyntheaToOmop
+import ExtractVocab
 import Utils
 import sys
 
@@ -26,6 +26,8 @@ dotenv.load_dotenv(".env")
 BASE_SYNTHEA_INPUT_DIRECTORY    = os.environ['BASE_SYNTHEA_INPUT_DIRECTORY']
 # Path to the directory containing the OMOP Vocabulary v5 files (can be downloaded from http://www.ohdsi.org/web/athena/)
 BASE_OMOP_INPUT_DIRECTORY       = os.environ['BASE_OMOP_INPUT_DIRECTORY']
+# directory to copy the processed vocabulary files
+BASE_VOCAB_OUTPUT_DIRECTORY     = os.environ['BASE_VOCAB_OUTPUT_DIRECTORY']
 # patients and encounters are first so that we can create dataframes to lookup ids
 SYNTHEA_FILE_LIST =  ['patients','encounters','conditions','careplans','observations','procedures','immunizations','imaging_studies','organizations','providers','payer_transitions','allergies','medications']
 # Synthea input file chunk size.  We will only process one large chunk for each type
@@ -71,26 +73,26 @@ if __name__ == '__main__':
             print("Error:  Could not find " + inputfile + " synthea file")
             exit(1)
         inputdata = os.path.join(BASE_SYNTHEA_INPUT_DIRECTORY,inputfile)
-        output = os.path.join(BASE_OUTPUT_DIRECTORY,inputfile)
+        output = os.path.join(BASE_VOCAB_OUTPUT_DIRECTORY,inputfile)
         print("")
         print(datatype),
         for df in pd.read_csv(inputdata, dtype=model_synthea.model_schema[datatype], chunksize=INPUT_CHUNK_SIZE, iterator=True, compression=compression):
             if (datatype == 'patients'):
                 pass
             elif (datatype == 'conditions'):
-                pass
+                concepts = extract.conditionsExtract(df, vocab_concept)
             elif (datatype == 'careplans'):
                 pass
             elif (datatype == 'observations'):
-                pass
+                concepts = extract.observationsExtract(df, vocab_concept)
             elif (datatype == 'procedures'):
-                pass
+                concepts = extract.proceduresExtract(df, vocab_concept)
             elif (datatype == 'immunizations'):
-                pass
+               pass 
             elif (datatype == 'imaging_studies'):
                 pass
             elif (datatype == 'encounters'):
-                pass
+                concepts = extract.encountersExtract(df, vocab_concept)
             elif (datatype == 'organizations'):
                 pass
             elif (datatype == 'providers'):

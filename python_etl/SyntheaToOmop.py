@@ -155,7 +155,6 @@ class SyntheaToOmop:
         drug_exposure['route_concept_id'] = '0'
         drug_exposure['lot_number'] = '0'
         drug_exposure['visit_detail_id'] = '0'
-        #drug_exposure_id = drug_exposure_id + len(df)
         observation = pd.DataFrame(columns=self.model_schema['observation'].keys())
         observation['observation_id'] = df['observationtmp']
         observation['person_id'] = df['person_id']
@@ -190,10 +189,7 @@ class SyntheaToOmop:
         measurement['visit_occurrence_id'] = df['visit_occurrence_id']
         measurement['visit_detail_id'] = '0'
         srctostdvm_filtered = srctostdvm[(srctostdvm["target_domain_id"]=='Measurement') & (srctostdvm["target_standard_concept"]=='S') & (srctostdvm["target_invalid_reason"].isnull())]
-        print(df.dtypes)
-        print(srctostdvm_filtered.dtypes)
         concept_df = pd.merge(df[['CODE']],srctostdvm_filtered[['source_code','target_concept_id']], left_on='CODE', right_on='source_code', how='left')
-        print(concept_df.dtypes)
         measurement['measurement_concept_id'] = concept_df['target_concept_id'].fillna('0').astype(int)
         measurement['measurement_source_value'] = df['CODE']
         measurement['measurement_source_concept_id'] = df['CODE']

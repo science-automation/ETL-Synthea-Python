@@ -12,10 +12,6 @@ class SyntheaToOmop:
     def __init__(self, model_schema):
        self.model_schema = model_schema
 
-    # hash function for patient id to convert synthea string to omop integer
-    def patienthash(self, id):
-        return hash(id) & ((1<<64)-1)
-
     # given date in synthea format return the year
     def getYearFromSyntheaDate(self, date):
         return datetime.datetime.strptime(date, "%Y-%m-%d").year
@@ -113,7 +109,7 @@ class SyntheaToOmop:
         location['county'] = df['COUNTY']
         location['location_source_value'] = df['Id']
         death = pd.DataFrame(columns=self.model_schema['death'].keys())
-        death['person_id'] = df['Id'].apply(self.patienthash)
+        death['person_id'] = df['persontmp']
         death['deathdate'] = df['DEATHDATE']
         death =  death[death.deathdate.notnull()]  # remove records where no death occurred
         return (person, location, death, personmap, person_id + len(person), location_id + len(location))

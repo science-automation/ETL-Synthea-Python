@@ -118,5 +118,5 @@ if __name__ == '__main__':
     conceptrelextract = conceptrelextract.sort_values(['concept_id_1','concept_id_2']) 
 
     # write to files
-    conceptextract.to_csv(os.path.join(BASE_VOCAB_OUTPUT_DIRECTORY,'CONCEPT.csv'), mode='w', header=True, index=False)
-    conceptrelextract.to_csv(os.path.join(BASE_VOCAB_OUTPUT_DIRECTORY,'CONCEPT_RELATIONSHIP.csv'), mode='w', header=True, index=False)
+    conceptextract.to_csv(os.path.join(BASE_VOCAB_OUTPUT_DIRECTORY,'CONCEPT.csv'), sep='\t', mode='w', header=True, index=False)
+    conceptrelextract.to_csv(os.path.join(BASE_VOCAB_OUTPUT_DIRECTORY,'CONCEPT_RELATIONSHIP.csv'), sep='\t', mode='w', header=True, index=False)

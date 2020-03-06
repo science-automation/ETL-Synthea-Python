@@ -1,240 +1,240 @@
-concept_id,concept_name,domain_id,vocabulary_id,concept_class_id,standard_concept,concept_code,valid_start_date,valid_end_date,invalid_reason
-3000053,Head Occipital-frontal circumference,Measurement,LOINC,Clinical Observation,S,9843-4,19960906,20991231,
-3000285,Sodium [Moles/volume] in Blood,Measurement,LOINC,Lab Test,S,2947-0,19700101,20991231,
-3000330,Specific gravity of Urine by Test strip,Measurement,LOINC,Lab Test,S,5811-5,19700101,20991231,
-3000348,Leukocyte esterase [Presence] in Urine by Test strip,Measurement,LOINC,Lab Test,S,5799-2,19700101,20991231,
-3000481,Estrogen+Progesterone receptor Ag [Presence] in Tissue by Immune stain,Measurement,LOINC,Lab Test,S,10480-2,19700101,20991231,
-3000483,Glucose [Mass/volume] in Blood,Measurement,LOINC,Lab Test,S,2339-0,19700101,20991231,
-3000876,Codfish IgE Ab [Units/volume] in Serum,Measurement,LOINC,Lab Test,S,6082-2,19700101,20991231,
-3000905,Leukocytes [#/volume] in Blood by Automated count,Measurement,LOINC,Lab Test,S,6690-2,19700101,20991231,
-3000963,Hemoglobin [Mass/volume] in Blood,Measurement,LOINC,Lab Test,S,718-7,19700101,20991231,
-3001247,Common Ragweed IgE Ab [Units/volume] in Serum,Measurement,LOINC,Lab Test,S,6085-5,19700101,20991231,
-3001488,Cow milk IgE Ab [Units/volume] in Serum,Measurement,LOINC,Lab Test,S,7258-7,19700101,20991231,
-3001802,Microalbumin/Creatinine [Mass Ratio] in Urine,Measurement,LOINC,Lab Test,S,14959-1,19700101,20991231,
-3002385,Erythrocyte distribution width [Ratio],Measurement,LOINC,Lab Test,S,30385-9,19700101,20991231,
-3002736,Platelet distribution width [Entitic volume] in Blood by Automated count,Measurement,LOINC,Lab Test,S,32207-3,19700101,20991231,
-3004249,Systolic blood pressure,Measurement,LOINC,Clinical Observation,S,8480-6,19960906,20991231,
-3004295,Urea nitrogen [Mass/volume] in Blood,Measurement,LOINC,Lab Test,S,6299-2,19700101,20991231,
-3004410,Hemoglobin A1c/Hemoglobin.total in Blood,Measurement,LOINC,Lab Test,S,4548-4,19700101,20991231,
-3004501,Glucose [Mass/volume] in Serum or Plasma,Measurement,LOINC,Lab Test,S,2345-7,19700101,20991231,
-3005136,Cladosporium herbarum IgE Ab [Units/volume] in Serum,Measurement,LOINC,Lab Test,S,6075-6,19700101,20991231,
-3005456,Potassium [Moles/volume] in Blood,Measurement,LOINC,Lab Test,S,6298-4,19700101,20991231,
-3005897,Protein [Mass/volume] in Urine by Test strip,Measurement,LOINC,Lab Test,S,5804-0,19700101,20991231,
-3006451,Walnut IgE Ab [Units/volume] in Serum,Measurement,LOINC,Lab Test,S,6273-7,19700101,20991231,
-3006513,Bilirubin.total [Mass/volume] in Urine by Test strip,Measurement,LOINC,Lab Test,S,20505-4,19700101,20991231,
-3006575,Distant metastases.clinical [Class] Cancer,Measurement,LOINC,Clinical Observation,S,21907-1,19700101,20991231,
-3006734,White Oak IgE Ab [Units/volume] in Serum,Measurement,LOINC,Lab Test,S,6189-5,19700101,20991231,
-3006906,Calcium [Mass/volume] in Serum or Plasma,Measurement,LOINC,Lab Test,S,17861-6,19980709,20991231,
-3006923,Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma,Measurement,LOINC,Lab Test,S,1742-6,19700101,20991231,
-3007070,Cholesterol in HDL [Mass/volume] in Serum or Plasma,Measurement,LOINC,Lab Test,S,2085-9,19700101,20991231,
-3007461,Platelets [#/volume] in Blood,Measurement,LOINC,Lab Test,S,26515-7,19700101,20991231,
-3007727,Regional lymph nodes.clinical [Class] Cancer,Measurement,LOINC,Clinical Observation,S,21906-3,19700101,20991231,
-3007876,Appearance of Urine,Measurement,LOINC,Lab Test,S,5767-9,19700101,20991231,
-3008204,Clarity of Urine,Measurement,LOINC,Lab Test,S,32167-9,19700101,20991231,
-3008598,Thyroxine (T4) free [Mass/volume] in Serum or Plasma,Measurement,LOINC,Lab Test,S,3024-7,19700101,20991231,
-3008841,Primary tumor.clinical [Class] Cancer,Measurement,LOINC,Clinical Observation,S,21905-5,19700101,20991231,
-3009201,Thyrotropin [Units/volume] in Serum or Plasma,Measurement,LOINC,Lab Test,S,3016-3,19700101,20991231,
-3009261,Glucose [Presence] in Urine by Test strip,Measurement,LOINC,Lab Test,S,25428-4,19700101,20991231,
-3009542,Hematocrit [Volume Fraction] of Blood,Measurement,LOINC,Lab Test,S,20570-8,19700101,20991231,
-3009744,MCHC [Mass/volume] by Automated count,Measurement,LOINC,Lab Test,S,786-4,19700101,20991231,
-3009966,Cholesterol in LDL [Mass/volume] in Serum or Plasma by Direct assay,Measurement,LOINC,Lab Test,S,18262-6,19980825,20991231,
-3010813,Leukocytes [#/volume] in Blood,Measurement,LOINC,Lab Test,S,26464-8,19700101,20991231,
-3011397,Hemoglobin [Presence] in Urine by Test strip,Measurement,LOINC,Lab Test,S,5794-3,19700101,20991231,
-3011505,FEV1/FVC,Measurement,LOINC,Clinical Observation,S,19926-5,19700101,20991231,
-3012030,MCH [Entitic mass] by Automated count,Measurement,LOINC,Lab Test,S,785-6,19700101,20991231,
-3012494,Peanut IgE Ab [Units/volume] in Serum,Measurement,LOINC,Lab Test,S,6206-7,19700101,20991231,
-3012888,Diastolic blood pressure,Measurement,LOINC,Clinical Observation,S,8462-4,19960906,20991231,
-3013603,Prostate specific Ag [Mass/volume] in Serum or Plasma,Measurement,LOINC,Lab Test,S,2857-1,19700101,20991231,
-3013682,Urea nitrogen [Mass/volume] in Serum or Plasma,Measurement,LOINC,Lab Test,S,3094-0,19700101,20991231,
-3013721,Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma,Measurement,LOINC,Lab Test,S,1920-8,19700101,20991231,
-3014051,Protein [Presence] in Urine by Test strip,Measurement,LOINC,Lab Test,S,20454-5,19700101,20991231,
-3014094,"Carbon dioxide, total [Moles/volume] in Blood",Measurement,LOINC,Lab Test,S,20565-8,19700101,20991231,
-3014576,Chloride [Moles/volume] in Serum or Plasma,Measurement,LOINC,Lab Test,S,2075-0,19700101,20991231,
-3014599,Egg white IgE Ab [Units/volume] in Serum,Measurement,LOINC,Lab Test,S,6106-9,19700101,20991231,
-3014902,Physical findings of Prostate,Measurement,LOINC,Clinical Observation,S,32465-7,20020809,20991231,
-3015076,Soybean IgE Ab [Units/volume] in Serum,Measurement,LOINC,Lab Test,S,6248-9,19700101,20991231,
-3015182,Erythrocyte distribution width [Entitic volume] by Automated count,Measurement,LOINC,Lab Test,S,21000-5,19700101,20991231,
-3015632,"Carbon dioxide, total [Moles/volume] in Serum or Plasma",Measurement,LOINC,Lab Test,S,2028-9,19700101,20991231,
-3016502,Oxygen saturation in Arterial blood,Measurement,LOINC,Lab Test,S,2708-6,19700101,20991231,
-3016723,Creatinine [Mass/volume] in Serum or Plasma,Measurement,LOINC,Lab Test,S,2160-0,19700101,20991231,
-3018572,Chloride [Moles/volume] in Blood,Measurement,LOINC,Lab Test,S,2069-3,19700101,20991231,
-3018834,Bilirubin.total [Presence] in Urine by Test strip,Measurement,LOINC,Lab Test,S,5770-3,19700101,20991231,
-3019406,Latex IgE Ab [Units/volume] in Serum,Measurement,LOINC,Lab Test,S,6158-0,19700101,20991231,
-3019550,Sodium [Moles/volume] in Serum or Plasma,Measurement,LOINC,Lab Test,S,2951-2,19700101,20991231,
-3020416,Erythrocytes [#/volume] in Blood by Automated count,Measurement,LOINC,Lab Test,S,789-8,19700101,20991231,
-3020630,Protein [Mass/volume] in Serum or Plasma,Measurement,LOINC,Lab Test,S,2885-2,19700101,20991231,
-3020655,Honey bee IgE Ab [Units/volume] in Serum,Measurement,LOINC,Lab Test,S,6844-5,19700101,20991231,
-3020891,Body temperature,Measurement,LOINC,Clinical Observation,S,8310-5,19960906,20991231,
-3021226,Shrimp IgE Ab [Units/volume] in Serum,Measurement,LOINC,Lab Test,S,6246-3,19700101,20991231,
-3021601,Nitrite [Presence] in Urine by Test strip,Measurement,LOINC,Lab Test,S,5802-4,19700101,20991231,
-3022192,Triglyceride [Mass/volume] in Serum or Plasma,Measurement,LOINC,Lab Test,S,2571-8,19700101,20991231,
-3022621,pH of Urine by Test strip,Measurement,LOINC,Lab Test,S,5803-2,19700101,20991231,
-3022698,Stage group.clinical Cancer,Measurement,LOINC,Clinical Observation,S,21908-9,19700101,20991231,
-3023103,Potassium [Moles/volume] in Serum or Plasma,Measurement,LOINC,Lab Test,S,2823-3,19700101,20991231,
-3023314,Hematocrit [Volume Fraction] of Blood by Automated count,Measurement,LOINC,Lab Test,S,4544-3,19700101,20991231,
-3023430,Cat dander IgE Ab [Units/volume] in Serum,Measurement,LOINC,Lab Test,S,6833-8,19700101,20991231,
-3023539,Ketones [Mass/volume] in Urine by Test strip,Measurement,LOINC,Lab Test,S,5797-6,19700101,20991231,
-3023599,MCV [Entitic volume] by Automated count,Measurement,LOINC,Lab Test,S,787-2,19700101,20991231,
-3024128,Bilirubin.total [Mass/volume] in Serum or Plasma,Measurement,LOINC,Lab Test,S,1975-2,19700101,20991231,
-3024171,Respiratory rate,Measurement,LOINC,Clinical Observation,S,9279-1,19960906,20991231,
-3024561,Albumin [Mass/volume] in Serum or Plasma,Measurement,LOINC,Lab Test,S,1751-7,19700101,20991231,
-3024629,Glucose [Mass/volume] in Urine by Test strip,Measurement,LOINC,Lab Test,S,5792-7,19700101,20991231,
-3024731,MCV [Entitic volume],Measurement,LOINC,Lab Test,S,30428-7,19700101,20991231,
-3024929,Platelets [#/volume] in Blood by Automated count,Measurement,LOINC,Lab Test,S,777-3,19700101,20991231,
-3025315,Body weight,Measurement,LOINC,Clinical Observation,S,29463-7,19700101,20991231,
-3026361,Erythrocytes [#/volume] in Blood,Measurement,LOINC,Lab Test,S,26453-1,19700101,20991231,
-3027018,Heart rate,Measurement,LOINC,Clinical Observation,S,8867-4,19700101,20991231,
-3027114,Cholesterol [Mass/volume] in Serum or Plasma,Measurement,LOINC,Lab Test,S,2093-3,19700101,20991231,
-3027162,Color of Urine,Measurement,LOINC,Lab Test,S,5778-6,19700101,20991231,
-3027172,Left ventricular Ejection fraction,Measurement,LOINC,Clinical Observation,S,10230-1,19700101,20991231,
-3027231,Wheat IgE Ab [Units/volume] in Serum,Measurement,LOINC,Lab Test,S,6276-0,19700101,20991231,
-3027970,Globulin [Mass/volume] in Serum by calculation,Measurement,LOINC,Lab Test,S,10834-0,19700101,20991231,
-3028833,Bilirubin.total [Mass/volume] in Blood,Measurement,LOINC,Lab Test,S,42719-5,20051018,20991231,
-3029187,Natriuretic peptide.B prohormone N-Terminal [Mass/volume] in Serum or Plasma,Measurement,LOINC,Lab Test,S,33762-6,19700101,20991231,
-3030315,Polyp size greatest dimension,Measurement,LOINC,Lab Test,S,33756-8,19700101,20991231,
-3030354,Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum or Plasma by Creatinine-based formula (MDRD),Measurement,LOINC,Lab Test,,33914-3,19700101,20180615,U
-3032503,Calcium [Mass/volume] in Blood,Measurement,LOINC,Lab Test,S,49765-1,20070810,20991231,
-3035350,Ketones [Presence] in Urine by Test strip,Measurement,LOINC,Lab Test,S,2514-8,19700101,20991231,
-3035995,Alkaline phosphatase [Enzymatic activity/volume] in Serum or Plasma,Measurement,LOINC,Lab Test,S,6768-6,19960815,20991231,
-3036277,Body height,Measurement,LOINC,Clinical Observation,S,8302-2,19960906,20991231,
-3036780,American house dust mite IgE Ab [Units/volume] in Serum,Measurement,LOINC,Lab Test,S,6095-4,19700101,20991231,
-3038553,Body mass index (BMI) [Ratio],Measurement,LOINC,Clinical Observation,S,39156-5,19700101,20991231,
-3043111,Platelet mean volume [Entitic volume] in Blood by Automated count,Measurement,LOINC,Lab Test,S,32623-1,19700101,20991231,
-3045716,Anion gap in Serum or Plasma,Measurement,LOINC,Lab Test,S,33037-3,20021106,20991231,
-3046523,Site of distant metastasis in Breast tumor,Measurement,LOINC,Lab Test,S,44667-4,20060313,20991231,
-3046581,Size.maximum dimension in Tumor,Measurement,LOINC,Lab Test,S,33728-7,19700101,20991231,
-3049273,DXA Radius and Ulna [T-score] Bone density,Measurement,LOINC,Clinical Observation,S,38265-5,19700101,20991231,
-3051673,US Guidance for biopsy of Prostate,Measurement,LOINC,Clinical Observation,S,46288-7,20060728,20991231,
-3051825,Creatinine [Mass/volume] in Blood,Measurement,LOINC,Lab Test,S,38483-4,20041020,20991231,
-4010253,Nasal sinus endoscopy,Procedure,SNOMED,Procedure,S,112790001,19700101,20991231,
-4015590,Counseling for termination of pregnancy,Procedure,SNOMED,Procedure,S,10383002,19700101,20991231,
-4015701,Cesarean section,Procedure,SNOMED,Procedure,S,11466000,19700101,20991231,
-4018619,Screening for occult blood in feces,Procedure,SNOMED,Procedure,S,104435004,19700101,20991231,
-4024289,Radiography of ankle,Procedure,SNOMED,Procedure,S,19490002,19700101,20991231,
-4029715,Radiation oncology AND/OR radiotherapy,Procedure,SNOMED,Procedure,S,108290001,19700101,20991231,
-4035793,Pulmonary rehabilitation,Procedure,SNOMED,Procedure,S,15081005,19700101,20991231,
-4037675,Brief general examination,Procedure,SNOMED,Procedure,S,162676008,19700101,20991231,
-4043071,Cognitive and behavioral therapy,Procedure,SNOMED,Procedure,S,228557008,19700101,20991231,
-4047491,Radiography of humerus,Procedure,SNOMED,Procedure,S,1225002,19700101,20991231,
-4047494,Biopsy of breast,Procedure,SNOMED,Procedure,S,122548005,19700101,20991231,
-4055982,Sputum microscopy,Procedure,SNOMED,Procedure,S,167995008,19700101,20991231,
-4057420,Catheter ablation of tissue of heart,Procedure,SNOMED,Procedure,S,18286008,19700101,20991231,
-4058899,Plain X-ray of clavicle,Procedure,SNOMED,Procedure,S,168594001,19700101,20991231,
-4059978,Insertion of subcutaneous contraceptive,Procedure,SNOMED,Procedure,S,169553002,19700101,20991231,
-4060626,Ultrasound scan for fetal viability,Procedure,SNOMED,Procedure,S,169230002,19700101,20991231,
-4061811,Rubella screening,Procedure,SNOMED,Procedure,,169690007,19700101,20190730,U
-4062501,Asthma screening,Procedure,SNOMED,Procedure,S,171231001,19700101,20991231,
-4064377,Depression screening,Procedure,SNOMED,Procedure,S,171207006,19700101,20991231,
-4068785,Diagnostic fiberoptic bronchoscopy,Procedure,SNOMED,Procedure,S,173160006,19700101,20991231,
-4075363,Auscultation of the fetal heart,Procedure,SNOMED,Procedure,S,225158009,19700101,20991231,
-4077697,Screening mammography,Procedure,SNOMED,Procedure,S,24623002,19700101,20991231,
-4078199,Epidural anesthesia,Procedure,SNOMED,Procedure,S,18946005,19700101,20991231,
-4078793,Direct current cardioversion,Procedure,SNOMED,Procedure,S,180325003,19700101,20991231,
-4081880,Mammogram - symptomatic,Procedure,SNOMED,Procedure,S,241055006,19700101,20991231,
-4082984,MRI of breast,Procedure,SNOMED,Procedure,S,241615005,19700101,20991231,
-4107731,Subcutaneous immunotherapy,Procedure,SNOMED,Procedure,S,180256009,19700101,20991231,
-4108565,Amputation of the foot,Procedure,SNOMED,Procedure,S,180030006,19700101,20991231,
-4108705,Intravenous blood transfusion of packed cells,Procedure,SNOMED,Procedure,S,180207008,19700101,20991231,
-4117038,Bilateral tubal ligation,Procedure,SNOMED,Procedure,S,287664005,19700101,20991231,
-4120961,Excision of axillary lymph node,Procedure,SNOMED,Procedure,S,234262008,19700101,20991231,
-4125906,Suture open wound,Procedure,SNOMED,Procedure,S,288086009,19700101,20991231,
-4127235,Methotrexate injection into tubal pregnancy,Procedure,SNOMED,Procedure,S,236931002,19700101,20991231,
-4127260,Augmentation of labor,Procedure,SNOMED,Procedure,S,237001001,19700101,20991231,
-4128031,Instrumental delivery,Procedure,SNOMED,Procedure,S,236974004,19700101,20991231,
-4134565,Hearing examination,Procedure,SNOMED,Procedure,S,398171003,19700101,20991231,
-4141448,Teleradiotherapy procedure,Procedure,SNOMED,Procedure,S,33195004,19700101,20991231,
-4145310,Pelvis X-ray,Procedure,SNOMED,Procedure,S,268425006,19700101,20991231,
-4146053,Manual pelvic examination,Procedure,SNOMED,Procedure,S,35025007,19700101,20991231,
-4150653,Fetal anatomy study,Procedure,SNOMED,Procedure,S,271442007,19700101,20991231,
-4150970,Medical induction of labor,Procedure,SNOMED,Procedure,S,31208007,19700101,20991231,
-4151422,Sputum examination,Procedure,SNOMED,Procedure,S,269911007,19700101,20991231,
-4161390,Human epidermal growth factor receptor 2 gene detection by immunohistochemistry,Procedure,SNOMED,Procedure,S,433114000,20090131,20991231,
-4163708,"Vaccination for diphtheria, pertussis, and tetanus",Procedure,SNOMED,Procedure,S,399014008,19700101,20991231,
-4163872,Plain chest X-ray,Procedure,SNOMED,Procedure,S,399208008,19700101,20991231,
-4163951,Electrocardiographic procedure,Procedure,SNOMED,Procedure,S,29303009,19700101,20991231,
-4163971,Laparoscopic cholecystectomy,Procedure,SNOMED,Procedure,S,45595009,19700101,20991231,
-4166761,Rectal polypectomy,Procedure,SNOMED,Procedure,S,274031008,19700101,20991231,
-4168133,Incision of trachea,Procedure,SNOMED,Procedure,S,48387007,19700101,20991231,
-4168236,Evaluation of uterine fundal height,Procedure,SNOMED,Procedure,S,274804006,19700101,20991231,
-4170947,Bone immobilization,Procedure,SNOMED,Procedure,S,274474001,19700101,20991231,
-4181778,Intravenous injection,Procedure,SNOMED,Procedure,S,43060002,19700101,20991231,
-4181781,Partial resection of colon,Procedure,SNOMED,Procedure,S,43075005,19700101,20991231,
-4181917,Electroencephalogram,Procedure,SNOMED,Procedure,S,54550000,19700101,20991231,
-4186930,Replacement of intrauterine contraceptive device,Procedure,SNOMED,Procedure,S,46706006,19700101,20991231,
-4187458,Review of systems,Procedure,SNOMED,Procedure,S,415300000,19700101,20991231,
-4191853,Allergy screening test,Procedure,SNOMED,Procedure,S,395142003,19700101,20991231,
-4195803,Bone density scan,Procedure,SNOMED,Procedure,S,312681000,19700101,20991231,
-4197460,Injection of epinephrine,Procedure,SNOMED,Procedure,S,313191000,19700101,20991231,
-4198190,Appendectomy,Procedure,SNOMED,Procedure,S,80146002,19700101,20991231,
-4199235,Transthoracic three dimensional ultrasonography of heart,Procedure,SNOMED,Procedure,S,434158009,20090131,20991231,
-4199276,Removal of subcutaneous contraceptive,Procedure,SNOMED,Procedure,S,301807007,19700101,20991231,
-4199458,Passive immunization,Procedure,SNOMED,Procedure,S,51116004,19700101,20991231,
-4202451,Percutaneous mechanical thrombectomy of portal vein using fluoroscopic guidance,Procedure,SNOMED,Procedure,S,433112001,20090131,20991231,
-4202832,Intubation,Procedure,SNOMED,Procedure,S,52765003,19700101,20991231,
-4213045,Lumpectomy of breast,Procedure,SNOMED,Procedure,S,392021009,19700101,20991231,
-4216130,Percutaneous coronary intervention,Procedure,SNOMED,Procedure,S,415070008,19700101,20991231,
-4218408,Collection of blood specimen for laboratory,Procedure,SNOMED,Procedure,S,82078001,19700101,20991231,
-4230911,Echocardiography,Procedure,SNOMED,Procedure,S,40701008,19700101,20991231,
-4234541,"Cytopathology procedure, preparation of smear, genital source",Procedure,SNOMED,Procedure,S,90226004,19700101,20991231,
-4235738,Prostatectomy,Procedure,SNOMED,Procedure,S,90470006,19700101,20991231,
-4238715,Removal of intrauterine device,Procedure,SNOMED,Procedure,S,68254000,19700101,20991231,
-4240305,Thoracentesis,Procedure,SNOMED,Procedure,S,91602002,19700101,20991231,
-4240345,Physical examination,Procedure,SNOMED,Procedure,S,5880005,19700101,20991231,
-4242997,Cholecystectomy,Procedure,SNOMED,Procedure,S,38102005,19700101,20991231,
-4243062,Radiography of wrist,Procedure,SNOMED,Procedure,S,60027007,19700101,20991231,
-4249893,Colonoscopy,Procedure,SNOMED,Procedure,S,73761001,19700101,20991231,
-4252419,Radiologic examination of knee,Procedure,SNOMED,Procedure,S,74016001,19700101,20991231,
-4254766,Digital examination of rectum,Procedure,SNOMED,Procedure,S,410006001,19700101,20991231,
-4263386,Sentinel lymph node biopsy,Procedure,SNOMED,Procedure,S,396487001,19700101,20991231,
-4273629,Chemotherapy,Procedure,SNOMED,Procedure,S,367336001,19700101,20991231,
-4275113,Insertion of intrauterine contraceptive device,Procedure,SNOMED,Procedure,S,65200003,19700101,20991231,
-4276519,Extraction of wisdom tooth,Procedure,SNOMED,Procedure,S,65546002,19700101,20991231,
-4278515,Biopsy of prostate,Procedure,SNOMED,Procedure,S,65575008,19700101,20991231,
-4286804,Excision of breast tissue,Procedure,SNOMED,Procedure,S,69031006,19700101,20991231,
-4293738,Intracavitary brachytherapy,Procedure,SNOMED,Procedure,S,384692006,19700101,20991231,
-4293740,Injection of tetanus antitoxin,Procedure,SNOMED,Procedure,S,384700001,19700101,20991231,
-4294513,Biopsy of colon,Procedure,SNOMED,Procedure,S,76164006,19700101,20991231,
-4295880,Intramuscular injection,Procedure,SNOMED,Procedure,S,76601001,19700101,20991231,
-4301346,Surgical manipulation of shoulder joint,Procedure,SNOMED,Procedure,S,387685009,19700101,20991231,
-4302356,CT of chest and abdomen,Procedure,SNOMED,Procedure,S,418891003,19700101,20991231,
-4306061,Construction of diverting colostomy,Procedure,SNOMED,Procedure,S,387607004,19700101,20991231,
-4311671,Episiotomy,Procedure,SNOMED,Procedure,S,85548006,19700101,20991231,
-4323902,Lung volume reduction surgery,Procedure,SNOMED,Procedure,S,429609002,20080131,20991231,
-4324693,Mammography,Procedure,SNOMED,Procedure,S,71651007,19700101,20991231,
-4326177,Medication Reconciliation,Procedure,SNOMED,Procedure,S,430193006,20090131,20991231,
-4330583,Vasectomy,Procedure,SNOMED,Procedure,S,22523008,19700101,20991231,
-4331248,Fine needle aspiration biopsy of lung,Procedure,SNOMED,Procedure,S,432231006,20090131,20991231,
-4335825,Transthoracic echocardiography,Procedure,SNOMED,Procedure,S,433236007,20090131,20991231,
-4336464,Coronary artery bypass graft,Procedure,SNOMED,Procedure,S,232717009,19700101,20991231,
-4337138,Transplant of lung,Procedure,SNOMED,Procedure,S,88039007,19700101,20991231,
-4337611,Single lung transplant,Procedure,SNOMED,Procedure,S,232657004,19700101,20991231,
-21494966,Physical findings of Abdomen by Palpation,Measurement,LOINC,Clinical Observation,S,80271-0,20160624,20991231,
-36203113,HER2 [Presence] in Breast cancer specimen by FISH,Measurement,LOINC,Lab Test,S,85318-4,20170623,20991231,
-36203114,HER2 [Presence] in Breast cancer specimen by Immune stain,Measurement,LOINC,Lab Test,S,85319-2,20170623,20991231,
-36203168,Estrogen receptor Ag [Presence] in Breast cancer specimen by Immune stain,Measurement,LOINC,Lab Test,S,85337-4,20170623,20991231,
-36203170,Progesterone receptor Ag [Presence] in Breast cancer specimen by Immune stain,Measurement,LOINC,Lab Test,S,85339-0,20170623,20991231,
-36203174,Lymph nodes with macrometastases [#] in Cancer specimen by Light microscopy,Measurement,LOINC,Lab Test,S,85343-2,20170623,20991231,
-36203175,Lymph nodes with micrometastases [#] in Cancer specimen by Light microscopy,Measurement,LOINC,Lab Test,S,85344-0,20170623,20991231,
-36203183,Lymph nodes with isolated tumor cells [#] in Cancer specimen by Light microscopy,Measurement,LOINC,Lab Test,S,85352-3,20170623,20991231,
-36713048,High resolution computed tomography of chest without contrast,Procedure,SNOMED,Procedure,S,16335031000119103,20170131,20991231,
-37018340,Induced termination of pregnancy,Procedure,SNOMED,Procedure,S,714812005,20160131,20991231,
-40481912,Excision of sentinel lymph node,Procedure,SNOMED,Procedure,S,443497002,20100131,20991231,
-40481948,Detection of chromosomal aneuploidy in prenatal amniotic fluid specimen using FISH screening technique,Procedure,SNOMED,Procedure,S,443529005,20100131,20991231,
-40486537,Brachytherapy of breast,Procedure,SNOMED,Procedure,S,447759004,20110731,20991231,
-40492359,Insertion of biventricular implantable cardioverter defibrillator,Procedure,SNOMED,Procedure,S,447365002,20110131,20991231,
-40493226,Excision of fallopian tube and surgical removal of ectopic pregnancy,Procedure,SNOMED,Procedure,S,445912000,20110131,20991231,
-40761014,Hemoglobin.gastrointestinal.lower [Presence] in Stool by Immunoassay --1st specimen,Measurement,LOINC,Lab Test,S,57905-2,20091118,20991231,
-40762619,Treatment status Cancer,Measurement,LOINC,Clinical Observation,S,59557-9,20100422,20991231,
-40762638,Body mass index (BMI) [Percentile] Per age and sex,Measurement,LOINC,Clinical Observation,S,59576-9,19700101,20991231,
-40769179,Percentage area affected by eczema Head and Neck [PhenX],Measurement,LOINC,Clinical Observation,S,66519-0,20110617,20991231,
-40769184,Percentage area affected by eczema Upper extremity - bilateral [PhenX],Measurement,LOINC,Clinical Observation,S,66524-0,20110617,20991231,
-40769189,Percentage area affected by eczema Trunk [PhenX],Measurement,LOINC,Clinical Observation,S,66529-9,20110617,20991231,
-40769194,Percentage area affected by eczema Lower extremity - bilateral [PhenX],Measurement,LOINC,Clinical Observation,S,66534-9,20110617,20991231,
-42535066,Ultrasonography of bilateral breasts,Procedure,SNOMED,Procedure,S,1571000087109,20180131,20991231,
-42535580,"Ultrasonography of abdomen, right upper quadrant and epigastrium",Procedure,SNOMED,Procedure,S,426701000119108,20180131,20991231,
-43055141,Pain severity - 0-10 verbal numeric rating [Score] - Reported,Measurement,LOINC,Clinical Observation,S,72514-3,20121228,20991231,
-43531648,Total knee replacement,Procedure,SNOMED,Procedure,S,609588000,20130731,20991231,
-44783196,Surgical manipulation of joint of knee,Procedure,SNOMED,Procedure,S,699253003,20140131,20991231,
-44784284,Magnetic resonance imaging for measurement of brain volume,Procedure,SNOMED,Procedure,S,698354004,20140131,20991231,
-45766298,Combined chemotherapy and radiation therapy,Procedure,SNOMED,Procedure,S,703423002,20150131,20991231,
-46236327,Weight-for-length Per age and sex,Measurement,LOINC,Clinical Observation,S,77606-2,20150529,20991231,
+concept_id	concept_name	domain_id	vocabulary_id	concept_class_id	standard_concept	concept_code	valid_start_date	valid_end_date	invalid_reason
+3000053	Head Occipital-frontal circumference	Measurement	LOINC	Clinical Observation	S	9843-4	19960906	20991231	
+3000285	Sodium [Moles/volume] in Blood	Measurement	LOINC	Lab Test	S	2947-0	19700101	20991231	
+3000330	Specific gravity of Urine by Test strip	Measurement	LOINC	Lab Test	S	5811-5	19700101	20991231	
+3000348	Leukocyte esterase [Presence] in Urine by Test strip	Measurement	LOINC	Lab Test	S	5799-2	19700101	20991231	
+3000481	Estrogen+Progesterone receptor Ag [Presence] in Tissue by Immune stain	Measurement	LOINC	Lab Test	S	10480-2	19700101	20991231	
+3000483	Glucose [Mass/volume] in Blood	Measurement	LOINC	Lab Test	S	2339-0	19700101	20991231	
+3000876	Codfish IgE Ab [Units/volume] in Serum	Measurement	LOINC	Lab Test	S	6082-2	19700101	20991231	
+3000905	Leukocytes [#/volume] in Blood by Automated count	Measurement	LOINC	Lab Test	S	6690-2	19700101	20991231	
+3000963	Hemoglobin [Mass/volume] in Blood	Measurement	LOINC	Lab Test	S	718-7	19700101	20991231	
+3001247	Common Ragweed IgE Ab [Units/volume] in Serum	Measurement	LOINC	Lab Test	S	6085-5	19700101	20991231	
+3001488	Cow milk IgE Ab [Units/volume] in Serum	Measurement	LOINC	Lab Test	S	7258-7	19700101	20991231	
+3001802	Microalbumin/Creatinine [Mass Ratio] in Urine	Measurement	LOINC	Lab Test	S	14959-1	19700101	20991231	
+3002385	Erythrocyte distribution width [Ratio]	Measurement	LOINC	Lab Test	S	30385-9	19700101	20991231	
+3002736	Platelet distribution width [Entitic volume] in Blood by Automated count	Measurement	LOINC	Lab Test	S	32207-3	19700101	20991231	
+3004249	Systolic blood pressure	Measurement	LOINC	Clinical Observation	S	8480-6	19960906	20991231	
+3004295	Urea nitrogen [Mass/volume] in Blood	Measurement	LOINC	Lab Test	S	6299-2	19700101	20991231	
+3004410	Hemoglobin A1c/Hemoglobin.total in Blood	Measurement	LOINC	Lab Test	S	4548-4	19700101	20991231	
+3004501	Glucose [Mass/volume] in Serum or Plasma	Measurement	LOINC	Lab Test	S	2345-7	19700101	20991231	
+3005136	Cladosporium herbarum IgE Ab [Units/volume] in Serum	Measurement	LOINC	Lab Test	S	6075-6	19700101	20991231	
+3005456	Potassium [Moles/volume] in Blood	Measurement	LOINC	Lab Test	S	6298-4	19700101	20991231	
+3005897	Protein [Mass/volume] in Urine by Test strip	Measurement	LOINC	Lab Test	S	5804-0	19700101	20991231	
+3006451	Walnut IgE Ab [Units/volume] in Serum	Measurement	LOINC	Lab Test	S	6273-7	19700101	20991231	
+3006513	Bilirubin.total [Mass/volume] in Urine by Test strip	Measurement	LOINC	Lab Test	S	20505-4	19700101	20991231	
+3006575	Distant metastases.clinical [Class] Cancer	Measurement	LOINC	Clinical Observation	S	21907-1	19700101	20991231	
+3006734	White Oak IgE Ab [Units/volume] in Serum	Measurement	LOINC	Lab Test	S	6189-5	19700101	20991231	
+3006906	Calcium [Mass/volume] in Serum or Plasma	Measurement	LOINC	Lab Test	S	17861-6	19980709	20991231	
+3006923	Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma	Measurement	LOINC	Lab Test	S	1742-6	19700101	20991231	
+3007070	Cholesterol in HDL [Mass/volume] in Serum or Plasma	Measurement	LOINC	Lab Test	S	2085-9	19700101	20991231	
+3007461	Platelets [#/volume] in Blood	Measurement	LOINC	Lab Test	S	26515-7	19700101	20991231	
+3007727	Regional lymph nodes.clinical [Class] Cancer	Measurement	LOINC	Clinical Observation	S	21906-3	19700101	20991231	
+3007876	Appearance of Urine	Measurement	LOINC	Lab Test	S	5767-9	19700101	20991231	
+3008204	Clarity of Urine	Measurement	LOINC	Lab Test	S	32167-9	19700101	20991231	
+3008598	Thyroxine (T4) free [Mass/volume] in Serum or Plasma	Measurement	LOINC	Lab Test	S	3024-7	19700101	20991231	
+3008841	Primary tumor.clinical [Class] Cancer	Measurement	LOINC	Clinical Observation	S	21905-5	19700101	20991231	
+3009201	Thyrotropin [Units/volume] in Serum or Plasma	Measurement	LOINC	Lab Test	S	3016-3	19700101	20991231	
+3009261	Glucose [Presence] in Urine by Test strip	Measurement	LOINC	Lab Test	S	25428-4	19700101	20991231	
+3009542	Hematocrit [Volume Fraction] of Blood	Measurement	LOINC	Lab Test	S	20570-8	19700101	20991231	
+3009744	MCHC [Mass/volume] by Automated count	Measurement	LOINC	Lab Test	S	786-4	19700101	20991231	
+3009966	Cholesterol in LDL [Mass/volume] in Serum or Plasma by Direct assay	Measurement	LOINC	Lab Test	S	18262-6	19980825	20991231	
+3010813	Leukocytes [#/volume] in Blood	Measurement	LOINC	Lab Test	S	26464-8	19700101	20991231	
+3011397	Hemoglobin [Presence] in Urine by Test strip	Measurement	LOINC	Lab Test	S	5794-3	19700101	20991231	
+3011505	FEV1/FVC	Measurement	LOINC	Clinical Observation	S	19926-5	19700101	20991231	
+3012030	MCH [Entitic mass] by Automated count	Measurement	LOINC	Lab Test	S	785-6	19700101	20991231	
+3012494	Peanut IgE Ab [Units/volume] in Serum	Measurement	LOINC	Lab Test	S	6206-7	19700101	20991231	
+3012888	Diastolic blood pressure	Measurement	LOINC	Clinical Observation	S	8462-4	19960906	20991231	
+3013603	Prostate specific Ag [Mass/volume] in Serum or Plasma	Measurement	LOINC	Lab Test	S	2857-1	19700101	20991231	
+3013682	Urea nitrogen [Mass/volume] in Serum or Plasma	Measurement	LOINC	Lab Test	S	3094-0	19700101	20991231	
+3013721	Aspartate aminotransferase [Enzymatic activity/volume] in Serum or Plasma	Measurement	LOINC	Lab Test	S	1920-8	19700101	20991231	
+3014051	Protein [Presence] in Urine by Test strip	Measurement	LOINC	Lab Test	S	20454-5	19700101	20991231	
+3014094	Carbon dioxide, total [Moles/volume] in Blood	Measurement	LOINC	Lab Test	S	20565-8	19700101	20991231	
+3014576	Chloride [Moles/volume] in Serum or Plasma	Measurement	LOINC	Lab Test	S	2075-0	19700101	20991231	
+3014599	Egg white IgE Ab [Units/volume] in Serum	Measurement	LOINC	Lab Test	S	6106-9	19700101	20991231	
+3014902	Physical findings of Prostate	Measurement	LOINC	Clinical Observation	S	32465-7	20020809	20991231	
+3015076	Soybean IgE Ab [Units/volume] in Serum	Measurement	LOINC	Lab Test	S	6248-9	19700101	20991231	
+3015182	Erythrocyte distribution width [Entitic volume] by Automated count	Measurement	LOINC	Lab Test	S	21000-5	19700101	20991231	
+3015632	Carbon dioxide, total [Moles/volume] in Serum or Plasma	Measurement	LOINC	Lab Test	S	2028-9	19700101	20991231	
+3016502	Oxygen saturation in Arterial blood	Measurement	LOINC	Lab Test	S	2708-6	19700101	20991231	
+3016723	Creatinine [Mass/volume] in Serum or Plasma	Measurement	LOINC	Lab Test	S	2160-0	19700101	20991231	
+3018572	Chloride [Moles/volume] in Blood	Measurement	LOINC	Lab Test	S	2069-3	19700101	20991231	
+3018834	Bilirubin.total [Presence] in Urine by Test strip	Measurement	LOINC	Lab Test	S	5770-3	19700101	20991231	
+3019406	Latex IgE Ab [Units/volume] in Serum	Measurement	LOINC	Lab Test	S	6158-0	19700101	20991231	
+3019550	Sodium [Moles/volume] in Serum or Plasma	Measurement	LOINC	Lab Test	S	2951-2	19700101	20991231	
+3020416	Erythrocytes [#/volume] in Blood by Automated count	Measurement	LOINC	Lab Test	S	789-8	19700101	20991231	
+3020630	Protein [Mass/volume] in Serum or Plasma	Measurement	LOINC	Lab Test	S	2885-2	19700101	20991231	
+3020655	Honey bee IgE Ab [Units/volume] in Serum	Measurement	LOINC	Lab Test	S	6844-5	19700101	20991231	
+3020891	Body temperature	Measurement	LOINC	Clinical Observation	S	8310-5	19960906	20991231	
+3021226	Shrimp IgE Ab [Units/volume] in Serum	Measurement	LOINC	Lab Test	S	6246-3	19700101	20991231	
+3021601	Nitrite [Presence] in Urine by Test strip	Measurement	LOINC	Lab Test	S	5802-4	19700101	20991231	
+3022192	Triglyceride [Mass/volume] in Serum or Plasma	Measurement	LOINC	Lab Test	S	2571-8	19700101	20991231	
+3022621	pH of Urine by Test strip	Measurement	LOINC	Lab Test	S	5803-2	19700101	20991231	
+3022698	Stage group.clinical Cancer	Measurement	LOINC	Clinical Observation	S	21908-9	19700101	20991231	
+3023103	Potassium [Moles/volume] in Serum or Plasma	Measurement	LOINC	Lab Test	S	2823-3	19700101	20991231	
+3023314	Hematocrit [Volume Fraction] of Blood by Automated count	Measurement	LOINC	Lab Test	S	4544-3	19700101	20991231	
+3023430	Cat dander IgE Ab [Units/volume] in Serum	Measurement	LOINC	Lab Test	S	6833-8	19700101	20991231	
+3023539	Ketones [Mass/volume] in Urine by Test strip	Measurement	LOINC	Lab Test	S	5797-6	19700101	20991231	
+3023599	MCV [Entitic volume] by Automated count	Measurement	LOINC	Lab Test	S	787-2	19700101	20991231	
+3024128	Bilirubin.total [Mass/volume] in Serum or Plasma	Measurement	LOINC	Lab Test	S	1975-2	19700101	20991231	
+3024171	Respiratory rate	Measurement	LOINC	Clinical Observation	S	9279-1	19960906	20991231	
+3024561	Albumin [Mass/volume] in Serum or Plasma	Measurement	LOINC	Lab Test	S	1751-7	19700101	20991231	
+3024629	Glucose [Mass/volume] in Urine by Test strip	Measurement	LOINC	Lab Test	S	5792-7	19700101	20991231	
+3024731	MCV [Entitic volume]	Measurement	LOINC	Lab Test	S	30428-7	19700101	20991231	
+3024929	Platelets [#/volume] in Blood by Automated count	Measurement	LOINC	Lab Test	S	777-3	19700101	20991231	
+3025315	Body weight	Measurement	LOINC	Clinical Observation	S	29463-7	19700101	20991231	
+3026361	Erythrocytes [#/volume] in Blood	Measurement	LOINC	Lab Test	S	26453-1	19700101	20991231	
+3027018	Heart rate	Measurement	LOINC	Clinical Observation	S	8867-4	19700101	20991231	
+3027114	Cholesterol [Mass/volume] in Serum or Plasma	Measurement	LOINC	Lab Test	S	2093-3	19700101	20991231	
+3027162	Color of Urine	Measurement	LOINC	Lab Test	S	5778-6	19700101	20991231	
+3027172	Left ventricular Ejection fraction	Measurement	LOINC	Clinical Observation	S	10230-1	19700101	20991231	
+3027231	Wheat IgE Ab [Units/volume] in Serum	Measurement	LOINC	Lab Test	S	6276-0	19700101	20991231	
+3027970	Globulin [Mass/volume] in Serum by calculation	Measurement	LOINC	Lab Test	S	10834-0	19700101	20991231	
+3028833	Bilirubin.total [Mass/volume] in Blood	Measurement	LOINC	Lab Test	S	42719-5	20051018	20991231	
+3029187	Natriuretic peptide.B prohormone N-Terminal [Mass/volume] in Serum or Plasma	Measurement	LOINC	Lab Test	S	33762-6	19700101	20991231	
+3030315	Polyp size greatest dimension	Measurement	LOINC	Lab Test	S	33756-8	19700101	20991231	
+3030354	Glomerular filtration rate/1.73 sq M.predicted [Volume Rate/Area] in Serum or Plasma by Creatinine-based formula (MDRD)	Measurement	LOINC	Lab Test		33914-3	19700101	20180615	U
+3032503	Calcium [Mass/volume] in Blood	Measurement	LOINC	Lab Test	S	49765-1	20070810	20991231	
+3035350	Ketones [Presence] in Urine by Test strip	Measurement	LOINC	Lab Test	S	2514-8	19700101	20991231	
+3035995	Alkaline phosphatase [Enzymatic activity/volume] in Serum or Plasma	Measurement	LOINC	Lab Test	S	6768-6	19960815	20991231	
+3036277	Body height	Measurement	LOINC	Clinical Observation	S	8302-2	19960906	20991231	
+3036780	American house dust mite IgE Ab [Units/volume] in Serum	Measurement	LOINC	Lab Test	S	6095-4	19700101	20991231	
+3038553	Body mass index (BMI) [Ratio]	Measurement	LOINC	Clinical Observation	S	39156-5	19700101	20991231	
+3043111	Platelet mean volume [Entitic volume] in Blood by Automated count	Measurement	LOINC	Lab Test	S	32623-1	19700101	20991231	
+3045716	Anion gap in Serum or Plasma	Measurement	LOINC	Lab Test	S	33037-3	20021106	20991231	
+3046523	Site of distant metastasis in Breast tumor	Measurement	LOINC	Lab Test	S	44667-4	20060313	20991231	
+3046581	Size.maximum dimension in Tumor	Measurement	LOINC	Lab Test	S	33728-7	19700101	20991231	
+3049273	DXA Radius and Ulna [T-score] Bone density	Measurement	LOINC	Clinical Observation	S	38265-5	19700101	20991231	
+3051673	US Guidance for biopsy of Prostate	Measurement	LOINC	Clinical Observation	S	46288-7	20060728	20991231	
+3051825	Creatinine [Mass/volume] in Blood	Measurement	LOINC	Lab Test	S	38483-4	20041020	20991231	
+4010253	Nasal sinus endoscopy	Procedure	SNOMED	Procedure	S	112790001	19700101	20991231	
+4015590	Counseling for termination of pregnancy	Procedure	SNOMED	Procedure	S	10383002	19700101	20991231	
+4015701	Cesarean section	Procedure	SNOMED	Procedure	S	11466000	19700101	20991231	
+4018619	Screening for occult blood in feces	Procedure	SNOMED	Procedure	S	104435004	19700101	20991231	
+4024289	Radiography of ankle	Procedure	SNOMED	Procedure	S	19490002	19700101	20991231	
+4029715	Radiation oncology AND/OR radiotherapy	Procedure	SNOMED	Procedure	S	108290001	19700101	20991231	
+4035793	Pulmonary rehabilitation	Procedure	SNOMED	Procedure	S	15081005	19700101	20991231	
+4037675	Brief general examination	Procedure	SNOMED	Procedure	S	162676008	19700101	20991231	
+4043071	Cognitive and behavioral therapy	Procedure	SNOMED	Procedure	S	228557008	19700101	20991231	
+4047491	Radiography of humerus	Procedure	SNOMED	Procedure	S	1225002	19700101	20991231	
+4047494	Biopsy of breast	Procedure	SNOMED	Procedure	S	122548005	19700101	20991231	
+4055982	Sputum microscopy	Procedure	SNOMED	Procedure	S	167995008	19700101	20991231	
+4057420	Catheter ablation of tissue of heart	Procedure	SNOMED	Procedure	S	18286008	19700101	20991231	
+4058899	Plain X-ray of clavicle	Procedure	SNOMED	Procedure	S	168594001	19700101	20991231	
+4059978	Insertion of subcutaneous contraceptive	Procedure	SNOMED	Procedure	S	169553002	19700101	20991231	
+4060626	Ultrasound scan for fetal viability	Procedure	SNOMED	Procedure	S	169230002	19700101	20991231	
+4061811	Rubella screening	Procedure	SNOMED	Procedure		169690007	19700101	20190730	U
+4062501	Asthma screening	Procedure	SNOMED	Procedure	S	171231001	19700101	20991231	
+4064377	Depression screening	Procedure	SNOMED	Procedure	S	171207006	19700101	20991231	
+4068785	Diagnostic fiberoptic bronchoscopy	Procedure	SNOMED	Procedure	S	173160006	19700101	20991231	
+4075363	Auscultation of the fetal heart	Procedure	SNOMED	Procedure	S	225158009	19700101	20991231	
+4077697	Screening mammography	Procedure	SNOMED	Procedure	S	24623002	19700101	20991231	
+4078199	Epidural anesthesia	Procedure	SNOMED	Procedure	S	18946005	19700101	20991231	
+4078793	Direct current cardioversion	Procedure	SNOMED	Procedure	S	180325003	19700101	20991231	
+4081880	Mammogram - symptomatic	Procedure	SNOMED	Procedure	S	241055006	19700101	20991231	
+4082984	MRI of breast	Procedure	SNOMED	Procedure	S	241615005	19700101	20991231	
+4107731	Subcutaneous immunotherapy	Procedure	SNOMED	Procedure	S	180256009	19700101	20991231	
+4108565	Amputation of the foot	Procedure	SNOMED	Procedure	S	180030006	19700101	20991231	
+4108705	Intravenous blood transfusion of packed cells	Procedure	SNOMED	Procedure	S	180207008	19700101	20991231	
+4117038	Bilateral tubal ligation	Procedure	SNOMED	Procedure	S	287664005	19700101	20991231	
+4120961	Excision of axillary lymph node	Procedure	SNOMED	Procedure	S	234262008	19700101	20991231	
+4125906	Suture open wound	Procedure	SNOMED	Procedure	S	288086009	19700101	20991231	
+4127235	Methotrexate injection into tubal pregnancy	Procedure	SNOMED	Procedure	S	236931002	19700101	20991231	
+4127260	Augmentation of labor	Procedure	SNOMED	Procedure	S	237001001	19700101	20991231	
+4128031	Instrumental delivery	Procedure	SNOMED	Procedure	S	236974004	19700101	20991231	
+4134565	Hearing examination	Procedure	SNOMED	Procedure	S	398171003	19700101	20991231	
+4141448	Teleradiotherapy procedure	Procedure	SNOMED	Procedure	S	33195004	19700101	20991231	
+4145310	Pelvis X-ray	Procedure	SNOMED	Procedure	S	268425006	19700101	20991231	
+4146053	Manual pelvic examination	Procedure	SNOMED	Procedure	S	35025007	19700101	20991231	
+4150653	Fetal anatomy study	Procedure	SNOMED	Procedure	S	271442007	19700101	20991231	
+4150970	Medical induction of labor	Procedure	SNOMED	Procedure	S	31208007	19700101	20991231	
+4151422	Sputum examination	Procedure	SNOMED	Procedure	S	269911007	19700101	20991231	
+4161390	Human epidermal growth factor receptor 2 gene detection by immunohistochemistry	Procedure	SNOMED	Procedure	S	433114000	20090131	20991231	
+4163708	Vaccination for diphtheria, pertussis, and tetanus	Procedure	SNOMED	Procedure	S	399014008	19700101	20991231	
+4163872	Plain chest X-ray	Procedure	SNOMED	Procedure	S	399208008	19700101	20991231	
+4163951	Electrocardiographic procedure	Procedure	SNOMED	Procedure	S	29303009	19700101	20991231	
+4163971	Laparoscopic cholecystectomy	Procedure	SNOMED	Procedure	S	45595009	19700101	20991231	
+4166761	Rectal polypectomy	Procedure	SNOMED	Procedure	S	274031008	19700101	20991231	
+4168133	Incision of trachea	Procedure	SNOMED	Procedure	S	48387007	19700101	20991231	
+4168236	Evaluation of uterine fundal height	Procedure	SNOMED	Procedure	S	274804006	19700101	20991231	
+4170947	Bone immobilization	Procedure	SNOMED	Procedure	S	274474001	19700101	20991231	
+4181778	Intravenous injection	Procedure	SNOMED	Procedure	S	43060002	19700101	20991231	
+4181781	Partial resection of colon	Procedure	SNOMED	Procedure	S	43075005	19700101	20991231	
+4181917	Electroencephalogram	Procedure	SNOMED	Procedure	S	54550000	19700101	20991231	
+4186930	Replacement of intrauterine contraceptive device	Procedure	SNOMED	Procedure	S	46706006	19700101	20991231	
+4187458	Review of systems	Procedure	SNOMED	Procedure	S	415300000	19700101	20991231	
+4191853	Allergy screening test	Procedure	SNOMED	Procedure	S	395142003	19700101	20991231	
+4195803	Bone density scan	Procedure	SNOMED	Procedure	S	312681000	19700101	20991231	
+4197460	Injection of epinephrine	Procedure	SNOMED	Procedure	S	313191000	19700101	20991231	
+4198190	Appendectomy	Procedure	SNOMED	Procedure	S	80146002	19700101	20991231	
+4199235	Transthoracic three dimensional ultrasonography of heart	Procedure	SNOMED	Procedure	S	434158009	20090131	20991231	
+4199276	Removal of subcutaneous contraceptive	Procedure	SNOMED	Procedure	S	301807007	19700101	20991231	
+4199458	Passive immunization	Procedure	SNOMED	Procedure	S	51116004	19700101	20991231	
+4202451	Percutaneous mechanical thrombectomy of portal vein using fluoroscopic guidance	Procedure	SNOMED	Procedure	S	433112001	20090131	20991231	
+4202832	Intubation	Procedure	SNOMED	Procedure	S	52765003	19700101	20991231	
+4213045	Lumpectomy of breast	Procedure	SNOMED	Procedure	S	392021009	19700101	20991231	
+4216130	Percutaneous coronary intervention	Procedure	SNOMED	Procedure	S	415070008	19700101	20991231	
+4218408	Collection of blood specimen for laboratory	Procedure	SNOMED	Procedure	S	82078001	19700101	20991231	
+4230911	Echocardiography	Procedure	SNOMED	Procedure	S	40701008	19700101	20991231	
+4234541	Cytopathology procedure, preparation of smear, genital source	Procedure	SNOMED	Procedure	S	90226004	19700101	20991231	
+4235738	Prostatectomy	Procedure	SNOMED	Procedure	S	90470006	19700101	20991231	
+4238715	Removal of intrauterine device	Procedure	SNOMED	Procedure	S	68254000	19700101	20991231	
+4240305	Thoracentesis	Procedure	SNOMED	Procedure	S	91602002	19700101	20991231	
+4240345	Physical examination	Procedure	SNOMED	Procedure	S	5880005	19700101	20991231	
+4242997	Cholecystectomy	Procedure	SNOMED	Procedure	S	38102005	19700101	20991231	
+4243062	Radiography of wrist	Procedure	SNOMED	Procedure	S	60027007	19700101	20991231	
+4249893	Colonoscopy	Procedure	SNOMED	Procedure	S	73761001	19700101	20991231	
+4252419	Radiologic examination of knee	Procedure	SNOMED	Procedure	S	74016001	19700101	20991231	
+4254766	Digital examination of rectum	Procedure	SNOMED	Procedure	S	410006001	19700101	20991231	
+4263386	Sentinel lymph node biopsy	Procedure	SNOMED	Procedure	S	396487001	19700101	20991231	
+4273629	Chemotherapy	Procedure	SNOMED	Procedure	S	367336001	19700101	20991231	
+4275113	Insertion of intrauterine contraceptive device	Procedure	SNOMED	Procedure	S	65200003	19700101	20991231	
+4276519	Extraction of wisdom tooth	Procedure	SNOMED	Procedure	S	65546002	19700101	20991231	
+4278515	Biopsy of prostate	Procedure	SNOMED	Procedure	S	65575008	19700101	20991231	
+4286804	Excision of breast tissue	Procedure	SNOMED	Procedure	S	69031006	19700101	20991231	
+4293738	Intracavitary brachytherapy	Procedure	SNOMED	Procedure	S	384692006	19700101	20991231	
+4293740	Injection of tetanus antitoxin	Procedure	SNOMED	Procedure	S	384700001	19700101	20991231	
+4294513	Biopsy of colon	Procedure	SNOMED	Procedure	S	76164006	19700101	20991231	
+4295880	Intramuscular injection	Procedure	SNOMED	Procedure	S	76601001	19700101	20991231	
+4301346	Surgical manipulation of shoulder joint	Procedure	SNOMED	Procedure	S	387685009	19700101	20991231	
+4302356	CT of chest and abdomen	Procedure	SNOMED	Procedure	S	418891003	19700101	20991231	
+4306061	Construction of diverting colostomy	Procedure	SNOMED	Procedure	S	387607004	19700101	20991231	
+4311671	Episiotomy	Procedure	SNOMED	Procedure	S	85548006	19700101	20991231	
+4323902	Lung volume reduction surgery	Procedure	SNOMED	Procedure	S	429609002	20080131	20991231	
+4324693	Mammography	Procedure	SNOMED	Procedure	S	71651007	19700101	20991231	
+4326177	Medication Reconciliation	Procedure	SNOMED	Procedure	S	430193006	20090131	20991231	
+4330583	Vasectomy	Procedure	SNOMED	Procedure	S	22523008	19700101	20991231	
+4331248	Fine needle aspiration biopsy of lung	Procedure	SNOMED	Procedure	S	432231006	20090131	20991231	
+4335825	Transthoracic echocardiography	Procedure	SNOMED	Procedure	S	433236007	20090131	20991231	
+4336464	Coronary artery bypass graft	Procedure	SNOMED	Procedure	S	232717009	19700101	20991231	
+4337138	Transplant of lung	Procedure	SNOMED	Procedure	S	88039007	19700101	20991231	
+4337611	Single lung transplant	Procedure	SNOMED	Procedure	S	232657004	19700101	20991231	
+21494966	Physical findings of Abdomen by Palpation	Measurement	LOINC	Clinical Observation	S	80271-0	20160624	20991231	
+36203113	HER2 [Presence] in Breast cancer specimen by FISH	Measurement	LOINC	Lab Test	S	85318-4	20170623	20991231	
+36203114	HER2 [Presence] in Breast cancer specimen by Immune stain	Measurement	LOINC	Lab Test	S	85319-2	20170623	20991231	
+36203168	Estrogen receptor Ag [Presence] in Breast cancer specimen by Immune stain	Measurement	LOINC	Lab Test	S	85337-4	20170623	20991231	
+36203170	Progesterone receptor Ag [Presence] in Breast cancer specimen by Immune stain	Measurement	LOINC	Lab Test	S	85339-0	20170623	20991231	
+36203174	Lymph nodes with macrometastases [#] in Cancer specimen by Light microscopy	Measurement	LOINC	Lab Test	S	85343-2	20170623	20991231	
+36203175	Lymph nodes with micrometastases [#] in Cancer specimen by Light microscopy	Measurement	LOINC	Lab Test	S	85344-0	20170623	20991231	
+36203183	Lymph nodes with isolated tumor cells [#] in Cancer specimen by Light microscopy	Measurement	LOINC	Lab Test	S	85352-3	20170623	20991231	
+36713048	High resolution computed tomography of chest without contrast	Procedure	SNOMED	Procedure	S	16335031000119103	20170131	20991231	
+37018340	Induced termination of pregnancy	Procedure	SNOMED	Procedure	S	714812005	20160131	20991231	
+40481912	Excision of sentinel lymph node	Procedure	SNOMED	Procedure	S	443497002	20100131	20991231	
+40481948	Detection of chromosomal aneuploidy in prenatal amniotic fluid specimen using FISH screening technique	Procedure	SNOMED	Procedure	S	443529005	20100131	20991231	
+40486537	Brachytherapy of breast	Procedure	SNOMED	Procedure	S	447759004	20110731	20991231	
+40492359	Insertion of biventricular implantable cardioverter defibrillator	Procedure	SNOMED	Procedure	S	447365002	20110131	20991231	
+40493226	Excision of fallopian tube and surgical removal of ectopic pregnancy	Procedure	SNOMED	Procedure	S	445912000	20110131	20991231	
+40761014	Hemoglobin.gastrointestinal.lower [Presence] in Stool by Immunoassay --1st specimen	Measurement	LOINC	Lab Test	S	57905-2	20091118	20991231	
+40762619	Treatment status Cancer	Measurement	LOINC	Clinical Observation	S	59557-9	20100422	20991231	
+40762638	Body mass index (BMI) [Percentile] Per age and sex	Measurement	LOINC	Clinical Observation	S	59576-9	19700101	20991231	
+40769179	Percentage area affected by eczema Head and Neck [PhenX]	Measurement	LOINC	Clinical Observation	S	66519-0	20110617	20991231	
+40769184	Percentage area affected by eczema Upper extremity - bilateral [PhenX]	Measurement	LOINC	Clinical Observation	S	66524-0	20110617	20991231	
+40769189	Percentage area affected by eczema Trunk [PhenX]	Measurement	LOINC	Clinical Observation	S	66529-9	20110617	20991231	
+40769194	Percentage area affected by eczema Lower extremity - bilateral [PhenX]	Measurement	LOINC	Clinical Observation	S	66534-9	20110617	20991231	
+42535066	Ultrasonography of bilateral breasts	Procedure	SNOMED	Procedure	S	1571000087109	20180131	20991231	
+42535580	Ultrasonography of abdomen, right upper quadrant and epigastrium	Procedure	SNOMED	Procedure	S	426701000119108	20180131	20991231	
+43055141	Pain severity - 0-10 verbal numeric rating [Score] - Reported	Measurement	LOINC	Clinical Observation	S	72514-3	20121228	20991231	
+43531648	Total knee replacement	Procedure	SNOMED	Procedure	S	609588000	20130731	20991231	
+44783196	Surgical manipulation of joint of knee	Procedure	SNOMED	Procedure	S	699253003	20140131	20991231	
+44784284	Magnetic resonance imaging for measurement of brain volume	Procedure	SNOMED	Procedure	S	698354004	20140131	20991231	
+45766298	Combined chemotherapy and radiation therapy	Procedure	SNOMED	Procedure	S	703423002	20150131	20991231	
+46236327	Weight-for-length Per age and sex	Measurement	LOINC	Clinical Observation	S	77606-2	20150529	20991231	

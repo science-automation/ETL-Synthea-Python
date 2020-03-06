@@ -148,8 +148,8 @@ if __name__ == '__main__':
             elif (datatype == 'payer_transitions'):
                 pass
             elif (datatype == 'allergies'):
-                (observation, c['observation_id']) = convert.allergiesToOmop(df, c['observation_id'], personmap)
-                person.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'observation.csv'), mode=mode, header=header, index=False)
+                (observation, c['observation_id']) = convert.allergiesToOmop(df, srctostdvm, c['observation_id'], personmap, visitmap)
+                observation.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'observation.csv'), mode=mode, header=header, index=False)
             elif (datatype == 'medications'):
                 (drug_exposure, c['drug_exposure_id']) = convert.medicationsToOmop(df, srctosrcvm, c['drug_exposure_id'], personmap)
                 drug_exposure.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'drug_exposure.csv'), mode=mode, header=header, index=False)

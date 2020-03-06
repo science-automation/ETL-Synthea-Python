@@ -306,8 +306,26 @@ class SyntheaToOmop:
     def payertransitionToOmop(self, df):
         pass
 
-    def allergiesToOmop(self, df, observation_id, personmap):
+    def allergiesToOmop(self, df, srctostdvm, observation_id, personmap, visitmap):
+        df['observationtmp'] = df.index + observation_id # copy index into a temp column.
+        df = pd.merge(df, personmap, left_on='PATIENT', right_on='synthea_patient_id', how='left')
+        df = pd.merge(df, visitmap, left_on='ENCOUNTER', right_on='synthea_encounter_id', how='left')
         observation = pd.DataFrame(columns=self.model_schema['observation'].keys())
+        observation['observation_id'] = df['observationtmp']
+        observation['person_id'] = df['person_id']
+        srctostdvm_filtered = srctostdvm[(srctostdvm["target_domain_id"]=='Observation') & (srctostdvm["target_vocabulary_id"]=='SNOMED') & (srctostdvm["target_invalid_reason"].isnull())]
+        concept_df = pd.merge(df['CODE'],srctostdvm_filtered[['source_code','target_concept_id']], left_on='CODE', right_on='source_code', how='left')
+        observation['observation_concept_id'] = concept_df['target_concept_id'].fillna('0')
+        observation['observation_date'] = df['START']
+        observation['observation_datetime'] = df['START'].apply(self.getDefaultTimestamp)
+        observation['value_as_concept_id'] = '0'
+        observation['qualifier_concept_id'] = '0'
+        observation['unit_concept_id'] = '0'
+        observation['visit_occurrence_id'] = df['visit_occurrence_id']
+        observation['visit_detail_id'] = '0'
+        observation['observation_source_value'] = df['CODE']
+        observation['observation_source_concept_id'] = df['CODE']
+        observation['observation_type_concept_id'] = '38000280'        
         return (observation, observation_id + len(observation))
 
     def medicationsToOmop(self, df, srctostdvm, drug_exposure_id, personmap):

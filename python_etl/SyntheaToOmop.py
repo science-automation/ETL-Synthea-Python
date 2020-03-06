@@ -232,7 +232,6 @@ class SyntheaToOmop:
         procedure_occurrence['visit_detail_id'] = '0'
         procedure_occurrence['procedure_type_concept_id'] = '38000275'
         procedure_occurrence['modifier_concept_id'] = '0'
-        procedure_occurrence['procedure_concept_id'] = df['CODE']
         procedure_occurrence['procedure_source_value'] = df['CODE']
         procedure_occurrence['procedure_source_concept_id'] = df['CODE']
         return (procedure_occurrence, procedure_occurrence_id + len(procedure_occurrence))

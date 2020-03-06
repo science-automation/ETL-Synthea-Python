@@ -84,19 +84,19 @@ if __name__ == '__main__':
             if (datatype == 'patients'):
                 pass
             elif (datatype == 'conditions'):
-                conceptextract = conceptextract.append(extract.conditionsExtract(df, vocab_concept))
+                conceptextract = conceptextract.append(extract.conditionsExtract(df, vocab_concept['concept']))
             elif (datatype == 'careplans'):
                 pass
             elif (datatype == 'observations'):
-                conceptextract = conceptextract.append(extract.observationsExtract(df, vocab_concept))
+                conceptextract = conceptextract.append(extract.observationsExtract(df, vocab_concept['concept']))
             elif (datatype == 'procedures'):
-                conceptextract = conceptextract.append(extract.proceduresExtract(df, vocab_concept))
+                conceptextract = conceptextract.append(extract.proceduresExtract(df, vocab_concept['concept']))
             elif (datatype == 'immunizations'):
                pass 
             elif (datatype == 'imaging_studies'):
                 pass
             elif (datatype == 'encounters'):
-                conceptextract = conceptextract.append(extract.encountersExtract(df, vocab_concept))
+                conceptextract = conceptextract.append(extract.encountersExtract(df, vocab_concept['concept']))
             elif (datatype == 'organizations'):
                 pass
             elif (datatype == 'providers'):

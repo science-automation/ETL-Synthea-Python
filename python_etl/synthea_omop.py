@@ -1,6 +1,6 @@
 import pandas as pd
 import os
-from python_dotenv import load_dotenv
+from dotenv import load_dotenv
 import ModelSyntheaPandas
 import ModelOmopPandas
 import SyntheaToOmop

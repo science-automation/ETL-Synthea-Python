@@ -1,6 +1,6 @@
 import pandas as pd
 import os
-import dotenv
+from python_dotenv import load_dotenv
 import ModelSyntheaPandas
 import ModelOmopPandas
 import SyntheaToOmop
@@ -15,7 +15,7 @@ import sys
 # ------------------------
 # load env
 # ------------------------
-dotenv.load_dotenv(".env")
+load_dotenv(verbose=True)
 
 # -----------------------------------
 # - Configuration
@@ -102,7 +102,7 @@ if __name__ == '__main__':
             inputfile = datatype + '.csv.gz'
             compression='gzip'
         else:
-            print("Error:  Could not find " + inputfile + " synthea file")
+            print("Error:  Could not find synthea file for " + datatype)
             exit(1)
         inputdata = os.path.join(BASE_SYNTHEA_INPUT_DIRECTORY,inputfile)
         output = os.path.join(BASE_OUTPUT_DIRECTORY,inputfile)

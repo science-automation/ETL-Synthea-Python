@@ -18,15 +18,18 @@ class ExtractVocab:
         domainconcept = concept[concept["domain_id"]==domain]
         return pd.merge(domainconcept, syntheaconcept, left_on='concept_code', right_on='code', how='inner').drop(columns=['code'])
 
+    # take concepts and find all related concept relationships that "map to"
     def getConceptRelationshipExtract(self, concept_relationship, concept):
         df1 = pd.merge(concept_relationship, concept[['concept_id']], left_on='concept_id_1', right_on='concept_id', how='inner').drop(columns=['concept_id'])
         df2 = pd.merge(concept_relationship, concept[['concept_id']], left_on='concept_id_2', right_on='concept_id', how='inner').drop(columns=['concept_id'])
-        return df1.append(df2)
+        conrel = df1.append(df2)
+        return conrel.loc[conrel['relationship_id'] == 'Maps to']
 
     def conditionsExtract(self, df, concept):
-        df1 = self.getConceptExtract(df, concept, 'Conditions')
+        df1 = self.getConceptExtract(df, concept, 'Condition')
         df2 = self.getConceptExtract(df, concept, 'Drug')
-        return df1.append(df2)
+        df3 = self.getConceptExtract(df, concept, 'Observation')
+        return df1.append(df2).append(df3)
 
     def observationsExtract(self, df, concept):
         return self.getConceptExtract(df, concept, 'Measurement')
@@ -41,7 +44,7 @@ class ExtractVocab:
         pass
 
     def allergiesExtract(self, df, vocab):
-        pass
+        return self.getConceptExtract(df, concept, 'Observation')
 
     def medicationsExtract(self, df, concept):
         return self.getConceptExtract(df, concept, 'Drug')

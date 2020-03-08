@@ -3,7 +3,7 @@ from collections import OrderedDict
 #
 # define types for omop schema
 #
-class ModelOmopPandas6:
+class ModelOmopPandas:
     #
     # Check the model matches
     #
@@ -162,6 +162,7 @@ class ModelOmopPandas6:
             ('month_of_birth', 'int64'),
             ('day_of_birth', 'int64'),
             ('birth_datetime', 'object'),
+            ('death_datetime', 'object'),
             ('race_concept_id', 'int64'),
             ('ethnicity_concept_id', 'int64'),
             ('location_id', 'int64'),
@@ -202,16 +203,6 @@ class ModelOmopPandas6:
             ('disease_status_source_value', 'category')
         ])
 
-        model_schema['death'] = OrderedDict([
-            ('person_id', 'int64'),
-            ('death_date', 'object'),
-            ('death_datetime', 'object'),
-            ('death_type_concept_id', 'int64'),
-            ('cause_concept_id', 'int64'),
-            ('cause_source_value', 'category'),
-            ('cause_source_concept_id', 'int64')
-        ])
-
         model_schema['visit_occurrence'] = OrderedDict([
             ('visit_occurrence_id', 'int64'),
             ('person_id', 'int64'),
@@ -225,8 +216,8 @@ class ModelOmopPandas6:
             ('care_site_id', 'int64'),
             ('visit_source_value', 'category'),
             ('visit_source_concept_id', 'int64'),
-            ('admitting_source_concept_id', 'int64'),
-            ('admitting_source_value', 'category'),
+            ('admitted_from_concept_id', 'int64'),
+            ('admitted_from_source_value', 'category'),
             ('discharge_to_concept_id', 'int64'),
             ('discharge_to_source_value', 'category'),
             ('preceding_visit_occurrence_id', 'int64')
@@ -243,12 +234,12 @@ class ModelOmopPandas6:
             ('visit_detail_type_concept_id', 'int64'),
             ('provider_id', 'int64'),
             ('care_site_id', 'int64'),
-            ('admitting_source_concept_id', 'int64'),
             ('discharge_to_concept_id', 'int64'),
+            ('admitted_from_concept_id', 'int64'),
+            ('admitted_from_source_value', 'int64'),
             ('preceding_visit_detail_id', 'int64'),
             ('visit_detail_source_value', 'category'),
             ('visit_detail_source_concept_id', 'int64'),
-            ('admitting_source_value', 'category'),
             ('discharge_to_source_value', 'category'),
             ('visit_detail_parent_id', 'int64'),
             ('visit_occurrence_id', 'int64')
@@ -330,8 +321,7 @@ class ModelOmopPandas6:
             ('visit_detail_id', 'int64'),
             ('condition_source_value', 'category'),
             ('condition_source_concept_id', 'int64'),
-            ('condition_status_source_value', 'category'),
-            ('condition_status_concept_id', 'int64')
+            ('condition_status_source_value', 'category')
         ])
 
         model_schema['measurement'] = OrderedDict([
@@ -360,6 +350,8 @@ class ModelOmopPandas6:
         model_schema['note'] = OrderedDict([
             ('note_id', 'int64'),
             ('person_id', 'int64'),
+            ('node_event_id', 'int64'),
+            ('node_event_field_concept_id', 'int64'),
             ('note_date', 'object'),
             ('note_datetime', 'object'),
             ('note_type_concept_id', 'int64'),
@@ -382,13 +374,13 @@ class ModelOmopPandas6:
             ('offset', 'category'),
             ('lexical_variant', 'category'),
             ('note_nlp_concept_id', 'int64'),
-            ('note_nlp_source_concept_id', 'int64'),
             ('nlp_system', 'category'),
             ('nlp_date', 'object'),
             ('nlp_datetime', 'object'),
             ('term_exists', 'category'),
             ('term_temporal', 'category'),
-            ('term_modifiers', 'category')
+            ('term_modifiers', 'category'),
+            ('note_nlp_source_concept_id', 'int64')
         ])
 
         model_schema['observation'] = OrderedDict([
@@ -409,7 +401,38 @@ class ModelOmopPandas6:
             ('observation_source_value', 'category'),
             ('observation_source_concept_id', 'int64'),
             ('unit_source_value', 'category'),
-            ('qualifier_source_value', 'category')
+            ('qualifier_source_value', 'category'),
+            ('observation_event_id', 'int64'),
+            ('obs_event_field_concept_id', 'int64'),
+            ('value_as_datetime', 'object')
+        ])
+
+        model_schema['survey_conduct'] = OrderedDict([
+            ('survey_conduct_id', 'int64'),
+            ('person_id', 'int64'),
+            ('survey_concept_id', 'int64'),
+            ('survey_start_date', 'object'),
+            ('survey_start_datetime', 'object'),
+            ('survey_end_date', 'object'),
+            ('survey_end_datetime', 'object'),
+            ('provider_id', 'int64'),
+            ('assisted_concept_id', 'int64'),
+            ('respondent_type_concept_id', 'int64'),
+            ('timing_concept_id', 'int64'),
+            ('collection_method_concept_id', 'int64'),
+            ('assisted_source_value', 'object'),
+            ('respondent_type_source_value', 'object'),
+            ('timing_source_value', 'object'),
+            ('collection_method_source_value', 'object'),
+            ('survey_source_value', 'object'),
+            ('survey_source_concept_id', 'int64'),
+            ('survey_source_identifier', 'object'),
+            ('validated_survey_concept_id', 'int64'),
+            ('validated_survey_source_value', 'object'),
+            ('survey_version_number', 'int64'),
+            ('visit_occurrence_id', 'int64'),
+            ('visit_detail_id', 'int64'),
+            ('response_visit_occurrence_id', 'int64')
         ])
 
         model_schema['fact_relationship'] = OrderedDict([
@@ -430,7 +453,18 @@ class ModelOmopPandas6:
             ('zip', 'category'),
             ('county', 'category'),
             ('location_source_value', 'category')
+            ('latitude', 'float'),
+            ('longitude', 'float')
         ])
+
+        model_schema['location'] = OrderedDict([
+            ('location_history_id', 'int64'),
+            ('location_id', 'int64'),
+            ('relationship_type_concept_id', 'int64'),
+            ('domain_id', 'int64'),
+            ('entity_id', 'int64'),
+            ('start_date', 'category'),
+            ('end_date', 'category')
 
         model_schema['care_site'] = OrderedDict([ 
             ('care_site_id', 'int64'),
@@ -461,72 +495,55 @@ class ModelOmopPandas6:
         model_schema['payer_plan_period'] = OrderedDict([
             ('payer_plan_period_id', 'int64'),
             ('person_id', 'int64'),
+            ('contract_person_id', 'int64'),
             ('payer_plan_period_start_date', 'object'),
             ('payer_plan_period_end_date', 'object'),
             ('payer_concept_id', 'int64'),
+            ('plan_concept_id', 'int64'),
+            ('contract_concept_id', 'int64'),
+            ('sponsor_concept_id', 'int64'),
+            ('stop_reason_concept_id', 'int64'),
             ('payer_source_value', 'category'),
             ('payer_source_concept_id', 'int64'),
-            ('plan_concept_id', 'int64'),
             ('plan_source_value', 'category'),
             ('plan_source_concept_id', 'int64'),
-            ('sponsor_concept_id', 'int64'),
+            ('contract_source_value', 'category'),
+            ('contract_source_concept_id', 'category'),
             ('sponsor_source_value', 'category'),
             ('sponsor_source_concept_id', 'int64'),
             ('family_source_value', 'category'),
-            ('stop_reason_concept_id', 'int64'),
             ('stop_reason_source_value', 'category'),
             ('stop_reason_source_concept_id', 'int64')
         ])
 
         model_schema['cost'] = OrderedDict([
             ('cost_id', 'int64'),
+            ('person_id', 'int64'),
             ('cost_event_id', 'int64'),
-            ('cost_domain_id', 'category'),
+            ('cost_event_field_concept_id', 'int64'),
+            ('cost_concept_id', 'int64'),
             ('cost_type_concept_id', 'int64'),
             ('currency_concept_id', 'int64'),
-            ('total_charge', 'float'),
-            ('total_cost', 'float'),
-            ('total_paid', 'float'),
-            ('paid_by_payer', 'float'),
-            ('paid_by_patient', 'float'),
-            ('paid_patient_copay', 'float'),
-            ('paid_patient_coinsurance', 'float'),
-            ('paid_patient_deductible', 'float'),
-            ('paid_by_primary', 'float'),
-            ('paid_ingredient_cost', 'float'),
-            ('paid_dispensing_fee', 'float'),
-            ('payer_plan_period_id', 'int64'),
-            ('amount_allowed', 'float'),
+            ('cost', 'float'),
+            ('incurred_date', 'category'),
+            ('billed_date', 'category'),
+            ('paid_date', 'category'),
             ('revenue_code_concept_id', 'int64'),
-            ('reveue_code_source_value', 'category'),
             ('drg_concept_id', 'int64'),
-            ('drg_source_value', 'category')
+            ('cost_source_value', 'category'),
+            ('cost_source_concept_id', 'int64'),
+            ('reveue_code_source_value', 'category'),
+            ('drg_source_value', 'category'),
+            ('payer_plan_period_id', 'int64')
         ])
 
         # Standardized derived elements
-        model_schema['cohort'] = OrderedDict([
-            ('cohort_definition_id', 'int64'),
-            ('subject_id', 'int64'),
-            ('cohort_start_date,', 'object'),
-            ('cohort_end_date,', 'object')
-        ])
-
-        model_schema['cohort_attribute'] = OrderedDict([
-            ('cohort_definition_id', 'int64'),
-            ('subject_id', 'int64'),
-            ('cohort_start_date', 'object'),
-            ('cohort_end_date', 'object'),
-            ('attribute_definition_id', 'int64'),
-            ('value_as_number', 'float'),
-            ('value_as_concept_id', 'int64')
-        ])
-
         model_schema['drug_era'] = OrderedDict([
             ('drug_era_id', 'int64'),
             ('person_id', 'int64'),
             ('drug_concept_id', 'int64'),
-            ('drug_era_start_date', 'object'),
-            ('drug_era_end_date', 'object'),
+            ('drug_era_start_datetime', 'object'),
+            ('drug_era_end_datetime', 'object'),
             ('drug_exposure_count', 'int64'),
             ('gap_days', 'int64')
         ])
@@ -537,16 +554,16 @@ class ModelOmopPandas6:
             ('drug_concept_id', 'int64'),
             ('unit_concept_id', 'int64'),
             ('dose_value', 'float'),
-            ('dose_era_start_date', 'object'),
-            ('dose_era_end_date', 'object')
+            ('dose_era_start_datetime', 'object'),
+            ('dose_era_end_datetime', 'object')
         ])
 
         model_schema['condition_era'] = OrderedDict([
             ('condition_era_id', 'int64'),
             ('person_id', 'int64'),
             ('condition_concept_id', 'int64'),
-            ('condition_era_start_date', 'object'),
-            ('condition_era_end_date', 'object'),
+            ('condition_era_start_datetime', 'object'),
+            ('condition_era_end_datetime', 'object'),
             ('condition_occurrence_count', 'int64')
         ])
 

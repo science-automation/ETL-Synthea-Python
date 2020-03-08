@@ -1,6 +1,7 @@
 import pandas as pd
 import datetime
 import dateutil.parser
+import Utils
 
 #
 # given a synthea object, covert it to it's equivalent omop objects
@@ -9,68 +10,9 @@ class SyntheaToOmop6:
     #
     # Check the model matches
     #
-    def __init__(self, model_schema):
+    def __init__(self, model_schema, utils):
        self.model_schema = model_schema
-
-    # given date in synthea format return the year
-    def getYearFromSyntheaDate(self, date):
-        return datetime.datetime.strptime(date, "%Y-%m-%d").year
-
-    # given date in synthea format return the month
-    def getMonthFromSyntheaDate(self, date):
-        return datetime.datetime.strptime(date, "%Y-%m-%d").month
-
-    # given date in synthea format return the day
-    def getDayFromSyntheaDate(self, date):
-        return datetime.datetime.strptime(date, "%Y-%m-%d").day
-
-    # given gender as M or F return the OMOP concept code
-    def getGenderConceptCode(self, gender):
-        gendre = gender.upper()
-        if gender=='M':
-            return '8507'
-        elif gender=='F':
-            return '8532'
-        else:
-            return 0
-
-    # given synthea race code return omop code
-    def getRaceConceptCode(self, race):
-        race = race.upper()
-        if race=='WHITE':
-            return '8527'
-        elif race=='BLACK':
-            return '8516'
-        elif race=='ASIAN':
-            return 8515
-        else:
-            return '0'
-
-    def getEthnicityConceptCode(self, eth):
-        eth = eth.upper()
-        #if race=='HISPANIC' or eth=='CENTRAL_AMERICAN' or eth=='DOMINICAN' or eth=='MEXICAN' or eth=='PUERTO_RICAN' or eth=='SOUTH_AMERICAN':
-        if eth=='CENTRAL_AMERICAN' or eth=='DOMINICAN' or eth=='MEXICAN' or eth=='PUERTO_RICAN' or eth=='SOUTH_AMERICAN':
-            return '38003563'
-        else:
-            return '0'
-
-    # convert a synthea timestamp like 2020-02-16T05:05:49Z to omop datestamp like 2020-02-16
-    def isoTimestampToDate(self, timestamp):
-        date = dateutil.parser.parse(timestamp)
-        return datetime.date.strftime(date, '%Y-%m-%d')
-
-    # given a datestamp, return on timestamp with default 0 hour
-    def getDefaultTimestamp(self, datestamp):
-        return datestamp + " 00:00:00"
-
-    # 
-    def getVisitConcept(self, encounterclass):
-        if encounterclass == 'emergency' or encounterclass == 'urgentcare':
-            return '9203'
-        elif encounterclass == 'ambulatory' or encounterclass == 'wellness' or encounterclass == 'outpatient':
-            return '9202'
-        else:
-            return '0'
+       self.utils = utils
 
     #
     # synthea patients to omop
@@ -81,12 +23,12 @@ class SyntheaToOmop6:
         df['locationtmp'] = df.index + location_id # copy index into a temp column. If accessed directly corrupts dataframe
         person = pd.DataFrame(columns=self.model_schema['person'].keys())
         person['person_id'] = df['persontmp']
-        person['gender_concept_id'] = df['GENDER'].apply(self.getGenderConceptCode)
-        person['year_of_birth'] = df['BIRTHDATE'].apply(self.getYearFromSyntheaDate)
-        person['month_of_birth'] = df['BIRTHDATE'].apply(self.getMonthFromSyntheaDate)
-        person['day_of_birth'] = df['BIRTHDATE'].apply(self.getDayFromSyntheaDate)
-        person['race_concept_id'] =  df['RACE'].apply(self.getRaceConceptCode)
-        person['ethnicity_concept_id'] = df['ETHNICITY'].apply(self.getEthnicityConceptCode)
+        person['gender_concept_id'] = df['GENDER'].apply(self.utils.getGenderConceptCode)
+        person['year_of_birth'] = df['BIRTHDATE'].apply(self.utils.getYearFromSyntheaDate)
+        person['month_of_birth'] = df['BIRTHDATE'].apply(self.utils.getMonthFromSyntheaDate)
+        person['day_of_birth'] = df['BIRTHDATE'].apply(self.utils.getDayFromSyntheaDate)
+        person['race_concept_id'] =  df['RACE'].apply(self.utils.getRaceConceptCode)
+        person['ethnicity_concept_id'] = df['ETHNICITY'].apply(self.utils.getEthnicityConceptCode)
         person['location_id'] = df['locationtmp']
         person['gender_source_value'] = df['GENDER']
         person['person_source_value'] = df['Id']
@@ -141,9 +83,9 @@ class SyntheaToOmop6:
         concept_df = pd.merge(df['CODE'],srctostdvm_filtered[['source_code','target_concept_id']], left_on='CODE', right_on='source_code', how='left')
         drug_exposure['drug_concept_id'] = concept_df['target_concept_id'].fillna('0').astype(int)
         drug_exposure['drug_exposure_start_date'] = df['START']
-        drug_exposure['drug_exposure_start_datetime'] = df['START'].apply(self.getDefaultTimestamp)
+        drug_exposure['drug_exposure_start_datetime'] = df['START'].apply(self.utils.getDefaultTimestamp)
         drug_exposure['drug_exposure_end_date'] = df['STOP']
-        drug_exposure['drug_exposure_end_datetime'] = df['STOP'].apply(self.getDefaultTimestamp)
+        drug_exposure['drug_exposure_end_datetime'] = df['STOP'].apply(self.utils.getDefaultTimestamp)
         drug_exposure['verbatim_end_date'] = df['STOP']
         drug_exposure['visit_occurrence_id'] = df['visit_occurrence_id']
         drug_exposure['drug_source_value'] = df['CODE']
@@ -162,7 +104,7 @@ class SyntheaToOmop6:
         concept_df = pd.merge(df['CODE'],srctostdvm_filtered[['source_code','target_concept_id']], left_on='CODE', right_on='source_code', how='left')
         observation['observation_concept_id'] = concept_df['target_concept_id'].fillna('0').astype(int)
         observation['observation_date'] = df['START']
-        observation['observation_datetime'] = df['START'].apply(self.getDefaultTimestamp)
+        observation['observation_datetime'] = df['START'].apply(self.utils.getDefaultTimestamp)
         observation['value_as_concept_id'] = '0'
         observation['qualifier_concept_id'] = '0'
         observation['unit_concept_id'] = '0'
@@ -186,7 +128,7 @@ class SyntheaToOmop6:
         measurement['measurement_id'] = df['measurementtmp']
         measurement['person_id'] = df['person_id']
         measurement['measurement_date'] = df['DATE']
-        measurement['measurement_datetime'] = df['DATE'].apply(self.getDefaultTimestamp)
+        measurement['measurement_datetime'] = df['DATE'].apply(self.utils.getDefaultTimestamp)
         measurement['measurement_time'] = df['DATE']  # check
         measurement['visit_occurrence_id'] = df['visit_occurrence_id']
         measurement['visit_detail_id'] = '0'
@@ -227,7 +169,7 @@ class SyntheaToOmop6:
         concept_df = pd.merge(df[['CODE']],srctostdvm_filtered[['source_code','target_concept_id']], left_on='CODE', right_on='source_code', how='left')
         procedure_occurrence['procedure_concept_id'] = concept_df['target_concept_id'].fillna('0').astype(int)
         procedure_occurrence['procedure_date'] = df['DATE']
-        procedure_occurrence['procedure_datetime'] = df['DATE'].apply(self.getDefaultTimestamp)
+        procedure_occurrence['procedure_datetime'] = df['DATE'].apply(self.utils.getDefaultTimestamp)
         procedure_occurrence['visit_occurrence_id'] = df['visit_occurrence_id']
         procedure_occurrence['visit_detail_id'] = '0'
         procedure_occurrence['procedure_type_concept_id'] = '38000275'
@@ -247,9 +189,9 @@ class SyntheaToOmop6:
         concept_df = pd.merge(df['CODE'],srctostdvm_filtered[['source_code','target_concept_id']], left_on='CODE', right_on='source_code', how='left')
         drug_exposure['drug_concept_id'] = concept_df['target_concept_id'].fillna('0').astype(int)
         drug_exposure['drug_exposure_start_date'] = df['DATE']
-        drug_exposure['drug_exposure_start_datetime'] = df['DATE'].apply(self.getDefaultTimestamp)
+        drug_exposure['drug_exposure_start_datetime'] = df['DATE'].apply(self.utils.getDefaultTimestamp)
         drug_exposure['drug_exposure_end_date'] = df['DATE']
-        drug_exposure['drug_exposure_end_datetime'] = df['DATE'].apply(self.getDefaultTimestamp)
+        drug_exposure['drug_exposure_end_datetime'] = df['DATE'].apply(self.utils.getDefaultTimestamp)
         drug_exposure['verbatim_end_date'] = df['DATE']
         drug_exposure['visit_occurrence_id'] = df['visit_occurrence_id']
         drug_exposure['drug_source_value'] = df['CODE']
@@ -267,8 +209,8 @@ class SyntheaToOmop6:
         df['visittmp'] = df.index + visit_occurrence_id # copy index into a temp column.
         df = pd.merge(df, personmap, left_on='PATIENT', right_on='synthea_patient_id', how='left')
         # preprocess df 
-        df['observation_period_start_date'] = df['START'].apply(self.isoTimestampToDate)
-        df['observation_period_end_date'] = df['STOP'].apply(self.isoTimestampToDate)
+        df['observation_period_start_date'] = df['START'].apply(self.utils.isoTimestampToDate)
+        df['observation_period_end_date'] = df['STOP'].apply(self.utils.isoTimestampToDate)
         start = df.groupby('person_id')['observation_period_start_date'].agg(['first']).reset_index()
         stop = df.groupby('person_id')['observation_period_end_date'].agg(['last']).reset_index()
         observation_tmp = pd.merge(start, stop, on='person_id', how='inner')
@@ -286,7 +228,7 @@ class SyntheaToOmop6:
         visit_occurrence['person_id'] = df['person_id']
         visit_occurrence['visit_start_date'] = df['START']
         visit_occurrence['visit_end_date'] = df['STOP']
-        visit_occurrence['visit_concept_id'] = df['ENCOUNTERCLASS'].apply(self.getVisitConcept)
+        visit_occurrence['visit_concept_id'] = df['ENCOUNTERCLASS'].apply(self.utils.getVisitConcept)
         visit_occurrence['visit_source_value'] = df['ENCOUNTERCLASS']
         visit_occurrence['visit_type_concept_id'] = '44818517'
         visitappend = pd.DataFrame(columns=["visit_occurrence_id","synthea_encounter_id"])
@@ -317,7 +259,7 @@ class SyntheaToOmop6:
         concept_df = pd.merge(df['CODE'],srctostdvm_filtered[['source_code','target_concept_id']], left_on='CODE', right_on='source_code', how='left')
         observation['observation_concept_id'] = concept_df['target_concept_id'].fillna('0').astype(int)
         observation['observation_date'] = df['START']
-        observation['observation_datetime'] = df['START'].apply(self.getDefaultTimestamp)
+        observation['observation_datetime'] = df['START'].apply(self.utils.getDefaultTimestamp)
         observation['value_as_concept_id'] = '0'
         observation['qualifier_concept_id'] = '0'
         observation['unit_concept_id'] = '0'

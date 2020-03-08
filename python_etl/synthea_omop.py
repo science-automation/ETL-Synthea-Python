@@ -68,7 +68,7 @@ if __name__ == '__main__':
     # load the model files to define structure
     model_synthea = ModelSyntheaPandas.ModelSyntheaPandas()
     model_omop = ModelOmopPandas.ModelOmopPandas()
-    convert = SyntheaToOmop.SyntheaToOmop(model_omop.model_schema)
+    convert = SyntheaToOmop.SyntheaToOmop(model_omop.model_schema, util)
 
     # write the headers for the output files
     for initfile in OMOP_FILE_LIST:

@@ -1,10 +1,72 @@
 import os
 import pandas as pd
+import datetime
+import dateutil.parser
 
 
 class Utils:
     def __init__(self):
         pass
+
+    # given date in synthea format return the year
+    def getYearFromSyntheaDate(self, date):
+        return datetime.datetime.strptime(date, "%Y-%m-%d").year
+
+    # given date in synthea format return the month
+    def getMonthFromSyntheaDate(self, date):
+        return datetime.datetime.strptime(date, "%Y-%m-%d").month
+
+    # given date in synthea format return the day
+    def getDayFromSyntheaDate(self, date):
+        return datetime.datetime.strptime(date, "%Y-%m-%d").day
+
+    # given gender as M or F return the OMOP concept code
+    def getGenderConceptCode(self, gender):
+        gendre = gender.upper()
+        if gender=='M':
+            return '8507'
+        elif gender=='F':
+            return '8532'
+        else:
+            return 0
+
+    # given synthea race code return omop code
+    def getRaceConceptCode(self, race):
+        race = race.upper()
+        if race=='WHITE':
+            return '8527'
+        elif race=='BLACK':
+            return '8516'
+        elif race=='ASIAN':
+            return 8515
+        else:
+            return '0'
+
+    def getEthnicityConceptCode(self, eth):
+        eth = eth.upper()
+        #if race=='HISPANIC' or eth=='CENTRAL_AMERICAN' or eth=='DOMINICAN' or eth=='MEXICAN' or eth=='PUERTO_RICAN' or eth=='SOUTH_AMERICAN':
+        if eth=='CENTRAL_AMERICAN' or eth=='DOMINICAN' or eth=='MEXICAN' or eth=='PUERTO_RICAN' or eth=='SOUTH_AMERICAN':
+            return '38003563'
+        else:
+            return '0'
+
+    # convert a synthea timestamp like 2020-02-16T05:05:49Z to omop datestamp like 2020-02-16
+    def isoTimestampToDate(self, timestamp):
+        date = dateutil.parser.parse(timestamp)
+        return datetime.date.strftime(date, '%Y-%m-%d')
+
+    # given a datestamp, return on timestamp with default 0 hour
+    def getDefaultTimestamp(self, datestamp):
+        return datestamp + " 00:00:00"
+
+    #
+    def getVisitConcept(self, encounterclass):
+        if encounterclass == 'emergency' or encounterclass == 'urgentcare':
+            return '9203'
+        elif encounterclass == 'ambulatory' or encounterclass == 'wellness' or encounterclass == 'outpatient':
+            return '9202'
+        else:
+            return '0'
 
     #
     # check memory usage of a pandas dataframe

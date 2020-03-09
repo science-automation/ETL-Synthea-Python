@@ -2,8 +2,10 @@ import pandas as pd
 import os
 from dotenv import load_dotenv
 import ModelSyntheaPandas
-import ModelOmopPandas
-import SyntheaToOmop
+import ModelOmopPandas5
+import ModelOmopPandas6
+import SyntheaToOmop5
+import SyntheaToOmop6
 import Utils
 import sys
 
@@ -28,6 +30,8 @@ BASE_SYNTHEA_INPUT_DIRECTORY    = os.environ['BASE_SYNTHEA_INPUT_DIRECTORY']
 BASE_OMOP_INPUT_DIRECTORY       = os.environ['BASE_OMOP_INPUT_DIRECTORY']
 # Path to the directory where CDM-compatible CSV files should be saved
 BASE_OUTPUT_DIRECTORY           = os.environ['BASE_OUTPUT_DIRECTORY']
+# cdm output version
+CDM_VERSION                     = os.environ['CDM_VERSION']
 # counter file name
 COUNTER_FILE                    = os.environ['COUNTER_FILE']
 # Synthea input file chunk size.
@@ -53,6 +57,7 @@ if __name__ == '__main__':
 
     print('BASE_SYNTHEA_INPUT_DIRECTORY     =' + BASE_SYNTHEA_INPUT_DIRECTORY)
     print('BASE_OUTPUT_DIRECTORY            =' + BASE_OUTPUT_DIRECTORY)
+    print('CDM_VERSION                      =' + CDM_VERSION)
     print('COUNTER_FILE                     =' + COUNTER_FILE)
 
     # load utils
@@ -65,10 +70,17 @@ if __name__ == '__main__':
 
     # check files look ok
 
-    # load the model files to define structure
+    # load the conversion class for this CDM version
     model_synthea = ModelSyntheaPandas.ModelSyntheaPandas()
-    model_omop = ModelOmopPandas.ModelOmopPandas()
-    convert = SyntheaToOmop.SyntheaToOmop(model_omop.model_schema, util)
+    if (CDM_VERSION == '5'):
+        model_omop = ModelOmopPandas5.ModelOmopPandas5()
+        convert = SyntheaToOmop5.SyntheaToOmop5(model_omop.model_schema, util)
+    elif (CDM_VERSION == '6'):
+        model_omop = ModelOmopPandas6.ModelOmopPandas6()
+        convert = SyntheaToOmop6.SyntheaToOmop6(model_omop.model_schema, util)
+    else:
+        print("CDM version not supported")
+        exit(1)
 
     # write the headers for the output files
     for initfile in OMOP_FILE_LIST:

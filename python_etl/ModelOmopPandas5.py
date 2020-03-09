@@ -3,7 +3,7 @@ from collections import OrderedDict
 #
 # define types for omop schema
 #
-class ModelOmopPandas:
+class ModelOmopPandas5:
     #
     # Check the model matches
     #

@@ -6,7 +6,7 @@ import Utils
 #
 # given a synthea object, covert it to it's equivalent omop objects
 #
-class SyntheaToOmop:
+class SyntheaToOmop5:
     #
     # Check the model matches
     #

@@ -457,7 +457,7 @@ class ModelOmopPandas:
             ('longitude', 'float')
         ])
 
-        model_schema['location'] = OrderedDict([
+        model_schema['location_history'] = OrderedDict([
             ('location_history_id', 'int64'),
             ('location_id', 'int64'),
             ('relationship_type_concept_id', 'int64'),
@@ -465,6 +465,7 @@ class ModelOmopPandas:
             ('entity_id', 'int64'),
             ('start_date', 'category'),
             ('end_date', 'category')
+        ])
 
         model_schema['care_site'] = OrderedDict([ 
             ('care_site_id', 'int64'),

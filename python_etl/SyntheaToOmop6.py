@@ -50,10 +50,8 @@ class SyntheaToOmop6:
         location['zip'] = df['ZIP']
         location['county'] = df['COUNTY']
         location['location_source_value'] = df['Id']
-        death = pd.DataFrame(columns=self.model_schema['death'].keys())
-        death['person_id'] = df['persontmp']
-        death['deathdate'] = df['DEATHDATE']
-        death =  death[death.deathdate.notnull()]  # remove records where no death occurred
+        # create empty death dataframe
+        death = pd.DataFrame()
         return (person, location, death, personmap, person_id + len(person), location_id + len(location))
 
     def conditionsToOmop(self, df, srctostdvm, condition_occurrence_id, drug_exposure_id, observation_id, personmap, visitmap):

@@ -41,7 +41,9 @@ INPUT_CHUNK_SIZE = int(os.environ['INPUT_CHUNK_SIZE'])
 # patients and encounters are first so that we can create dataframes to lookup ids
 SYNTHEA_FILE_LIST =  ['patients','encounters','conditions','careplans','observations','procedures','immunizations','imaging_studies','organizations','providers','payer_transitions','allergies','medications']
 # List of omop output files
-OMOP_FILE_LIST = ['person','location','death','condition_occurrence','drug_exposure','observation','measurement','procedure_occurrence','observation_period','visit_occurrence','care_site','provider']
+OMOP_FILE_LIST = ['person','location','condition_occurrence','drug_exposure','observation','measurement','procedure_occurrence','observation_period','visit_occurrence','care_site','provider']
+if (CDM_VERSION=='5'):
+    OMOP_FILE_LIST.append('death')
 
 #---------------------------------
 # start of the program
@@ -125,7 +127,8 @@ if __name__ == '__main__':
                 (person, location, death, personmap, c['person_id'], c['location_id']) = convert.patientsToOmop(df, personmap, c['person_id'], c['location_id'])
                 person.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'person.csv'), mode=mode, header=header, index=False)
                 location.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'location.csv'), mode=mode, header=header, index=False)
-                death.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'death.csv'), mode=mode, header=header, index=False)
+                if (CDM_VERSION=='5'): # death table is removed in cdm6 so only write it in cdm 5
+                    death.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'death.csv'), mode=mode, header=header, index=False)
                 personmap.to_csv(os.path.join(BASE_OUTPUT_DIRECTORY,'personmap.csv'), mode='w', header=True, index=False)
             elif (datatype == 'conditions'):
                 (condition_occurrence, drug_exposure, observation, c['condition_occurrence_id'], c['drug_exposure_id'], c['observation_id']) = convert.conditionsToOmop(df, srctostdvm, c['condition_occurrence_id'], c['drug_exposure_id'], c['observation_id'], personmap, visitmap)

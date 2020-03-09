@@ -3,7 +3,7 @@ from collections import OrderedDict
 #
 # define types for omop schema
 #
-class ModelOmopPandas:
+class ModelOmopPandas6:
     #
     # Check the model matches
     #
@@ -452,7 +452,7 @@ class ModelOmopPandas:
             ('state', 'category'),
             ('zip', 'category'),
             ('county', 'category'),
-            ('location_source_value', 'category')
+            ('location_source_value', 'category'),
             ('latitude', 'float'),
             ('longitude', 'float')
         ])

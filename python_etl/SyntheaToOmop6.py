@@ -29,6 +29,8 @@ class SyntheaToOmop6:
         person['day_of_birth'] = df['BIRTHDATE'].apply(self.utils.getDayFromSyntheaDate)
         person['race_concept_id'] =  df['RACE'].apply(self.utils.getRaceConceptCode)
         person['ethnicity_concept_id'] = df['ETHNICITY'].apply(self.utils.getEthnicityConceptCode)
+        person['birth_datetime'] = df['BIRTHDATE']
+        person['death_datetime'] = df['DEATHDATE']
         person['location_id'] = df['locationtmp']
         person['gender_source_value'] = df['GENDER']
         person['person_source_value'] = df['Id']

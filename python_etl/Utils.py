@@ -57,7 +57,7 @@ class Utils:
 
     # given a datestamp, return on timestamp with default 0 hour
     def getDefaultTimestamp(self, datestamp):
-        return datestamp + " 00:00:00"
+        return str(datestamp) + " 00:00:00"
 
     #
     def getVisitConcept(self, encounterclass):

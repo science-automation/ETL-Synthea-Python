@@ -206,3 +206,9 @@ class Utils:
         for key, value in counter.iteritems():
             f.write(key + "=" + str(value) + "\n")
         f.close()
+
+    # given a dataframe of addresses and zip code, return a random real address within the zip code
+    def getRealAddress(self, code, addresses):
+        temp = addresses.loc[addresses['POSTCODE'] == int(code)]
+        sample = temp.sample(n=1)
+        return str(sample.iloc[0]['LAT']) + "," + str(sample.iloc[0]['LON']) + "," + str(sample.iloc[0]['STREET']) + " " + str(sample.iloc[0]['NUMBER'])

@@ -63,7 +63,6 @@ if __name__ == '__main__':
     # remove all records with null street number
     addresses = addresses[addresses['STREET'].notnull()]
     addresses = addresses[addresses['NUMBER'].notnull()]
-    #print(addresses)
 
     # call the function to switch out the address
     patient['temp'] = patient['ZIP'].apply(util.getRealAddress,args=(addresses,))
@@ -73,4 +72,4 @@ if __name__ == '__main__':
     patient = patient.drop(columns=['temp'])
 
     # write back to csv file
-    pd.write_csv(inputdata, dtype=model_synthea.model_schema[datatype], compression=compression)
+    patient.to_csv(inputdata, mode='w', header=True, compression=compression)

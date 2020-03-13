@@ -58,8 +58,12 @@ if __name__ == '__main__':
     inputdata = BASE_SYNTHEA_INPUT_DIRECTORY + "/" + inputfile
     patient = pd.read_csv(inputdata, dtype=model_synthea.model_schema[datatype], compression=compression)
 
-    # load the location data
-    addresses = pd.read_csv(ADDRESS_FILE, compression=None)
+    # load the address data
+    if '.gz' in ADDRESS_FILE:
+       addresses = pd.read_csv(ADDRESS_FILE, compression='gzip')
+    else: 
+       addresses = pd.read_csv(ADDRESS_FILE, compression=None)
+
     # remove all records with null street number
     addresses = addresses[addresses['STREET'].notnull()]
     addresses = addresses[addresses['NUMBER'].notnull()]

@@ -57,11 +57,9 @@ if __name__ == '__main__':
         exit(1)
     inputdata = BASE_SYNTHEA_INPUT_DIRECTORY + "/" + inputfile
     patient = pd.read_csv(inputdata, dtype=model_synthea.model_schema[datatype], compression=compression)
-    print(patient)
 
     # load the location data
-    compression=None
-    addresses = pd.read_csv(ADDRESS_FILE, compression=compression)
+    addresses = pd.read_csv(ADDRESS_FILE, compression=None)
     # remove all records with null street number
     addresses = addresses[addresses['STREET'].notnull()]
     addresses = addresses[addresses['NUMBER'].notnull()]
@@ -69,4 +67,10 @@ if __name__ == '__main__':
 
     # call the function to switch out the address
     patient['temp'] = patient['ZIP'].apply(util.getRealAddress,args=(addresses,))
-    print(patient)
+
+    # expand the comma delimited row
+    patient[['LAT','LON','ADDRESS']] = patient['temp'].str.split(',',expand=True)
+    patient = patient.drop(columns=['temp'])
+
+    # write back to csv file
+    pd.write_csv(inputdata, dtype=model_synthea.model_schema[datatype], compression=compression)

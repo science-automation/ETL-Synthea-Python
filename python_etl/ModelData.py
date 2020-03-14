@@ -32,4 +32,25 @@ class ModelData:
             ('HASH','object')
         ])
 
+        model_schema['fiaddress'] = OrderedDict([
+            ('building_id', 'object'),
+            ('region', 'category'),
+            ('municipality', 'category'),
+            ('street', 'category'),
+            ('house_number', 'category'),
+            ('postal_code', 'category'),
+            ('latitude_wgs84', 'object'),
+            ('longitude_wgs84', 'object'),
+            ('building_use', 'category')
+        ])
+
+        model_schema['postalcodes'] = OrderedDict([
+            ('USPS', 'object'),
+            ('ST', 'category'),
+            ('NAME', 'object'),
+            ('ZCTA5', 'category'),
+            ('LAT', 'object'),
+            ('LON', 'object')
+        ])
+
         return model_schema

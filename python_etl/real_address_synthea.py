@@ -62,16 +62,17 @@ if __name__ == '__main__':
 
     # load the address data
     if '.gz' in ADDRESS_FILE:
-       addresses = pd.read_csv(ADDRESS_FILE, dtype=model_data.model_schema['openaddress'], compression='gzip')
+       addresses = pd.read_csv(ADDRESS_FILE, dtype=model_data.model_schema['fiaddress'], compression='gzip')
     else: 
-       addresses = pd.read_csv(ADDRESS_FILE, dtype=model_data.model_schema['openaddress'], compression=None)
+       addresses = pd.read_csv(ADDRESS_FILE, dtype=model_data.model_schema['fiaddress'], compression=None)
 
-    # remove all records with null street number
-    addresses = addresses[addresses['STREET'].notnull()]
-    addresses = addresses[addresses['NUMBER'].notnull()]
+    # remove all records with null street/house number and building must be residential
+    addresses = addresses[addresses['street'].notnull()]
+    addresses = addresses[addresses['house_number'].notnull()]
+    addresses = addresses.loc[addresses['building_use'] == '1']
 
     # call the function to switch out the address
-    patient['temp'] = patient['ZIP'].apply(util.getRealAddress,args=(addresses,))
+    patient['temp'] = patient['ZIP'].apply(util.getRealFIAddress,args=(addresses,))
 
     # expand the comma delimited row
     patient[['LAT','LON','ADDRESS']] = patient['temp'].str.split(',',expand=True)

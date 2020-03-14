@@ -207,8 +207,20 @@ class Utils:
             f.write(key + "=" + str(value) + "\n")
         f.close()
 
-    # given a dataframe of addresses and zip code, return a random real address within the zip code
-    def getRealAddress(self, code, addresses):
+    # given an openaddresses dataframe, return a random real address within the zip code
+    def getRealOpenAddress(self, code, addresses):
         temp = addresses.loc[addresses['POSTCODE'] == code]
-        sample = temp.sample(n=1)
-        return str(sample.iloc[0]['LAT']) + "," + str(sample.iloc[0]['LON']) + "," + str(sample.iloc[0]['STREET']) + " " + str(sample.iloc[0]['NUMBER'])
+        if len(temp) > 0:
+            sample = temp.sample(n=1)
+            return str(sample.iloc[0]['LAT']) + "," + str(sample.iloc[0]['LON']) + "," + str(sample.iloc[0]['STREET']) + " " + str(sample.iloc[0]['NUMBER'])
+        else:
+            return ",,"
+
+    # given a finland address dataframe, return a random real address within the zip code
+    def getRealFIAddress(self, code, addresses):
+        temp = addresses.loc[addresses['postal_code'] == code]
+        if len(temp) > 0:
+            sample = temp.sample(n=1)
+            return str(sample.iloc[0]['latitude_wgs84']) + "," + str(sample.iloc[0]['longitude_wgs84']) + "," + str(sample.iloc[0]['street']) + " " + str(sample.iloc[0]['house_number'])
+        else:
+            return ",,"

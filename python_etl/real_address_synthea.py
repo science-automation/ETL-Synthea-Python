@@ -2,6 +2,7 @@ import pandas as pd
 import os
 from dotenv import load_dotenv
 import ModelSyntheaPandas
+import ModelData
 import Utils
 import sys
 
@@ -41,8 +42,9 @@ if __name__ == '__main__':
     # load utils
     util = Utils.Utils()
 
-    # load the synthea model
+    # load the data models
     model_synthea = ModelSyntheaPandas.ModelSyntheaPandas()
+    model_data = ModelData.ModelData()
 
     # read the synthea patient file
     datatype='patients'
@@ -60,9 +62,9 @@ if __name__ == '__main__':
 
     # load the address data
     if '.gz' in ADDRESS_FILE:
-       addresses = pd.read_csv(ADDRESS_FILE, compression='gzip')
+       addresses = pd.read_csv(ADDRESS_FILE, dtype=model_data.model_schema['openaddress'], compression='gzip')
     else: 
-       addresses = pd.read_csv(ADDRESS_FILE, compression=None)
+       addresses = pd.read_csv(ADDRESS_FILE, dtype=model_data.model_schema['openaddress'], compression=None)
 
     # remove all records with null street number
     addresses = addresses[addresses['STREET'].notnull()]

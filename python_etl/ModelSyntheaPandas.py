@@ -315,13 +315,15 @@ class ModelSyntheaPandas:
             ('PULMONARY DISEASE', 'object'),
             ('RADIATION ONCOLOGY', 'object'),
             ('REGISTERED DIETITIAN OR NUTRITION PROFESSIONAL', 'object'),
-            ('RHEUMATOLOGY,SLEEP MEDICINE', 'object'),
+            ('RHEUMATOLOGY,', 'object'),
+            ('SLEEP MEDICINE', 'object'),
             ('SPEECH LANGUAGE PATHOLOGIST', 'object'),
             ('SPORTS MEDICINE', 'object'),
             ('SURGICAL ONCOLOGY', 'object'),
             ('THORACIC SURGERY', 'object'),
             ('UNDEFINED PHYSICIAN TYPE (SPECIFY)', 'object'),
-            ('UROLOGY,VASCULAR SURGERY', 'object'),
+            ('UROLOGY,', 'object'),
+            ('VASCULAR SURGERY', 'object'),
             ('id', 'object')
         ])
 

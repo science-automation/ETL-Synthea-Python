@@ -371,9 +371,9 @@ class ModelSyntheaPandas:
             ('TOT_FEMALE', 'object'),
             ('WHITE', 'object'),
             ('HISPANIC', 'object'),
-            ('BLACK', 'object')
+            ('BLACK', 'object'),
             ('ASIAN', 'object'),
-            ('NATIVE', 'object')
+            ('NATIVE', 'object'),
             ('OTHER', 'object'),
             ('1', 'object'),
             ('2', 'object'),

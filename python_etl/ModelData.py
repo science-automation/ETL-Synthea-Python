@@ -53,4 +53,26 @@ class ModelData:
             ('LON', 'object')
         ])
 
+        model_schema['geoname'] = OrderedDict([
+            ('geonameid', 'object'),
+            ('name', 'object'),
+            ('asciiname', 'object'),
+            ('alternatenames', 'object'),
+            ('latitude', 'object'),
+            ('longitude', 'object'),
+            ('feature class', 'object'),
+            ('feature code', 'object'),
+            ('country code', 'object'),
+            ('cc2', 'object'),
+            ('admin1 code', 'object'),
+            ('admin2 code', 'object'),
+            ('admin3 code', 'object'),
+            ('admin4 code', 'object'),
+            ('population', 'object'),
+            ('elevation', 'object'),
+            ('dem', 'object'),
+            ('timezone', 'object'),
+            ('modification date', 'object')
+        ])
+
         return model_schema

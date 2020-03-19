@@ -337,8 +337,8 @@ class ModelSyntheaPandas:
             ('CITY', 'category'),
             ('STATE', 'category'),
             ('ZIP', 'category'),
-            ('LAT', 'float32'),
-            ('LON', 'float32'),
+            ('LAT', 'object'),
+            ('LON', 'object'),
             ('UTILIZATION', 'float32')
         ])
 
@@ -355,8 +355,8 @@ class ModelSyntheaPandas:
             ('ownership', 'object'),
             ('emergency', 'category'),
             ('quality', 'float32'),
-            ('LAT', 'float32'),
-            ('LON', 'float32')
+            ('LAT', 'object'),
+            ('LON', 'object')
         ])
 
         model_schema['demographics'] = OrderedDict([

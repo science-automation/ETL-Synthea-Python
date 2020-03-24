@@ -29,7 +29,7 @@ BASE_OMOP_INPUT_DIRECTORY       = os.environ['BASE_OMOP_INPUT_DIRECTORY']
 # directory to copy the processed vocabulary files
 BASE_VOCAB_OUTPUT_DIRECTORY     = os.environ['BASE_VOCAB_OUTPUT_DIRECTORY']
 # patients and encounters are first so that we can create dataframes to lookup ids
-SYNTHEA_FILE_LIST =  ['patients','encounters','conditions','careplans','observations','procedures','immunizations','imaging_studies','organizations','providers','payer_transitions','allergies','medications']
+SYNTHEA_FILE_LIST =  ['patients','encounters','conditions','careplans','observations','procedures','immunizations','imaging_studies','allergies','medications']
 # Synthea input file chunk size.  We will only process one large chunk for each type
 INPUT_CHUNK_SIZE_EXTRACT = int(os.environ['INPUT_CHUNK_SIZE_EXTRACT'])
 

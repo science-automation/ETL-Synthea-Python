@@ -52,6 +52,8 @@ class SyntheaToOmop6:
         location['zip'] = df['ZIP']
         location['county'] = df['COUNTY']
         location['location_source_value'] = df['Id']
+        location['latitude'] = df['LAT']
+        location['longitude'] = df['LON']
         # create empty death dataframe
         death = pd.DataFrame()
         return (person, location, death, personmap, person_id + len(person), location_id + len(location))

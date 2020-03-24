@@ -73,7 +73,7 @@ if __name__ == '__main__':
             inputfile = datatype + '.csv.gz'
             compression='gzip'
         else:
-            print("Error:  Could not find " + inputfile + " synthea file")
+            print("Error:  Could not find " + datatype + " synthea file")
             exit(1)
         inputdata = os.path.join(BASE_SYNTHEA_INPUT_DIRECTORY,inputfile)
         output = os.path.join(BASE_VOCAB_OUTPUT_DIRECTORY,inputfile)

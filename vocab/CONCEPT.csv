@@ -10,18 +10,24 @@ concept_id	concept_name	domain_id	vocabulary_id	concept_class_id	standard_concep
 134438	Contact dermatitis	Condition	SNOMED	Clinical Finding	S	40275004	19700101	20991231	
 137613	Eclampsia in pregnancy	Condition	SNOMED	Clinical Finding	S	198992004	19700101	20991231	
 192279	Kidney disorder due to diabetes mellitus	Condition	SNOMED	Clinical Finding	S	127013003	19700101	20991231	
+193591	Meconium ileus	Condition	SNOMED	Clinical Finding	S	206523001	19700101	20991231	
 195588	Cystitis	Condition	SNOMED	Clinical Finding	S	38822007	19700101	20991231	
 196456	Gallstone	Condition	SNOMED	Clinical Finding	S	235919008	19700101	20991231	
 197500	Primary malignant neoplasm of colon	Condition	SNOMED	Clinical Finding	S	93761005	19700101	20991231	
+198199	Pyelonephritis	Condition	SNOMED	Clinical Finding	S	45816000	19700101	20991231	
 198809	Acute cholecystitis	Condition	SNOMED	Clinical Finding	S	65275009	19700101	20991231	
 199076	Tubal pregnancy	Condition	SNOMED	Clinical Finding	S	79586000	19700101	20991231	
 200970	Carcinoma in situ of prostate	Condition	SNOMED	Clinical Finding	S	92691004	19700101	20991231	
 201826	Type 2 diabetes mellitus	Condition	SNOMED	Clinical Finding	S	44054006	19700101	20991231	
+254761	Cough	Condition	SNOMED	Clinical Finding	S	49727002	19700101	20991231	
 255848	Pneumonia	Condition	SNOMED	Clinical Finding	S	233604007	19700101	20991231	
+255891	Lupus erythematosus	Condition	SNOMED	Clinical Finding	S	200936003	19700101	20991231	
 257012	Chronic sinusitis	Condition	SNOMED	Clinical Finding	S	40055000	19700101	20991231	
 258780	Emphysematous bronchitis	Condition	SNOMED	Clinical Finding	S	185086009	19700101	20991231	
 260139	Acute bronchitis	Condition	SNOMED	Clinical Finding	S	10509002	19700101	20991231	
 261325	Pulmonary emphysema	Condition	SNOMED	Clinical Finding	S	87433001	19700101	20991231	
+261600	Acute pulmonary edema	Condition	SNOMED	Clinical Finding	S	40541001	19700101	20991231	
+312437	Dyspnea	Condition	SNOMED	Clinical Finding	S	267036007	19700101	20991231	
 313217	Atrial fibrillation	Condition	SNOMED	Clinical Finding	S	49436004	19700101	20991231	
 317009	Asthma	Condition	SNOMED	Clinical Finding	S	195967001	19700101	20991231	
 317576	Coronary arteriosclerosis	Condition	SNOMED	Clinical Finding	S	53741008	19700101	20991231	
@@ -36,8 +42,11 @@ concept_id	concept_name	domain_id	vocabulary_id	concept_class_id	standard_concep
 381316	Cerebrovascular accident	Condition	SNOMED	Clinical Finding	S	230690007	19700101	20991231	
 432867	Hyperlipidemia	Condition	SNOMED	Clinical Finding	S	55822004	19700101	20991231	
 433125	Infection due to Staphylococcus aureus	Condition	SNOMED	Clinical Finding	S	406602003	19700101	20991231	
+435796	Dehydration	Condition	SNOMED	Clinical Finding	S	34095006	19700101	20991231	
 436096	Chronic pain	Condition	SNOMED	Clinical Finding	S	82423001	19700101	20991231	
+436676	Posttraumatic stress disorder	Condition	SNOMED	Clinical Finding	S	47505003	19700101	20991231	
 436940	Metabolic syndrome X	Condition	SNOMED	Clinical Finding	S	237602007	19700101	20991231	
+437663	Fever	Condition	SNOMED	Clinical Finding	S	386661006	19700101	20991231	
 438130	Opioid abuse	Condition	SNOMED	Clinical Finding	S	5602001	19700101	20991231	
 439393	Pre-eclampsia	Condition	SNOMED	Clinical Finding	S	398254007	19700101	20991231	
 439777	Anemia	Condition	SNOMED	Clinical Finding	S	271737000	19700101	20991231	
@@ -45,8 +54,11 @@ concept_id	concept_name	domain_id	vocabulary_id	concept_class_id	standard_concep
 440448	Appendicitis	Condition	SNOMED	Clinical Finding	S	74400008	19700101	20991231	
 440674	Gout	Condition	SNOMED	Clinical Finding	S	90560007	19700101	20991231	
 441267	Cystic fibrosis	Condition	SNOMED	Clinical Finding	S	190905008	19700101	20991231	
+443277	Attempted suicide - suffocation	Observation	SNOMED	Clinical Finding	S	287182007	19700101	20991231	
+443597	Chronic kidney disease stage 3	Condition	SNOMED	Clinical Finding	S	433144002	20090131	20991231	
 443601	Chronic kidney disease stage 2	Condition	SNOMED	Clinical Finding	S	431856006	20090131	20991231	
 443614	Chronic kidney disease stage 1	Condition	SNOMED	Clinical Finding	S	431855005	20090131	20991231	
+444362	Suicidal deliberate poisoning	Condition	SNOMED	Clinical Finding	S	86849004	19700101	20991231	
 3000053	Head Occipital-frontal circumference	Measurement	LOINC	Clinical Observation	S	9843-4	19960906	20991231	
 3000285	Sodium [Moles/volume] in Blood	Measurement	LOINC	Lab Test	S	2947-0	19700101	20991231	
 3000330	Specific gravity of Urine by Test strip	Measurement	LOINC	Lab Test	S	5811-5	19700101	20991231	
@@ -127,6 +139,7 @@ concept_id	concept_name	domain_id	vocabulary_id	concept_class_id	standard_concep
 3024171	Respiratory rate	Measurement	LOINC	Clinical Observation	S	9279-1	19960906	20991231	
 3024561	Albumin [Mass/volume] in Serum or Plasma	Measurement	LOINC	Lab Test	S	1751-7	19700101	20991231	
 3024629	Glucose [Mass/volume] in Urine by Test strip	Measurement	LOINC	Lab Test	S	5792-7	19700101	20991231	
+3024717	Tumor marker Cancer	Measurement	LOINC	Clinical Observation	S	21924-6	19700101	20991231	
 3024731	MCV [Entitic volume]	Measurement	LOINC	Lab Test	S	30428-7	19700101	20991231	
 3024929	Platelets [#/volume] in Blood by Automated count	Measurement	LOINC	Lab Test	S	777-3	19700101	20991231	
 3025315	Body weight	Measurement	LOINC	Clinical Observation	S	29463-7	19700101	20991231	
@@ -155,13 +168,18 @@ concept_id	concept_name	domain_id	vocabulary_id	concept_class_id	standard_concep
 3051673	US Guidance for biopsy of Prostate	Measurement	LOINC	Clinical Observation	S	46288-7	20060728	20991231	
 3051825	Creatinine [Mass/volume] in Blood	Measurement	LOINC	Lab Test	S	38483-4	20041020	20991231	
 4001336	Concussion injury of brain	Condition	SNOMED	Clinical Finding	S	110030002	19700101	20991231	
+4008261	Infection due to Pseudomonas aeruginosa	Condition	SNOMED	Clinical Finding	S	11218009	19700101	20991231	
 4010253	Nasal sinus endoscopy	Procedure	SNOMED	Procedure	S	112790001	19700101	20991231	
+4012485	Interstitial brachytherapy	Procedure	SNOMED	Procedure	S	113120007	19700101	20991231	
 4015590	Counseling for termination of pregnancy	Procedure	SNOMED	Procedure	S	10383002	19700101	20991231	
 4015701	Cesarean section	Procedure	SNOMED	Procedure	S	11466000	19700101	20991231	
 4018619	Screening for occult blood in feces	Procedure	SNOMED	Procedure	S	104435004	19700101	20991231	
+4021192	Suicide risk assessment	Procedure	SNOMED	Procedure	S	225337009	19700101	20991231	
+4021336	At risk for suicide	Condition	SNOMED	Clinical Finding	S	225444004	19700101	20991231	
 4024289	Radiography of ankle	Procedure	SNOMED	Procedure	S	19490002	19700101	20991231	
 4029498	Seizure disorder	Condition	SNOMED	Clinical Finding	S	128613002	19700101	20991231	
 4029715	Radiation oncology AND/OR radiotherapy	Procedure	SNOMED	Procedure	S	108290001	19700101	20991231	
+4030886	Intravenous infusion	Procedure	SNOMED	Procedure	S	14152002	19700101	20991231	
 4035415	Tear of meniscus of knee	Condition	SNOMED	Clinical Finding	S	239720000	19700101	20991231	
 4035793	Pulmonary rehabilitation	Procedure	SNOMED	Procedure	S	15081005	19700101	20991231	
 4037675	Brief general examination	Procedure	SNOMED	Procedure	S	162676008	19700101	20991231	
@@ -177,6 +195,7 @@ concept_id	concept_name	domain_id	vocabulary_id	concept_class_id	standard_concep
 4055982	Sputum microscopy	Procedure	SNOMED	Procedure	S	167995008	19700101	20991231	
 4056621	Recurrent urinary tract infection	Condition	SNOMED	Clinical Finding	S	197927001	19700101	20991231	
 4057420	Catheter ablation of tissue of heart	Procedure	SNOMED	Procedure	S	18286008	19700101	20991231	
+4058850	H/O: lower limb amputation	Observation	SNOMED	Context-dependent	S	161622006	19700101	20991231	
 4058899	Plain X-ray of clavicle	Procedure	SNOMED	Procedure	S	168594001	19700101	20991231	
 4059173	Fracture of ankle	Condition	SNOMED	Clinical Finding	S	16114001	19700101	20991231	
 4059978	Insertion of subcutaneous contraceptive	Procedure	SNOMED	Procedure	S	169553002	19700101	20991231	
@@ -185,7 +204,9 @@ concept_id	concept_name	domain_id	vocabulary_id	concept_class_id	standard_concep
 4061811	Rubella screening	Procedure	SNOMED	Procedure		169690007	19700101	20190730	U
 4062501	Asthma screening	Procedure	SNOMED	Procedure	S	171231001	19700101	20991231	
 4064377	Depression screening	Procedure	SNOMED	Procedure	S	171207006	19700101	20991231	
+4066995	Fracture of vertebral column with spinal cord injury	Condition	SNOMED	Clinical Finding	S	1734006	19700101	20991231	
 4068785	Diagnostic fiberoptic bronchoscopy	Procedure	SNOMED	Procedure	S	173160006	19700101	20991231	
+4073422	Spontaneous breech delivery	Procedure	SNOMED	Procedure	S	177157003	19700101	20991231	
 4075363	Auscultation of the fetal heart	Procedure	SNOMED	Procedure	S	225158009	19700101	20991231	
 4077697	Screening mammography	Procedure	SNOMED	Procedure	S	24623002	19700101	20991231	
 4078199	Epidural anesthesia	Procedure	SNOMED	Procedure	S	18946005	19700101	20991231	
@@ -196,6 +217,7 @@ concept_id	concept_name	domain_id	vocabulary_id	concept_class_id	standard_concep
 4081880	Mammogram - symptomatic	Procedure	SNOMED	Procedure	S	241055006	19700101	20991231	
 4082984	MRI of breast	Procedure	SNOMED	Procedure	S	241615005	19700101	20991231	
 4084167	Acute allergic reaction	Condition	SNOMED	Clinical Finding	S	241929008	19700101	20991231	
+4085731	Intravenous antibiotic therapy	Procedure	SNOMED	Procedure	S	281790008	19700101	20991231	
 4094814	Bullet wound	Condition	SNOMED	Clinical Finding	S	262574004	19700101	20991231	
 4107731	Subcutaneous immunotherapy	Procedure	SNOMED	Procedure	S	180256009	19700101	20991231	
 4108565	Amputation of the foot	Procedure	SNOMED	Procedure	S	180030006	19700101	20991231	
@@ -215,6 +237,7 @@ concept_id	concept_name	domain_id	vocabulary_id	concept_class_id	standard_concep
 4127260	Augmentation of labor	Procedure	SNOMED	Procedure	S	237001001	19700101	20991231	
 4128031	Instrumental delivery	Procedure	SNOMED	Procedure	S	236974004	19700101	20991231	
 4129902	Neoplasm of prostate	Condition	SNOMED	Clinical Finding	S	126906006	19700101	20991231	
+4132546	Traumatic brain injury	Condition	SNOMED	Clinical Finding	S	127295002	19700101	20991231	
 4134304	Fracture subluxation of wrist	Condition	SNOMED	Clinical Finding	S	263102004	19700101	20991231	
 4134565	Hearing examination	Procedure	SNOMED	Procedure	S	398171003	19700101	20991231	
 4141448	Teleradiotherapy procedure	Procedure	SNOMED	Procedure	S	33195004	19700101	20991231	
@@ -223,6 +246,7 @@ concept_id	concept_name	domain_id	vocabulary_id	concept_class_id	standard_concep
 4145310	Pelvis X-ray	Procedure	SNOMED	Procedure	S	268425006	19700101	20991231	
 4146053	Manual pelvic examination	Procedure	SNOMED	Procedure	S	35025007	19700101	20991231	
 4146173	Injury of tendon of the rotator cuff of shoulder	Condition	SNOMED	Clinical Finding	S	307731004	19700101	20991231	
+4146536	Renal dialysis	Procedure	SNOMED	Procedure	S	265764009	19700101	20991231	
 4149245	Rupture of patellar tendon	Condition	SNOMED	Clinical Finding	S	30832001	19700101	20991231	
 4150653	Fetal anatomy study	Procedure	SNOMED	Procedure	S	271442007	19700101	20991231	
 4150970	Medical induction of labor	Procedure	SNOMED	Procedure	S	31208007	19700101	20991231	
@@ -231,7 +255,9 @@ concept_id	concept_name	domain_id	vocabulary_id	concept_class_id	standard_concep
 4152936	Laceration of thigh	Condition	SNOMED	Clinical Finding	S	283385000	19700101	20991231	
 4155034	Laceration of forearm	Condition	SNOMED	Clinical Finding	S	283371005	19700101	20991231	
 4156265	Facial laceration	Condition	SNOMED	Clinical Finding	S	370247008	19700101	20991231	
+4158346	Respiratory distress	Condition	SNOMED	Clinical Finding	S	271825005	19700101	20991231	
 4161390	Human epidermal growth factor receptor 2 gene detection by immunohistochemistry	Procedure	SNOMED	Procedure	S	433114000	20090131	20991231	
+4162736	Oxygen administration by mask	Procedure	SNOMED	Procedure	S	371908008	19700101	20991231	
 4163708	Vaccination for diphtheria, pertussis, and tetanus	Procedure	SNOMED	Procedure	S	399014008	19700101	20991231	
 4163872	Plain chest X-ray	Procedure	SNOMED	Procedure	S	399208008	19700101	20991231	
 4163874	History of myocardial infarction	Observation	SNOMED	Context-dependent	S	399211009	19700101	20991231	
@@ -240,6 +266,7 @@ concept_id	concept_name	domain_id	vocabulary_id	concept_class_id	standard_concep
 4166224	Rupture of appendix	Condition	SNOMED	Clinical Finding	S	47693006	19700101	20991231	
 4166590	Brain damage - traumatic	Condition	SNOMED	Clinical Finding		275272006	19700101	20180730	U
 4166761	Rectal polypectomy	Procedure	SNOMED	Procedure	S	274031008	19700101	20991231	
+4168004	Burn injury	Observation	SNOMED	Morph Abnormality	S	48333001	19700101	20991231	
 4168133	Incision of trachea	Procedure	SNOMED	Procedure	S	48387007	19700101	20991231	
 4168236	Evaluation of uterine fundal height	Procedure	SNOMED	Procedure	S	274804006	19700101	20991231	
 4170947	Bone immobilization	Procedure	SNOMED	Procedure	S	274474001	19700101	20991231	
@@ -249,7 +276,9 @@ concept_id	concept_name	domain_id	vocabulary_id	concept_class_id	standard_concep
 4181917	Electroencephalogram	Procedure	SNOMED	Procedure	S	54550000	19700101	20991231	
 4186930	Replacement of intrauterine contraceptive device	Procedure	SNOMED	Procedure	S	46706006	19700101	20991231	
 4187458	Review of systems	Procedure	SNOMED	Procedure	S	415300000	19700101	20991231	
+4188598	High risk pregnancy	Condition	SNOMED	Clinical Finding	S	47200007	19700101	20991231	
 4191853	Allergy screening test	Procedure	SNOMED	Procedure	S	395142003	19700101	20991231	
+4195136	Amputation above-knee	Procedure	SNOMED	Procedure	S	79733001	19700101	20991231	
 4195803	Bone density scan	Procedure	SNOMED	Procedure	S	312681000	19700101	20991231	
 4196262	Metastasis from malignant tumor of prostate	Condition	SNOMED	Clinical Finding	S	314994000	19700101	20991231	
 4197460	Injection of epinephrine	Procedure	SNOMED	Procedure	S	313191000	19700101	20991231	
@@ -259,6 +288,7 @@ concept_id	concept_name	domain_id	vocabulary_id	concept_class_id	standard_concep
 4199458	Passive immunization	Procedure	SNOMED	Procedure	S	51116004	19700101	20991231	
 4202451	Percutaneous mechanical thrombectomy of portal vein using fluoroscopic guidance	Procedure	SNOMED	Procedure	S	433112001	20090131	20991231	
 4202832	Intubation	Procedure	SNOMED	Procedure	S	52765003	19700101	20991231	
+4203771	Total replacement of hip	Procedure	SNOMED	Procedure	S	52734007	19700101	20991231	
 4208104	Drug overdose	Condition	SNOMED	Clinical Finding	S	55680006	19700101	20991231	
 4213045	Lumpectomy of breast	Procedure	SNOMED	Procedure	S	392021009	19700101	20991231	
 4214376	Hyperglycemia	Condition	SNOMED	Clinical Finding	S	80394007	19700101	20991231	
@@ -267,11 +297,14 @@ concept_id	concept_name	domain_id	vocabulary_id	concept_class_id	standard_concep
 4218106	Alcoholism	Condition	SNOMED	Clinical Finding	S	7200002	19700101	20991231	
 4218389	Whiplash injury to neck	Condition	SNOMED	Clinical Finding	S	39848009	19700101	20991231	
 4218408	Collection of blood specimen for laboratory	Procedure	SNOMED	Procedure	S	82078001	19700101	20991231	
+4219631	Continuous negative pressure ventilation treatment	Procedure	SNOMED	Procedure	S	82433009	19700101	20991231	
 4226121	Retinopathy with type 2 diabetes mellitus	Condition	SNOMED	Clinical Finding	S	422034002	19700101	20991231	
 4229440	Chronic congestive heart failure	Condition	SNOMED	Clinical Finding	S	88805009	19700101	20991231	
+4230209	Psychiatric follow-up	Procedure	SNOMED	Procedure	S	88848003	19700101	20991231	
 4230399	Closed fracture of hip	Condition	SNOMED	Clinical Finding	S	359817006	19700101	20991231	
 4230911	Echocardiography	Procedure	SNOMED	Procedure	S	40701008	19700101	20991231	
 4234541	Cytopathology procedure, preparation of smear, genital source	Procedure	SNOMED	Procedure	S	90226004	19700101	20991231	
+4234705	Evaluation of psychiatric state of patient	Procedure	SNOMED	Procedure	S	90407005	19700101	20991231	
 4235738	Prostatectomy	Procedure	SNOMED	Procedure	S	90470006	19700101	20991231	
 4237458	Fracture of clavicle	Condition	SNOMED	Clinical Finding	S	58150001	19700101	20991231	
 4238715	Removal of intrauterine device	Procedure	SNOMED	Procedure	S	68254000	19700101	20991231	
@@ -280,18 +313,21 @@ concept_id	concept_name	domain_id	vocabulary_id	concept_class_id	standard_concep
 4242997	Cholecystectomy	Procedure	SNOMED	Procedure	S	38102005	19700101	20991231	
 4243062	Radiography of wrist	Procedure	SNOMED	Procedure	S	60027007	19700101	20991231	
 4245614	Bleeding from anus	Condition	SNOMED	Clinical Finding	S	6072007	19700101	20991231	
+4246502	Neonatal screening	Procedure	SNOMED	Procedure	S	60151004	19700101	20991231	
 4249893	Colonoscopy	Procedure	SNOMED	Procedure	S	73761001	19700101	20991231	
 4252419	Radiologic examination of knee	Procedure	SNOMED	Procedure	S	74016001	19700101	20991231	
 4254766	Digital examination of rectum	Procedure	SNOMED	Procedure	S	410006001	19700101	20991231	
 4256640	Body mass index 40+ - severely obese	Observation	SNOMED	Clinical Finding	S	408512008	19700101	20991231	
 4262136	Blighted ovum	Condition	SNOMED	Clinical Finding	S	35999006	19700101	20991231	
 4263386	Sentinel lymph node biopsy	Procedure	SNOMED	Procedure	S	396487001	19700101	20991231	
+4263590	Amputation of hand	Procedure	SNOMED	Procedure	S	46028000	19700101	20991231	
 4273629	Chemotherapy	Procedure	SNOMED	Procedure	S	367336001	19700101	20991231	
 4275113	Insertion of intrauterine contraceptive device	Procedure	SNOMED	Procedure	S	65200003	19700101	20991231	
 4276519	Extraction of wisdom tooth	Procedure	SNOMED	Procedure	S	65546002	19700101	20991231	
 4278515	Biopsy of prostate	Procedure	SNOMED	Procedure	S	65575008	19700101	20991231	
 4278672	Fracture of forearm	Condition	SNOMED	Clinical Finding	S	65966004	19700101	20991231	
 4280726	Seasonal allergic rhinitis	Condition	SNOMED	Clinical Finding	S	367498001	19700101	20991231	
+4282096	Major depression, single episode	Condition	SNOMED	Clinical Finding	S	36923009	19700101	20991231	
 4283893	Sinusitis	Condition	SNOMED	Clinical Finding	S	36971009	19700101	20991231	
 4285898	Polyp of colon	Condition	SNOMED	Clinical Finding	S	68496003	19700101	20991231	
 4286804	Excision of breast tissue	Procedure	SNOMED	Procedure	S	69031006	19700101	20991231	
@@ -304,6 +340,7 @@ concept_id	concept_name	domain_id	vocabulary_id	concept_class_id	standard_concep
 4296205	Partial thickness burn	Condition	SNOMED	Clinical Finding	S	403191005	19700101	20991231	
 4299128	Full thickness burn	Condition	SNOMED	Clinical Finding	S	403192003	19700101	20991231	
 4301346	Surgical manipulation of shoulder joint	Procedure	SNOMED	Procedure	S	387685009	19700101	20991231	
+4301557	Mental health screening	Procedure	SNOMED	Procedure	S	385892002	19700101	20991231	
 4302356	CT of chest and abdomen	Procedure	SNOMED	Procedure	S	418891003	19700101	20991231	
 4306061	Construction of diverting colostomy	Procedure	SNOMED	Procedure	S	387607004	19700101	20991231	
 4309027	Idiopathic atrophic hypothyroidism	Condition	SNOMED	Clinical Finding	S	83664006	19700101	20991231	
@@ -311,6 +348,7 @@ concept_id	concept_name	domain_id	vocabulary_id	concept_class_id	standard_concep
 4311671	Episiotomy	Procedure	SNOMED	Procedure	S	85548006	19700101	20991231	
 4311765	Secondary malignant neoplasm of colon	Condition	SNOMED	Clinical Finding	S	94260004	19700101	20991231	
 4316217	Primary fibromyalgia syndrome	Condition	SNOMED	Clinical Finding	S	95417003	19700101	20991231	
+4318531	Gastrointestinal irritation	Condition	SNOMED	Clinical Finding	S	95516005	19700101	20991231	
 4323208	History of appendectomy	Observation	SNOMED	Context-dependent	S	428251008	20080131	20991231	
 4323766	History of amputation of foot	Observation	SNOMED	Context-dependent	S	429280009	20080131	20991231	
 4323902	Lung volume reduction surgery	Procedure	SNOMED	Procedure	S	429609002	20080131	20991231	
@@ -326,6 +364,7 @@ concept_id	concept_name	domain_id	vocabulary_id	concept_class_id	standard_concep
 4337611	Single lung transplant	Procedure	SNOMED	Procedure	S	232657004	19700101	20991231	
 4341247	Protracted diarrhea	Condition	SNOMED	Clinical Finding	S	236077008	19700101	20991231	
 21494966	Physical findings of Abdomen by Palpation	Measurement	LOINC	Clinical Observation	S	80271-0	20160624	20991231	
+35623148	Vomiting co-occurrent and due to infectious disease	Condition	SNOMED	Clinical Finding	S	765480005	20180731	20991231	
 36203113	HER2 [Presence] in Breast cancer specimen by FISH	Measurement	LOINC	Lab Test	S	85318-4	20170623	20991231	
 36203114	HER2 [Presence] in Breast cancer specimen by Immune stain	Measurement	LOINC	Lab Test	S	85319-2	20170623	20991231	
 36203168	Estrogen receptor Ag [Presence] in Breast cancer specimen by Immune stain	Measurement	LOINC	Lab Test	S	85337-4	20170623	20991231	
@@ -338,6 +377,7 @@ concept_id	concept_name	domain_id	vocabulary_id	concept_class_id	standard_concep
 37017023	Recurrent rectal polyp	Condition	SNOMED	Clinical Finding	S	713197008	20160131	20991231	
 37018340	Induced termination of pregnancy	Procedure	SNOMED	Procedure	S	714812005	20160131	20991231	
 37395648	Primary small cell malignant neoplasm of lung, TNM stage 1	Condition	SNOMED	Clinical Finding	S	67811000119102	20160731	20991231	
+37395717	Depression screening using PHQ-9 (Patient Health Questionnaire 9) score	Procedure	SNOMED	Procedure	S	715252007	20160731	20991231	
 40316773	Prediabetes	Condition	SNOMED	Clinical Finding		15777000	19700101	20130130	U
 40318618	Complete miscarriage	Condition	SNOMED	Clinical Finding	S	156073000	19700101	20991231	
 40479422	Injury of medial collateral ligament of knee	Condition	SNOMED	Clinical Finding	S	444448004	20100131	20991231	
@@ -348,6 +388,8 @@ concept_id	concept_name	domain_id	vocabulary_id	concept_class_id	standard_concep
 40481948	Detection of chromosomal aneuploidy in prenatal amniotic fluid specimen using FISH screening technique	Procedure	SNOMED	Procedure	S	443529005	20100131	20991231	
 40486433	Perennial allergic rhinitis	Condition	SNOMED	Clinical Finding	S	446096008	20110131	20991231	
 40486537	Brachytherapy of breast	Procedure	SNOMED	Procedure	S	447759004	20110731	20991231	
+40489907	Sepsis due to Staphylococcus aureus	Condition	SNOMED	Clinical Finding	S	448417001	20110731	20991231	
+40491961	Sepsis due to Pseudomonas	Condition	SNOMED	Clinical Finding	S	448813005	20110731	20991231	
 40492359	Insertion of biventricular implantable cardioverter defibrillator	Procedure	SNOMED	Procedure	S	447365002	20110131	20991231	
 40493226	Excision of fallopian tube and surgical removal of ectopic pregnancy	Procedure	SNOMED	Procedure	S	445912000	20110131	20991231	
 40761014	Hemoglobin.gastrointestinal.lower [Presence] in Stool by Immunoassay --1st specimen	Measurement	LOINC	Lab Test	S	57905-2	20091118	20991231	
@@ -357,6 +399,7 @@ concept_id	concept_name	domain_id	vocabulary_id	concept_class_id	standard_concep
 40769184	Percentage area affected by eczema Upper extremity - bilateral [PhenX]	Measurement	LOINC	Clinical Observation	S	66524-0	20110617	20991231	
 40769189	Percentage area affected by eczema Trunk [PhenX]	Measurement	LOINC	Clinical Observation	S	66529-9	20110617	20991231	
 40769194	Percentage area affected by eczema Lower extremity - bilateral [PhenX]	Measurement	LOINC	Clinical Observation	S	66534-9	20110617	20991231	
+42529398	Mental health Telehealth Note	Measurement	LOINC	Clinical Observation	S	84215-3	20170221	20991231	
 42535066	Ultrasonography of bilateral breasts	Procedure	SNOMED	Procedure	S	1571000087109	20180131	20991231	
 42535580	Ultrasonography of abdomen, right upper quadrant and epigastrium	Procedure	SNOMED	Procedure	S	426701000119108	20180131	20991231	
 42709996	Smokes tobacco daily	Observation	SNOMED	Clinical Finding	S	449868002	20120131	20991231	
@@ -365,10 +408,17 @@ concept_id	concept_name	domain_id	vocabulary_id	concept_class_id	standard_concep
 43530656	Nonproliferative diabetic retinopathy due to type 2 diabetes mellitus	Condition	SNOMED	Clinical Finding	S	1551000119108	20130731	20991231	
 43530685	Proliferative retinopathy with type 2 diabetes mellitus	Condition	SNOMED	Clinical Finding	S	1501000119109	20130731	20991231	
 43531648	Total knee replacement	Procedure	SNOMED	Procedure	S	609588000	20130731	20991231	
+44782520	Chronic paralysis due to lesion of spinal cord	Condition	SNOMED	Clinical Finding	S	698754002	20140131	20991231	
 44783196	Surgical manipulation of joint of knee	Procedure	SNOMED	Procedure	S	699253003	20140131	20991231	
 44784284	Magnetic resonance imaging for measurement of brain volume	Procedure	SNOMED	Procedure	S	698354004	20140131	20991231	
+44784316	History of disarticulation at wrist	Observation	SNOMED	Context-dependent	S	698423002	20140131	20991231	
+44786664	Weight difference [Mass difference] --pre dialysis - post dialysis	Measurement	LOINC	Clinical Observation	S	74006-8	20130722	20991231	
+45757499	Proteinuria due to type 2 diabetes mellitus	Condition	SNOMED	Clinical Finding	S	157141000119108	20150131	20991231	
+45763582	Blindness due to type 2 diabetes mellitus	Condition	SNOMED	Clinical Finding	S	60951000119105	20150131	20991231	
 45766064	History of single seizure	Observation	SNOMED	Context-dependent	S	703151001	20150131	20991231	
 45766298	Combined chemotherapy and radiation therapy	Procedure	SNOMED	Procedure	S	703423002	20150131	20991231	
+45769019	Female infertility due to cystic fibrosis	Condition	SNOMED	Clinical Finding	S	707577004	20150131	20991231	
 45769905	Microalbuminuria due to type 2 diabetes mellitus	Condition	SNOMED	Clinical Finding	S	90781000119102	20150131	20991231	
 45770830	Macular edema and retinopathy due to type 2 diabetes mellitus	Condition	SNOMED	Clinical Finding	S	97331000119101	20150131	20991231	
+46235010	Mental health Outpatient Note	Measurement	LOINC	Clinical Observation	S	75443-2	20141113	20991231	
 46236327	Weight-for-length Per age and sex	Measurement	LOINC	Clinical Observation	S	77606-2	20150529	20991231	

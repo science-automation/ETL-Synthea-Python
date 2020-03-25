@@ -71,7 +71,9 @@ class SyntheaToOmop6:
         concept_df = pd.merge(df['CODE'],srctostdvm_filtered[['source_code','target_concept_id']], left_on='CODE', right_on='source_code', how='left')
         condition_occurrence['condition_concept_id'] = concept_df['target_concept_id'].fillna('0').astype(int)
         condition_occurrence['condition_start_date'] = df['START']
+        condition_occurrence['condition_start_datetime'] = df['START'].apply(self.utils.getDefaultTimestamp)
         condition_occurrence['condition_end_date'] = df['STOP']
+        condition_occurrence['condition_end_datetime'] = df['STOP'].apply(self.utils.getDefaultTimestamp)
         condition_occurrence['condition_type_concept_id'] = '32020'
         condition_occurrence['stop_reason'] = '0'
         condition_occurrence['visit_occurrence_id'] = df['visit_occurrence_id']

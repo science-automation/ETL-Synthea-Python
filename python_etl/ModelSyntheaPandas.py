@@ -218,6 +218,15 @@ class ModelSyntheaPandas:
         ])
 
         # resource files providers model
+        model_schema['zipcodes'] = OrderedDict([
+            ('USPS', 'object'),
+            ('ST', 'object'),
+            ('NAME', 'object'),
+            ('ZCTA5', 'object'),
+            ('LAT', 'object'),
+            ('LON', 'object'),
+        ])
+
         model_schema['hospitals'] = OrderedDict([
             ('id', 'object'),
             ('name', 'object'),
@@ -406,7 +415,7 @@ class ModelSyntheaPandas:
             ('LESS_THAN_HS', 'object'),
             ('HS_DEGREE', 'object'),
             ('SOME_COLLEGE', 'object'),
-            ('BS_DEGRE', 'object')
+            ('BS_DEGREE', 'object')
         ])
 
         return model_schema

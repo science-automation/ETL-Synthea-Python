@@ -4,4 +4,3 @@ This project contains the source code to convert Synthea csv data to csv files s
 
 Synthea is able to generate an unlimited amount of patient records for multiple countries.
 
-This tool is capable of converting synthea csv to OMOP CDM v5 and v6.

@@ -10,7 +10,6 @@ concept_id	concept_name	domain_id	vocabulary_id	concept_class_id	standard_concep
 134438	Contact dermatitis	Condition	SNOMED	Clinical Finding	S	40275004	19700101	20991231	
 137613	Eclampsia in pregnancy	Condition	SNOMED	Clinical Finding	S	198992004	19700101	20991231	
 192279	Kidney disorder due to diabetes mellitus	Condition	SNOMED	Clinical Finding	S	127013003	19700101	20991231	
-193591	Meconium ileus	Condition	SNOMED	Clinical Finding	S	206523001	19700101	20991231	
 195588	Cystitis	Condition	SNOMED	Clinical Finding	S	38822007	19700101	20991231	
 196456	Gallstone	Condition	SNOMED	Clinical Finding	S	235919008	19700101	20991231	
 197500	Primary malignant neoplasm of colon	Condition	SNOMED	Clinical Finding	S	93761005	19700101	20991231	
@@ -55,6 +54,7 @@ concept_id	concept_name	domain_id	vocabulary_id	concept_class_id	standard_concep
 440674	Gout	Condition	SNOMED	Clinical Finding	S	90560007	19700101	20991231	
 441267	Cystic fibrosis	Condition	SNOMED	Clinical Finding	S	190905008	19700101	20991231	
 443277	Attempted suicide - suffocation	Observation	SNOMED	Clinical Finding	S	287182007	19700101	20991231	
+443279	Attempted suicide - cut/stab	Observation	SNOMED	Clinical Finding	S	287185009	19700101	20991231	
 443597	Chronic kidney disease stage 3	Condition	SNOMED	Clinical Finding	S	433144002	20090131	20991231	
 443601	Chronic kidney disease stage 2	Condition	SNOMED	Clinical Finding	S	431856006	20090131	20991231	
 443614	Chronic kidney disease stage 1	Condition	SNOMED	Clinical Finding	S	431855005	20090131	20991231	
@@ -195,6 +195,7 @@ concept_id	concept_name	domain_id	vocabulary_id	concept_class_id	standard_concep
 4055982	Sputum microscopy	Procedure	SNOMED	Procedure	S	167995008	19700101	20991231	
 4056621	Recurrent urinary tract infection	Condition	SNOMED	Clinical Finding	S	197927001	19700101	20991231	
 4057420	Catheter ablation of tissue of heart	Procedure	SNOMED	Procedure	S	18286008	19700101	20991231	
+4058421	H/O: upper limb amputation	Observation	SNOMED	Context-dependent	S	161621004	19700101	20991231	
 4058850	H/O: lower limb amputation	Observation	SNOMED	Context-dependent	S	161622006	19700101	20991231	
 4058899	Plain X-ray of clavicle	Procedure	SNOMED	Procedure	S	168594001	19700101	20991231	
 4059173	Fracture of ankle	Condition	SNOMED	Clinical Finding	S	16114001	19700101	20991231	
@@ -313,7 +314,6 @@ concept_id	concept_name	domain_id	vocabulary_id	concept_class_id	standard_concep
 4242997	Cholecystectomy	Procedure	SNOMED	Procedure	S	38102005	19700101	20991231	
 4243062	Radiography of wrist	Procedure	SNOMED	Procedure	S	60027007	19700101	20991231	
 4245614	Bleeding from anus	Condition	SNOMED	Clinical Finding	S	6072007	19700101	20991231	
-4246502	Neonatal screening	Procedure	SNOMED	Procedure	S	60151004	19700101	20991231	
 4249893	Colonoscopy	Procedure	SNOMED	Procedure	S	73761001	19700101	20991231	
 4252419	Radiologic examination of knee	Procedure	SNOMED	Procedure	S	74016001	19700101	20991231	
 4254766	Digital examination of rectum	Procedure	SNOMED	Procedure	S	410006001	19700101	20991231	
@@ -388,7 +388,6 @@ concept_id	concept_name	domain_id	vocabulary_id	concept_class_id	standard_concep
 40481948	Detection of chromosomal aneuploidy in prenatal amniotic fluid specimen using FISH screening technique	Procedure	SNOMED	Procedure	S	443529005	20100131	20991231	
 40486433	Perennial allergic rhinitis	Condition	SNOMED	Clinical Finding	S	446096008	20110131	20991231	
 40486537	Brachytherapy of breast	Procedure	SNOMED	Procedure	S	447759004	20110731	20991231	
-40489907	Sepsis due to Staphylococcus aureus	Condition	SNOMED	Clinical Finding	S	448417001	20110731	20991231	
 40491961	Sepsis due to Pseudomonas	Condition	SNOMED	Clinical Finding	S	448813005	20110731	20991231	
 40492359	Insertion of biventricular implantable cardioverter defibrillator	Procedure	SNOMED	Procedure	S	447365002	20110131	20991231	
 40493226	Excision of fallopian tube and surgical removal of ectopic pregnancy	Procedure	SNOMED	Procedure	S	445912000	20110131	20991231	

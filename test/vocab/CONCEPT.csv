@@ -1,50 +1,10 @@
 concept_id	concept_name	domain_id	vocabulary_id	concept_class_id	standard_concept	concept_code	valid_start_date	valid_end_date	invalid_reason
 45956931	Self-emulsifying glyceryl monostearate	Observation	SNOMED	Substance	S	3578611000001105	19700101	20991231	
-45956935	Sibutramine hydrochloride	Observation	SNOMED	Substance	S	3579011000001108	19700101	20991231	
-45956943	Yellow soft paraffin	Observation	SNOMED	Substance	S	3330611000001108	19700101	20991231	
-45956945	Magnesium oxide light	Observation	SNOMED	Substance	S	3565611000001107	19700101	20991231	
-45956950	Lanolin oil	Observation	SNOMED	Substance	S	3563811000001107	19700101	20991231	
-45956951	Water for injection	Observation	SNOMED	Substance	S	3330811000001107	19700101	20991231	
-45956953	Wool alcohols ointment	Observation	SNOMED	Substance	S	3331111000001106	19700101	20991231	
-45956958	Magnesium oxide hydrated	Observation	SNOMED	Substance	S	3589811000001106	19700101	20991231	
-45956966	Glucose anhydrous	Observation	SNOMED	Substance	S	3589411000001109	19700101	20991231	
-45956967	Rice powder pre-cooked	Observation	SNOMED	Substance	S	3541311000001106	19700101	20991231	
-45956968	Disodium hydrogen citrate	Observation	SNOMED	Substance	S	3528711000001102	19700101	20991231	
-45956973	Sodium phosphate	Observation	SNOMED	Substance	S	14676611000001104	20081106	20991231	
-45956978	Clemastine hydrogen fumarate	Observation	SNOMED	Substance	S	3664811000001101	19700101	20991231	
-45956984	Ammonia solution dilute	Observation	SNOMED	Substance	S	3732411000001107	19700101	20991231	
-45956987	Storax prepared	Observation	SNOMED	Substance	S	3755411000001103	19700101	20991231	
-45956988	Benzoin sumatra	Observation	SNOMED	Substance	S	3754711000001105	19700101	20991231	
-45956994	Acetylated wool alcohols	Observation	SNOMED	Substance	S	16662511000001103	20100202	20991231	
-45957002	Isopentane	Observation	SNOMED	Substance	S	3899211000001107	19700101	20991231	
-45957005	Ammonia solution strong	Observation	SNOMED	Substance	S	3948711000001107	19700101	20991231	
-45957009	Rhubarb extract	Observation	SNOMED	Substance	S	4030111000001102	19700101	20991231	
-45957014	Povidone K25	Observation	SNOMED	Substance	S	4034011000001105	19700101	20991231	
-45957015	Ketotifen hydrogen fumarate	Observation	SNOMED	Substance	S	4032111000001103	19700101	20991231	
-45957020	Camphor oil rectified	Observation	SNOMED	Substance	S	4119611000001104	19700101	20991231	
-45957026	Cobaltous sulfate monohydrate	Observation	SNOMED	Substance	S	4173611000001105	19700101	20991231	
-44781075	Allantoin 2 MG/ML / Hyaluronic Acid 20 MG/ML Medicated Liquid Soap	Drug	NDC	11-digit NDC		71237000401	20181201	20991231	
-45957031	Orotic acid anhydrous	Observation	SNOMED	Substance	S	4174711000001104	19700101	20991231	
-45957032	Potassium sulfate	Observation	SNOMED	Substance	S	4174911000001102	19700101	20991231	
-44781101	clobazam 10 MG Oral Strip [Sympazan]	Drug	NDC	11-digit NDC		10094021001	20181201	20991231	
-44781102	clobazam 20 MG Oral Strip [Sympazan]	Drug	NDC	11-digit NDC		10094022001	20181201	20991231	
-45957036	Quillaia liquid extract	Observation	SNOMED	Substance	S	4246811000001104	19700101	20991231	
-45957037	Chloroform water double strength	Observation	SNOMED	Substance	S	4246611000001103	19700101	20991231	
-45957038	Sodium lauryl ether sulfo-succinate	Observation	SNOMED	Substance	S	4266511000001105	19700101	20991231	
-45957039	Sodium lauryl ether sulfate	Observation	SNOMED	Substance	S	4266411000001106	19700101	20991231	
-45957041	Purified talc	Observation	SNOMED	Substance	S	4318311000001106	19700101	20991231	
-44781184	rivaroxaban 2.5 MG Oral Tablet [Xarelto]	Drug	NDC	11-digit NDC		50458057701	20181201	20991231	
-45957043	Wood naphtha	Observation	SNOMED	Substance	S	4337411000001107	19700101	20991231	
-45957044	Potassium glycerophosphate	Observation	SNOMED	Substance	S	4350511000001106	19700101	20991231	
-44778058	DOVE ROSE FINISH DRY SERUM ANTIPERSPIRANT - aluminum zirconium tetrachlorohydrex gly stick	Drug	SPL	OTC Drug	C	7780958f-c56b-f9ea-e053-2991aa0a952f	20181213	20991231	
 44778059	DOVE JASMINE FINISH DRY SERUM ANTIPERSPIRANT - aluminum zirconium tetrachlorohydrex gly stick	Drug	SPL	OTC Drug	C	7781171b-1c8a-6011-e053-2a91aa0a185d	20181213	20991231	
 45957047	Calcium carbonate heavy	Observation	SNOMED	Substance	S	4368611000001102	19700101	20991231	
-45957058	Pine Sylvestris oil	Observation	SNOMED	Substance	S	4483111000001105	19700101	20991231	
-45957060	Pumilio pine oil	Observation	SNOMED	Substance	S	4483011000001109	19700101	20991231	
-45957063	Albumin solution human	Observation	SNOMED	Substance	S	4508911000001106	19700101	20991231	
-45957065	Juniper berry oil	Observation	SNOMED	Substance	S	4560911000001108	19700101	20991231	
-45957066	Wintergreen oil	Observation	SNOMED	Substance	S	4561511000001108	19700101	20991231	
 44872207	Colestipol Hydrochloride 5000 MG Granules for Oral Suspension [Colestid]	Drug	NDC	11-digit NDC		00009026002	20110101	20991231	
 44870417	benzalkonium chloride .1g/100mL TOPICAL LIQUID	Drug	NDC	9-digit NDC		644952365	20120330	20991231	
 45957072	Calcium levofolinate	Observation	SNOMED	Substance	S	4640211000001100	19700101	20991231	
 44954070	Colestipol Hydrochloride 5000 MG Granules for Oral Suspension	Drug	NDC	11-digit NDC		59762026003	20110101	20991231	
+43055141	Pain severity - 0-10 verbal numeric rating [Score] - Reported	Measurement	LOINC	Clinical Observation	S	72514-3	20121228	20991231	
+260139	Acute bronchitis	Condition	SNOMED	Clinical Finding	S	10509002	19700101	20991231	
